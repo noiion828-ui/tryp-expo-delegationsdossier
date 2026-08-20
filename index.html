@@ -15,7 +15,7 @@
   --bg:#F1EFE9; --bg-raised:#E7E4DA; --bg-sunken:#DCD8CB;
   --ink:#16151A; --ink-soft:#454351; --ink-faint:#79747F;
   --line:#CBC6B8; --line-strong:#a19c8c;
-  --grad-a:#9B2FCB; --grad-b:#0FA99A;
+  --grad-a:#9B2FCB; --grad-b:#0FA99A; --grad-c:#E0862F; --grad-d:#3F6FE0;
   --lime:#4C6B14; --lime-bg:#DFE7C1; --lime-line:#a9bb7a;
   --amber:#8C5A08; --amber-bg:#EFDFB4; --amber-line:#cbab5e;
   --violet:#6B2E93; --violet-bg:#EADCF4; --violet-line:#c197de;
@@ -24,55 +24,59 @@
   --font-display:'Unbounded', 'Arial Black', sans-serif;
   --font-body:'IBM Plex Sans', system-ui, sans-serif;
   --font-mono:'IBM Plex Mono', ui-monospace, monospace;
+  --plasma-op: .5;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#0D0C10; --bg-raised:#161419; --bg-sunken:#08070A;
     --ink:#F2EFEA; --ink-soft:#C8C3CC; --ink-faint:#8B8590;
     --line:#2B2732; --line-strong:#3d3846;
-    --grad-a:#DE8CF5; --grad-b:#5FE3D6;
+    --grad-a:#DE8CF5; --grad-b:#5FE3D6; --grad-c:#F5B26B; --grad-d:#8FA8FF;
     --lime:#B8E066; --lime-bg:#212C10; --lime-line:#496320;
     --amber:#EABD5E; --amber-bg:#2C2210; --amber-line:#6b551f;
     --violet:#CC9BEA; --violet-bg:#251A31; --violet-line:#5c3d78;
     --rose:#EA93AB; --rose-bg:#2E141C; --rose-line:#6e2c3c;
     --shadow: 0 1px 0 rgba(0,0,0,.4), 0 14px 30px -16px rgba(0,0,0,.7);
+    --plasma-op: .7;
   }
 }
 :root[data-theme="dark"]{
   --bg:#0D0C10; --bg-raised:#161419; --bg-sunken:#08070A;
   --ink:#F2EFEA; --ink-soft:#C8C3CC; --ink-faint:#8B8590;
   --line:#2B2732; --line-strong:#3d3846;
-  --grad-a:#DE8CF5; --grad-b:#5FE3D6;
+  --grad-a:#DE8CF5; --grad-b:#5FE3D6; --grad-c:#F5B26B; --grad-d:#8FA8FF;
   --lime:#B8E066; --lime-bg:#212C10; --lime-line:#496320;
   --amber:#EABD5E; --amber-bg:#2C2210; --amber-line:#6b551f;
   --violet:#CC9BEA; --violet-bg:#251A31; --violet-line:#5c3d78;
   --rose:#EA93AB; --rose-bg:#2E141C; --rose-line:#6e2c3c;
   --shadow: 0 1px 0 rgba(0,0,0,.4), 0 14px 30px -16px rgba(0,0,0,.7);
+  --plasma-op: .7;
 }
 
 *{box-sizing:border-box}
-body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--font-body); font-size:16.5px; line-height:1.55; -webkit-font-smoothing:antialiased}
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--font-body); font-size:16.5px; line-height:1.6; -webkit-font-smoothing:antialiased}
 ::selection{background:var(--grad-a); color:#fff}
 a{color:var(--grad-b)}
 :focus-visible{outline:2px solid var(--grad-b); outline-offset:2px}
-.wrap{max-width:1080px; margin:0 auto; padding:0 clamp(16px,4vw,40px)}
+.wrap{max-width:1080px; margin:0 auto; padding:0 clamp(16px,4vw,40px); position:relative; z-index:1}
 
 h1,h2,h3{font-family:var(--font-display); font-weight:700; text-wrap:balance; margin:0; letter-spacing:-.01em}
-h1{font-size:clamp(2rem,5vw,3.1rem); line-height:1.02; font-weight:900}
-h2{font-size:clamp(1.3rem,2.4vw,1.7rem); line-height:1.1}
+h1{font-size:clamp(2.1rem,5vw,3.4rem); line-height:1.03; font-weight:900}
+h2{font-size:clamp(1.35rem,2.4vw,1.8rem); line-height:1.15}
 h3{font-family:var(--font-display); font-weight:600; font-size:1.05rem}
-p{margin:0 0 .85em}
+p{margin:0 0 .9em}
 .eyebrow{font-family:var(--font-mono); font-size:.68rem; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-faint); font-weight:500; display:flex; align-items:center; gap:8px; margin-bottom:8px}
 .eyebrow::before{content:""; width:16px; height:2px; background:linear-gradient(90deg,var(--grad-a),var(--grad-b))}
 .mono{font-family:var(--font-mono)}
-.grad-text{background:linear-gradient(100deg,var(--grad-a),var(--grad-b)); -webkit-background-clip:text; background-clip:text; color:transparent}
+.grad-text{background:linear-gradient(100deg,var(--grad-a),var(--grad-d),var(--grad-b)); -webkit-background-clip:text; background-clip:text; color:transparent; background-size:200% 100%; animation:gradShift 8s ease-in-out infinite alternate}
+@keyframes gradShift{ from{background-position:0% 50%} to{background-position:100% 50%} }
+@media (prefers-reduced-motion: reduce){ .grad-text{animation:none} }
 
-[data-de]{display:block} [data-en]{display:none}
-html[data-lang="en"] [data-de]{display:none} html[data-lang="en"] [data-en]{display:block}
-span[data-de],span[data-en],b[data-de],b[data-en]{display:inline}
-html[data-lang="en"] span[data-de],html[data-lang="en"] b[data-de]{display:none}
-html[data-lang="en"] span[data-en],html[data-lang="en"] b[data-en]{display:inline}
+/* ---- language toggle: robust, independent of tag type or nesting ---- */
+html:not([data-lang="en"]) [data-en] { display:none !important; }
+html[data-lang="en"] [data-de] { display:none !important; }
 
+/* ---- nav ---- */
 .topbar{position:sticky; top:0; z-index:40; background:color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter:blur(8px); border-bottom:1px solid var(--line)}
 .topbar-inner{display:flex; align-items:center; justify-content:space-between; gap:14px; padding:11px clamp(16px,4vw,40px)}
 .brand{font-family:var(--font-display); font-weight:700; font-size:.95rem}
@@ -81,46 +85,70 @@ html[data-lang="en"] span[data-en],html[data-lang="en"] b[data-en]{display:inlin
 .pill-btn:hover{border-color:var(--line-strong)}
 .pill-btn[aria-pressed="true"]{background:var(--ink); color:var(--bg); border-color:var(--ink)}
 
-header.hero{padding:clamp(40px,7vw,72px) 0 clamp(28px,5vw,44px); border-bottom:3px solid var(--ink)}
-.hero h1{margin:10px 0 16px}
-.hero-lede{font-size:1.08rem; color:var(--ink-soft); max-width:56ch}
-.factstrip{display:flex; flex-wrap:wrap; gap:10px 26px; margin-top:22px; font-family:var(--font-mono); font-size:.78rem; color:var(--ink-faint)}
+.subnav{position:sticky; top:41px; z-index:39; background:var(--bg); border-bottom:1px solid var(--line); overflow-x:auto; scrollbar-width:none}
+.subnav::-webkit-scrollbar{display:none}
+.subnav-inner{display:flex; gap:4px; padding:8px clamp(16px,4vw,40px); min-width:max-content}
+.subnav a{font-family:var(--font-mono); font-size:.72rem; letter-spacing:.03em; color:var(--ink-faint); text-decoration:none; padding:5px 11px; border-radius:999px; white-space:nowrap; border:1px solid transparent}
+.subnav a:hover{color:var(--ink-soft)}
+.subnav a[aria-current="true"]{color:var(--ink); background:var(--bg-raised); border-color:var(--line)}
+
+/* ---- ambient plasma canvas ---- */
+.plasma-wrap{position:absolute; inset:0; overflow:hidden; z-index:0; pointer-events:none}
+.plasma-wrap canvas{width:100%; height:100%; opacity:var(--plasma-op); filter:blur(38px) saturate(1.3)}
+
+/* ---- wave divider ---- */
+.wave-divider{display:block; width:100%; height:34px; margin-bottom:-1px}
+.wave-divider path{fill:var(--bg)}
+
+header.hero{position:relative; padding:clamp(48px,8vw,88px) 0 clamp(30px,5vw,48px); overflow:hidden; background:var(--bg-sunken)}
+.hero h1{margin:12px 0 18px}
+.hero-lede{font-size:1.1rem; color:var(--ink-soft); max-width:58ch}
+.factstrip{display:flex; flex-wrap:wrap; gap:10px 26px; margin-top:24px; font-family:var(--font-mono); font-size:.78rem; color:var(--ink-faint)}
 .factstrip b{color:var(--ink); font-family:var(--font-body); font-weight:600}
 
-section{padding:clamp(38px,6vw,60px) 0; border-bottom:1px solid var(--line)}
-.section-head{max-width:70ch; margin-bottom:22px}
+section{padding:clamp(40px,6vw,64px) 0; position:relative}
+.section-head{max-width:72ch; margin-bottom:24px}
+.section-head p{font-size:1.02rem; color:var(--ink-soft)}
 
-.legal-banner{display:flex; gap:14px; align-items:flex-start; background:var(--amber-bg); border:1px solid var(--amber-line); border-radius:4px; padding:15px 18px; margin:18px 0 0}
+.legal-banner{display:flex; gap:14px; align-items:flex-start; background:var(--amber-bg); border:1px solid var(--amber-line); border-radius:4px; padding:16px 19px; margin:20px 0 0}
 .legal-banner .glyph{font-family:var(--font-mono); font-weight:700; font-size:1.1rem; color:var(--amber); line-height:1.3}
-.legal-banner p{margin:0; font-size:.9rem; color:var(--ink-soft)}
+.legal-banner p{margin:0; font-size:.92rem; color:var(--ink-soft)}
 .legal-banner b{color:var(--ink)}
 
 .panel-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:2px; background:var(--line); border:1px solid var(--line); border-radius:4px; overflow:hidden; margin:20px 0}
 @media (max-width:680px){ .panel-grid{grid-template-columns:1fr} }
-.voice{background:var(--bg-raised); padding:16px 18px}
-.voice h3{font-size:.72rem; font-family:var(--font-mono); font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:6px}
-.voice p{font-size:.89rem; color:var(--ink-soft); margin:0}
-.convergence{display:flex; align-items:center; gap:12px; font-family:var(--font-mono); font-size:.76rem; color:var(--ink-faint); margin:4px 0 0}
+.voice{background:var(--bg-raised); padding:17px 19px}
+.voice h3{font-size:.72rem; font-family:var(--font-mono); font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:7px}
+.voice p{font-size:.92rem; color:var(--ink-soft); margin:0}
+.convergence{display:flex; align-items:center; gap:12px; font-family:var(--font-mono); font-size:.76rem; color:var(--ink-faint); margin:6px 0 0}
 .convergence .bar{flex:0 0 160px; height:6px; background:var(--bg-sunken); border-radius:3px; overflow:hidden}
 .convergence .fill{height:100%; background:linear-gradient(90deg,var(--grad-a),var(--grad-b)); width:22%}
-.gegenpol{background:var(--violet-bg); border:1px solid var(--violet-line); border-radius:4px; padding:22px 24px; margin-top:4px}
+.gegenpol{background:var(--violet-bg); border:1px solid var(--violet-line); border-radius:4px; padding:24px 26px; margin-top:6px}
 .gegenpol .eyebrow{color:var(--violet)}
 .gegenpol .eyebrow::before{background:var(--violet)}
-.gegenpol p{color:var(--ink); font-size:.96rem}
-.gegenpol .question{font-family:var(--font-display); font-weight:600; font-size:1.08rem; color:var(--violet); margin-top:10px; line-height:1.3}
+.gegenpol p{color:var(--ink); font-size:1rem}
+.gegenpol .question{font-family:var(--font-display); font-weight:600; font-size:1.1rem; color:var(--violet); margin-top:12px; line-height:1.3}
 
-/* ---- candidate cards (native <details>, open state auto-local) ---- */
+/* ---- tier intro ---- */
+.tier-legend{display:flex; gap:10px; flex-wrap:wrap; margin:18px 0 30px}
+.tier-badge{display:flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:.76rem; color:var(--ink-soft); background:var(--bg-raised); border:1px solid var(--line); border-radius:999px; padding:6px 13px}
+.tier-badge .dot{width:9px; height:9px; border-radius:50%}
+.tier-badge.kern .dot{background:var(--grad-a)}
+.tier-badge.kontext .dot{background:var(--grad-b)}
+.tier-badge.archiv .dot{background:var(--ink-faint)}
+
+/* ---- candidate cards ---- */
 .candidate-list{display:flex; flex-direction:column; gap:10px}
 .ccard{background:var(--bg-raised); border:1px solid var(--line); border-radius:4px; overflow:hidden; box-shadow:var(--shadow)}
 .ccard[open]{border-color:var(--line-strong)}
-.ccard > summary{list-style:none; cursor:pointer; padding:15px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; border-left:5px solid var(--line-strong)}
+.ccard > summary{list-style:none; cursor:pointer; padding:16px 19px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; border-left:5px solid var(--line-strong)}
 .ccard > summary::-webkit-details-marker{display:none}
 .ccard[data-status="prioritized"] > summary{border-left-color:var(--lime)}
 .ccard[data-status="review"] > summary{border-left-color:var(--amber)}
 .ccard[data-status="hold"] > summary{border-left-color:var(--violet)}
 .ccard[data-status="notyet"] > summary{border-left-color:var(--rose)}
-.ccard-name{font-family:var(--font-display); font-weight:700; font-size:1.06rem}
-.ccard-meta{font-size:.84rem; color:var(--ink-faint); font-family:var(--font-mono)}
+.ccard-name{font-family:var(--font-display); font-weight:700; font-size:1.08rem}
+.ccard-meta{font-size:.85rem; color:var(--ink-faint); font-family:var(--font-mono)}
 .status-chip{font-family:var(--font-mono); font-size:.66rem; letter-spacing:.05em; text-transform:uppercase; padding:4px 10px; border-radius:999px; margin-left:auto}
 .status-chip.prioritized{background:var(--lime-bg); color:var(--lime)}
 .status-chip.review{background:var(--amber-bg); color:var(--amber)}
@@ -128,20 +156,36 @@ section{padding:clamp(38px,6vw,60px) 0; border-bottom:1px solid var(--line)}
 .status-chip.notyet{background:var(--rose-bg); color:var(--rose)}
 .chev{font-family:var(--font-mono); color:var(--ink-faint); font-size:.9rem; transition:transform .15s}
 .ccard[open] .chev{transform:rotate(90deg)}
-.ccard-body{padding:4px 18px 20px; border-top:1px solid var(--line)}
-.field{margin-top:14px}
-.field h4{font-size:.68rem; font-family:var(--font-mono); font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 4px}
-.field p{font-size:.88rem; color:var(--ink-soft); margin:0}
-.oq-list{margin:0; padding-left:1.1em; font-size:.86rem; color:var(--ink-soft)}
-.oq-list li{margin-bottom:3px}
-.mini-legal{display:flex; gap:8px; align-items:flex-start; background:var(--amber-bg); border-radius:4px; padding:9px 11px; font-size:.83rem; color:var(--ink-soft)}
+.ccard-body{padding:2px 19px 22px; border-top:1px solid var(--line)}
+.anchor-prose{font-size:1rem; color:var(--ink); margin-top:16px; padding-left:14px; border-left:3px solid var(--grad-a)}
+.field{margin-top:15px}
+.field h4{font-size:.68rem; font-family:var(--font-mono); font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); margin:0 0 5px}
+.field p{font-size:.92rem; color:var(--ink-soft); margin:0}
+.oq-list{margin:0; padding-left:1.1em; font-size:.9rem; color:var(--ink-soft)}
+.oq-list li{margin-bottom:4px}
+.mini-legal{display:flex; gap:8px; align-items:flex-start; background:var(--amber-bg); border-radius:4px; padding:10px 12px; font-size:.86rem; color:var(--ink-soft); margin-top:15px}
 .mini-legal b{font-family:var(--font-mono); color:var(--amber)}
-.src-list{font-size:.75rem; margin-top:10px}
+.src-list{font-size:.76rem; margin-top:12px}
 .src-list a{color:var(--ink-faint); text-decoration:underline; text-decoration-color:var(--line-strong)}
 .src-list a + a{margin-left:10px}
 
-/* ---- feedback controls: static markup, plain gestures (sync-eligible) ---- */
-.fb{margin-top:16px; padding-top:14px; border-top:1px dashed var(--line-strong)}
+/* ---- kontext cards ---- */
+.kontext-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:8px}
+@media (max-width:680px){ .kontext-grid{grid-template-columns:1fr} }
+.kcard{background:var(--bg-sunken); border:1px dashed var(--line-strong); border-radius:4px; padding:16px 18px}
+.kcard-head{display:flex; flex-direction:column; gap:2px; margin-bottom:8px}
+.kcard-name{font-family:var(--font-display); font-weight:700; font-size:.98rem}
+.kcard-meta{font-size:.78rem; color:var(--ink-faint); font-family:var(--font-mono)}
+.kcard p{font-size:.87rem; color:var(--ink-soft)}
+
+.abs-box{margin-top:20px; padding:16px 18px; border:1px solid var(--line); border-radius:4px; background:var(--bg-raised)}
+.abs-row{padding:8px 0; border-top:1px solid var(--line)}
+.abs-row:first-child{border-top:none; padding-top:0}
+.abs-row b{font-family:var(--font-mono); font-size:.8rem; color:var(--ink); display:block; margin-bottom:3px}
+.abs-row p{font-size:.86rem; color:var(--ink-soft); margin:0}
+
+/* ---- feedback controls ---- */
+.fb{margin-top:18px; padding-top:15px; border-top:1px dashed var(--line-strong)}
 .fb-row{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
 .fb-group{display:flex; gap:6px; flex-wrap:wrap}
 .fb-label{font-family:var(--font-mono); font-size:.66rem; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); margin-right:2px}
@@ -154,28 +198,28 @@ section{padding:clamp(38px,6vw,60px) 0; border-bottom:1px solid var(--line)}
 .fb-note:focus{outline:2px solid var(--grad-b); outline-offset:1px}
 
 .ladder{display:flex; flex-direction:column}
-.rung{display:grid; grid-template-columns:34px 1fr; gap:14px; padding:15px 0; border-top:1px solid var(--line)}
+.rung{display:grid; grid-template-columns:34px 1fr; gap:14px; padding:16px 0; border-top:1px solid var(--line)}
 .rung:first-child{border-top:none}
 .rung .num{font-family:var(--font-mono); font-weight:700; font-size:1.15rem; color:var(--grad-b)}
-.rung h3{margin-bottom:4px; font-size:.98rem}
-.rung p{font-size:.88rem; color:var(--ink-soft); margin:0}
-.tag-row{display:flex; gap:6px; flex-wrap:wrap; margin-top:6px}
+.rung h3{margin-bottom:5px; font-size:.98rem}
+.rung p{font-size:.9rem; color:var(--ink-soft); margin:0}
+.tag-row{display:flex; gap:6px; flex-wrap:wrap; margin-top:7px}
 .tag{font-family:var(--font-mono); font-size:.65rem; background:var(--bg-sunken); color:var(--ink-faint); padding:3px 8px; border-radius:999px}
 
 .sponsor-cols{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
 @media (max-width:760px){ .sponsor-cols{grid-template-columns:1fr} }
-.sponsor-col{background:var(--bg-raised); border:1px solid var(--line); border-radius:4px; padding:15px 17px}
-.sponsor-col h3{margin-bottom:8px; font-size:.92rem; color:var(--grad-a)}
-.sponsor-col ul{margin:0; padding-left:1.05em; font-size:.85rem; color:var(--ink-soft)}
-.sponsor-col li{margin-bottom:7px}
+.sponsor-col{background:var(--bg-raised); border:1px solid var(--line); border-radius:4px; padding:16px 18px}
+.sponsor-col h3{margin-bottom:9px; font-size:.94rem; color:var(--grad-a)}
+.sponsor-col ul{margin:0; padding-left:1.05em; font-size:.87rem; color:var(--ink-soft)}
+.sponsor-col li{margin-bottom:8px}
 .sponsor-col b{color:var(--ink)}
 
-footer{padding:28px 0 50px}
-footer p{font-size:.78rem; color:var(--ink-faint); max-width:68ch}
-.cost-strip{display:flex; gap:18px; flex-wrap:wrap; font-family:var(--font-mono); font-size:.73rem; color:var(--ink-faint); margin:12px 0}
+footer{padding:30px 0 54px; position:relative}
+footer p{font-size:.8rem; color:var(--ink-faint); max-width:70ch}
+.cost-strip{display:flex; gap:18px; flex-wrap:wrap; font-family:var(--font-mono); font-size:.73rem; color:var(--ink-faint); margin:14px 0}
 .cost-strip b{color:var(--ink-soft)}
 
-@media (prefers-reduced-motion: reduce){ *{transition:none !important} }
+@media (prefers-reduced-motion: reduce){ *{animation:none !important; transition:none !important} }
 
 /* ---- password gate ---- */
 html:not(.unlocked) #pageContent{display:none}
@@ -196,7 +240,7 @@ html.unlocked #lockGate{display:none}
   <div class="lock-card">
     <div class="brand"><span class="grad-text">TRYP</span> / 2027</div>
     <p><span data-de>Dieses Dossier ist passwortgeschützt.</span><span data-en>This dossier is password-protected.</span></p>
-    <input type="password" id="lockInput" autocomplete="off" placeholder="••••••••">
+    <input type="password" id="lockInput" autocomplete="off" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;">
     <button type="button" id="lockSubmit"><span data-de>Entsperren</span><span data-en>Unlock</span></button>
     <div class="err" id="lockErr"></div>
     <button type="button" id="lockLangToggle" class="pill-btn" style="margin-top:14px" aria-pressed="false">EN</button>
@@ -209,38 +253,53 @@ html.unlocked #lockGate{display:none}
     <div class="brand"><span class="grad-text">TRYP</span>&nbsp;/ 2027 Kuration</div>
     <div class="topbar-controls">
       <button class="pill-btn" id="langToggle" type="button" aria-pressed="false">EN</button>
-      <button class="pill-btn" id="themeToggle" type="button" aria-pressed="false">☾</button>
+      <button class="pill-btn" id="themeToggle" type="button" aria-pressed="false">&#9789;</button>
     </div>
   </div>
 </div>
+<nav class="subnav" aria-label="Sections">
+  <div class="subnav-inner" id="subnavInner">
+    <a href="#frame"><span data-de>Rahmen</span><span data-en>Frame</span></a>
+    <a href="#panel"><span data-de>Panel</span><span data-en>Panel</span></a>
+    <a href="#candidates"><span data-de>Kandidaten</span><span data-en>Candidates</span></a>
+    <a href="#outreach"><span data-de>Kontakt</span><span data-en>Outreach</span></a>
+    <a href="#sponsors"><span data-de>Sponsoren</span><span data-en>Sponsors</span></a>
+    <a href="#footer-methodik"><span data-de>Methodik</span><span data-en>Methodology</span></a>
+  </div>
+</nav>
 
-<header class="hero">
+<header class="hero" id="top">
+  <div class="plasma-wrap"><canvas id="plasmaCanvas" aria-hidden="true"></canvas></div>
   <div class="wrap">
-    <div class="eyebrow"><span data-de>Kurationsdossier · Runde 1</span><span data-en>Curation Dossier · Round One</span></div>
-    <h1><span data-de>Sechs Wege zurück zur Pflanze.<br>Ein Kriterium ohne Ausnahme.</span><span data-en>Six paths back to the plant.<br>One criterion, no exceptions.</span></h1>
-    <p class="hero-lede" data-de>SuperBrain-gestützte Kuration neuer Pflanzenmedizin-Delegationen für TRYP EXPO Berlin 2027. Governance-Autonomie ist Vorbedingung, nicht Bonuspunkt — und ein Gegenpol stellt die ganze Übung in Frage.</p>
-    <p class="hero-lede" data-en>SuperBrain-assisted curation of new plant-medicine delegations for TRYP EXPO Berlin 2027. Governance autonomy is a precondition, not a bonus point — and a dissenting voice questions the whole exercise.</p>
+    <div class="eyebrow"><span data-de>Kurationsdossier &middot; Runde 2</span><span data-en>Curation Dossier &middot; Round Two</span></div>
+    <h1><span data-de>Viele Wege zurück zur Pflanze.<br>Ein Kriterium ohne Ausnahme.</span><span data-en>Many paths back to the plant.<br>One criterion, no exceptions.</span></h1>
+    <p class="hero-lede" data-de>Dieses Dossier begleitet die Kuration neuer Pflanzenmedizin-Delegationen für TRYP EXPO Berlin 2027 mit Hilfe von SuperBrain-Engines. Es setzt Governance-Autonomie als Vorbedingung, nicht als Bonuspunkt, und lässt bewusst eine Gegenstimme stehen, die die gesamte Übung noch einmal in Frage stellt.</p>
+    <p class="hero-lede" data-en>This dossier accompanies the curation of new plant-medicine delegations for TRYP EXPO Berlin 2027 with the help of SuperBrain engines. It treats governance autonomy as a precondition rather than a bonus point, and deliberately leaves a dissenting voice standing that questions the entire exercise once more.</p>
     <div class="factstrip">
-      <span><b data-de>Vorbild</b><b data-en>Precedent</b>: TRYP EXPO Berlin, Mai 2026 · Funkhaus · 15k <span data-de>Bes.</span><span data-en>attendees</span></span>
-      <span><b data-de>Bereits dabei</b><b data-en>Already in</b>: Huni Kuin · Yawanawá</span>
-      <span><b data-de>Ziel</b><b data-en>Target</b>: 10.–13.06.2027</span>
-      <span><b data-de>Kandidaten</b><b data-en>Candidates</b>: 6</span>
+      <span><b data-de>Vorbild</b><b data-en>Precedent</b>: TRYP EXPO Berlin, Mai 2026 &middot; Funkhaus &middot; 15k <span data-de>Bes.</span><span data-en>attendees</span></span>
+      <span><b data-de>Bereits dabei</b><b data-en>Already in</b>: Huni Kuin &middot; Yawanawá</span>
+      <span><b data-de>Ziel</b><b data-en>Target</b>: 10.&ndash;13.06.2027</span>
+      <span><b data-de>Kernkandidaten</b><b data-en>Core candidates</b>: 10</span>
+      <span><b data-de>Kontext</b><b data-en>Context</b>: 4</span>
     </div>
   </div>
 </header>
+<svg class="wave-divider" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C200,40 400,0 600,20 C800,40 1000,0 1200,20 L1200,40 L0,40 Z"/></svg>
 
 <section id="frame">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow"><span data-de>Der Wendepunkt</span><span data-en>The Turning Point</span></div>
       <h2><span data-de>Kulturelle Präsenz, nicht Substanz-Kulisse</span><span data-en>Cultural presence, not a substance backdrop</span></h2>
-      <p data-de style="margin-top:10px">Huni Kuin und Yawanawá waren 2026 bereits als Kultur — Lehre, Begegnung, Kunst — eingebunden, nicht als Zeremonie-Dienstleister. Genau dieses Format ist die Vorlage für alle sechs Kandidaten unten.</p>
-      <p data-en style="margin-top:10px">Huni Kuin and Yawanawá were already present in 2026 as culture — teaching, encounter, art — not as ceremony providers. That exact format is the template for all six candidates below.</p>
+      <p data-de>Huni Kuin und Yawanawá waren 2026 bereits als Kultur eingebunden: Sie lehrten, begegneten dem Publikum und stellten Kunst aus, ohne dabei als Anbieter einer Zeremonie aufzutreten. Genau dieses Format ist die Vorlage für jede Karte weiter unten, egal ob es um eine schon lange bestehende Beziehung geht oder um eine Gemeinschaft, die TRYP EXPO bislang noch nicht kennt.</p>
+      <p data-en>Huni Kuin and Yawanawá were already woven into the 2026 program as culture: they taught, met the public, and exhibited art, without ever appearing as a ceremony provider. That exact format is the template for every card below, whether it concerns a relationship that already runs deep or a community TRYP EXPO has not yet encountered at all.</p>
     </div>
     <div class="legal-banner">
-      <div class="glyph">§</div>
-      <p><span data-de><b>Rechtslage Deutschland</b> (Falsifiability-Check 92/100, kein Rechtsrat): DMT, Meskalin und Psilocybin sind BtMG Anlage&nbsp;I. Eine Zeremonie mit Substanzverabreichung wäre strafbar — jede Einladung meint substanzfreie kulturelle/edukative Präsenz.</span>
-      <span data-en><b>German legal status</b> (falsifiability check 92/100, not legal advice): DMT, mescaline, and psilocybin are BtMG Schedule&nbsp;I. A ceremony involving substance administration would be a criminal offense — any invitation means substance-free cultural or educational presence.</span></p>
+      <div class="glyph">&sect;</div>
+      <p>
+        <span data-de><b>Rechtslage Deutschland</b> (Falsifiability-Check 92/100, kein Rechtsrat): DMT, Meskalin und Psilocybin sind als Betäubungsmittel der Anlage&nbsp;I eingestuft und damit nicht verkehrsfähig. Eine öffentliche Zeremonie mit Substanzverabreichung wäre in Deutschland strafbar, weshalb sich jede Einladung in diesem Dossier ausschließlich auf substanzfreie kulturelle oder edukative Präsenz bezieht &mdash; Kunst, Vortrag, Musik, Textilien, Erzählung.</span>
+        <span data-en><b>German legal status</b> (falsifiability check 92/100, not legal advice): DMT, mescaline, and psilocybin are classified as Schedule&nbsp;I controlled substances and are therefore not legally dispensable. A public ceremony involving substance administration would be a criminal offense in Germany, so every invitation in this dossier refers exclusively to substance-free cultural or educational presence &mdash; art, talks, music, textiles, storytelling.</span>
+      </p>
     </div>
   </div>
 </section>
@@ -250,63 +309,77 @@ html.unlocked #lockGate{display:none}
     <div class="section-head">
       <div class="eyebrow"><span data-de>SuperBrain-Kurationspanel</span><span data-en>SuperBrain Curation Panel</span></div>
       <h2><span data-de>Vier Stimmen, eine Triage</span><span data-en>Four voices, one triage</span></h2>
+      <p data-de>Die volle NovaSphere-Engine hat vier fallspezifisch gecastete Personas über zwei Diskussionsrunden laufen lassen, statt vier Kriterien einfach gleich zu gewichten. Am Ende einigte sich das Panel auf eine feste Reihenfolge: erst Governance-Legitimität prüfen, dann die deutsche Rechtslage, dann die Logistik &mdash; Reciprocity-Reife zählt in dieser Kette erst ganz zuletzt.</p>
+      <p data-en>The full NovaSphere engine ran four case-specifically cast personas through two rounds of discussion, rather than simply weighting four criteria equally. In the end, the panel agreed on a fixed sequence: check governance legitimacy first, then German law, then logistics &mdash; reciprocity readiness only counts last in that chain.</p>
       <div class="convergence">
         <span data-de>Konvergenz</span><span data-en>Convergence</span>
         <div class="bar"><div class="fill"></div></div><span>0.22 / 1.0</span>
       </div>
-      <p style="font-family:var(--font-mono); font-size:.72rem; color:var(--ink-faint); margin-top:6px">
-        <span data-de>Quelle: NovaSphere-panel_cast-Engine-Antwort (2 Runden, 4 Personas + Gegenpol) — Engine-Metrik, kein extern verifizierbarer Fakt.</span>
-        <span data-en>Source: NovaSphere panel_cast engine response (2 rounds, 4 personas + dissent) — an engine metric, not an externally verifiable fact.</span>
+      <p style="font-family:var(--font-mono); font-size:.72rem; color:var(--ink-faint); margin-top:8px">
+        <span data-de>Quelle: NovaSphere-panel_cast-Engine-Antwort (2 Runden, 4 Personas + Gegenpol) &mdash; eine Engine-Metrik, kein extern verifizierbarer Fakt.</span>
+        <span data-en>Source: NovaSphere panel_cast engine response (2 rounds, 4 personas + dissent) &mdash; an engine metric, not an externally verifiable fact.</span>
       </p>
     </div>
     <div class="panel-grid">
       <div class="voice"><h3><span data-de>Kulturschutz</span><span data-en>Cultural Protection</span></h3>
-        <p data-de>Fehlendes schriftliches Gremium = anderes Governance-System, nicht Vakuum. Frage: echter Konsens oder unlegitimierte Einzelperson?</p>
-        <p data-en>A missing written body means a different governance system, not a vacuum. The question: genuine consensus, or one unauthorized person?</p></div>
+        <p data-de>Ein fehlendes schriftliches Gremium bedeutet nicht automatisch ein Governance-Vakuum &mdash; bei mündlich-familiär organisierter Selbstbestimmung ist es schlicht ein anderes System. Die entscheidende Frage lautet deshalb nicht &bdquo;gibt es ein Gremium&ldquo;, sondern ob ein echter Konsensprozess möglich ist oder ob am Ende eine intern nicht legitimierte Einzelperson verhandelt.</p>
+        <p data-en>A missing written body does not automatically mean a governance vacuum &mdash; where self-determination runs orally and through family structures, it is simply a different system. The decisive question is therefore not &ldquo;does a body exist&rdquo;, but whether a genuine consensus process is possible, or whether an internally unauthorized individual ends up negotiating instead.</p></div>
       <div class="voice"><h3><span data-de>Event-Kuration</span><span data-en>Event Curation</span></h3>
-        <p data-de>4 von 6 Kandidaten scheitern am Governance-Filter — Fakt, kein Graubereich. Nur dokumentierte Gremien mit Ablehnungs-Historie bekommen einen Score.</p>
-        <p data-en>4 of 6 candidates already fail the governance filter — fact, not grey zone. Only documented bodies with a rejection track record get scored.</p></div>
+        <p data-de>Mehrere der geprüften Kandidaten scheitern bereits am Governance-Filter, und das ist ein Befund, kein Graubereich. Nur Gemeinschaften mit einem dokumentierten, zentralen Gremium und einer nachgewiesenen Geschichte von Ablehnung oder Neuverhandlung erhalten in dieser Logik überhaupt einen Status.</p>
+        <p data-en>Several of the candidates reviewed already fail the governance filter, and that is a finding, not a grey zone. Only communities with a documented, central body and a proven history of rejecting or renegotiating deals receive any status at all under this logic.</p></div>
       <div class="voice"><h3><span data-de>Reciprocity &amp; Recht</span><span data-en>Reciprocity &amp; Law</span></h3>
-        <p data-de>Governance → Recht → Logistik → Reciprocity, in dieser Reihenfolge: Triage, keine Matrix. Iboga/Meskalin-Grenzfälle bleiben explizit offen, nicht als Fakt verkauft.</p>
-        <p data-en>Governance → law → logistics → reciprocity, in that order: triage, not a matrix. Iboga/mescaline edge cases stay explicitly open, not sold as settled fact.</p></div>
+        <p data-de>Governance zuerst, dann die Rechtslage, dann Logistik, erst danach Reciprocity: Das ist als Triage gemeint, nicht als Bewertungsmatrix mit vier gleich schweren Feldern. Grenzfälle wie Iboga oder Meskalin bei San Pedro bleiben deshalb bewusst als offene Fragen stehen, statt als geprüfter Fakt verkauft zu werden.</p>
+        <p data-en>Governance first, then the legal situation, then logistics, and only after that reciprocity: this is meant as triage, not as a scoring matrix with four equally weighted fields. Edge cases such as iboga or mescaline in San Pedro are therefore deliberately left as open questions rather than sold as verified fact.</p></div>
       <div class="voice"><h3><span data-de>Sponsor-Fit</span><span data-en>Sponsor Fit</span></h3>
-        <p data-de>Wenn selbst die stärksten Kandidaten nur Kunst und Vortrag beitragen, ist „Psychedelic Festival" das falsche Etikett für diesen Teil. Zwei Spuren statt eines Labels.</p>
-        <p data-en>If even the strongest candidates can only contribute art and talks, "psychedelic festival" is the wrong label for this part. Two tracks, not one label.</p></div>
+        <p data-de>Wenn selbst die governance-stärksten Kandidaten am Ende nur Kunst und Vortrag beitragen können, ist &bdquo;Psychedelic Festival&ldquo; das falsche Etikett für genau diesen Programmteil. Ehrlicher wäre es, zwei getrennte Spuren zu benennen, statt beides unter einem einzigen Label zu vermischen.</p>
+        <p data-en>If even the governance-strongest candidates can ultimately only contribute art and talks, &ldquo;psychedelic festival&rdquo; is the wrong label for exactly that part of the program. It would be more honest to name two separate tracks than to blend both under one single label.</p></div>
     </div>
     <div class="gegenpol">
       <div class="eyebrow"><span data-de>Gegenpol</span><span data-en>Dissenting Voice</span></div>
-      <p data-de>Die Falle sitzt nicht im Kriterienkatalog, sondern in der Annahme, Substanz-Erlebnis und kulturelle Authentizität seien ein Paket. Ernstgenommene Rechtslage disqualifiziert diese Annahme — nicht die Gemeinschaften.</p>
-      <p class="question" data-de>Welche Rangfolge bleibt stehen, wenn nur kulturelle Präsenz möglich ist — und für wen ist das noch „TRYP EXPO"?</p>
-      <p data-en>The trap isn't the criteria catalogue — it's assuming a substance experience and cultural authenticity are one package. German law, taken seriously, disqualifies that assumption, not the communities.</p>
-      <p class="question" data-en>Which ranking survives once only cultural presence is possible — and for whom is that still "TRYP EXPO"?</p>
+      <p data-de>Die eigentliche Falle liegt nicht im Kriterienkatalog selbst, sondern in der stillschweigenden Annahme, dass Substanz-Erlebnis und kulturelle Authentizität immer als ein Paket kommen müssten. Wer die deutsche Rechtslage ernst nimmt, muss diese Annahme fallen lassen &mdash; nicht die beteiligten Gemeinschaften.</p>
+      <p class="question" data-de>Welche Rangfolge bleibt eigentlich noch bestehen, wenn nur kulturelle Präsenz möglich ist &mdash; und für wen ist das dann überhaupt noch &bdquo;TRYP EXPO&ldquo;?</p>
+      <p data-en>The real trap is not the criteria catalogue itself, but the silent assumption that a substance experience and cultural authenticity must always arrive as one package. Anyone who takes German law seriously has to drop that assumption &mdash; not the communities involved.</p>
+      <p class="question" data-en>Which ranking actually survives once only cultural presence is possible &mdash; and for whom is that still &ldquo;TRYP EXPO&rdquo; at all?</p>
     </div>
   </div>
 </section>
+<svg class="wave-divider" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C300,0 500,40 700,15 C900,-5 1050,35 1200,15 L1200,40 L0,40 Z"/></svg>
 
 <section id="candidates">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow"><span data-de>Sechs Dossiers</span><span data-en>Six Dossiers</span></div>
-      <h2><span data-de>Kandidaten — zum Öffnen klicken</span><span data-en>Candidates — click to open</span></h2>
+      <div class="eyebrow"><span data-de>Globale Pluralität der Pflanzenmedizin-Kulturen</span><span data-en>Global Plurality of Plant Medicine Cultures</span></div>
+      <h2><span data-de>Drei Ebenen statt einer flachen Liste</span><span data-en>Three tiers, not a flat list</span></h2>
+      <p data-de>Die erste Fassung dieses Dossiers zeigte sechs Kandidaten, fast ausschließlich aus Lateinamerika &mdash; angesichts der ganzen Welt zu wenig, wie zu Recht angemerkt wurde. Eine SuperBrain-Dialektik-Konsultation hat deshalb ein dreistufiges Modell vorgeschlagen: <b>Kernkandidaten</b> werden mit derselben Sorgfalt geprüft wie bisher, mit vollständigem Governance-, Rechts- und Quellen-Nachweis. <b>Kontextkandidaten</b> sind lebendige Traditionen, die (noch) keine vergleichbar dokumentierte Vertretungsstruktur haben und deshalb bewusst mit weniger Gewicht, aber genauso viel Respekt gezeigt werden. Die <b>Archiv-Ebene</b> benennt schließlich Weltregionen, in denen die Recherche keine passende lebendige Gemeinschaft fand &mdash; als dokumentiertes Ergebnis, nicht als stille Lücke.</p>
+      <p data-en>The first version of this dossier showed six candidates, almost entirely from Latin America &mdash; too few given the size of the world, as was rightly pointed out. A SuperBrain Dialektik consultation therefore proposed a three-tier model: <b>core candidates</b> are reviewed with the same rigor as before, with full governance, legal, and source documentation. <b>Context candidates</b> are living traditions that do not (yet) have a comparably documented representative structure, and are therefore shown deliberately with less weight but no less respect. The <b>archive tier</b>, finally, names world regions where the research found no matching living community &mdash; as a documented finding, not a silent gap.</p>
+      <div class="tier-legend">
+        <span class="tier-badge kern"><span class="dot"></span><span data-de>Kernkandidaten</span><span data-en>Core candidates</span></span>
+        <span class="tier-badge kontext"><span class="dot"></span><span data-de>Kontextkandidaten</span><span data-en>Context candidates</span></span>
+        <span class="tier-badge archiv"><span class="dot"></span><span data-de>Archiv-Ebene</span><span data-en>Archive tier</span></span>
+      </div>
     </div>
+
+    <h3 style="margin-bottom:14px"><span data-de>Kernkandidaten &mdash; zum Öffnen klicken</span><span data-en>Core candidates &mdash; click to open</span></h3>
     <div class="candidate-list">
 
-      <details class="ccard" data-status="prioritized">
-        <summary><span class="ccard-name">Shipibo-Konibo</span><span class="ccard-meta">Peru · Ucayali — <span data-de>Ayahuasca</span><span data-en>Ayahuasca</span></span><span class="status-chip prioritized"><span data-de>Priorisiert</span><span data-en>Prioritized</span></span><span class="chev">▸</span></summary>
+      <details class="ccard" data-status="prioritized" id="c-shipibo">
+        <summary>
+          <span class="ccard-name">Shipibo-Konibo</span>
+          <span class="ccard-meta">Peru · Ucayali &middot; <span data-de>Ayahuasca-Tradition</span><span data-en>Ayahuasca lineage</span></span>
+          <span class="status-chip prioritized"><span data-de>Priorisiert</span><span data-en>Prioritized</span></span>
+          <span class="chev" aria-hidden="true">&#9656;</span>
+        </summary>
         <div class="ccard-body">
+          <p class="anchor-prose"><span data-de>Von den zehn geprüften Gemeinschaften kommt keine näher an das bestehende Huni-Kuin/Yawanawá-Format heran als die Shipibo-Konibo: Sie haben nach einem eigenen Trauma bereits eine eigene Governance-Antwort formuliert, und ihre Kunst zeigt, wie kulturelle Präsenz ohne Substanz konkret aussehen kann.</span><span data-en>Of the ten communities reviewed, none sits closer to the existing Huni Kuin/Yawanawá format than the Shipibo-Konibo: they answered their own trauma with a governance response of their own making, and their art already shows what substance-free cultural presence can look like in practice.</span></p>
           <div class="field"><h4><span data-de>Governance</span><span data-en>Governance</span></h4>
-            <p data-de>COSHIKOX (Regionalrat) + ASOMASHK (2018, Union der Onanya-Heiler:innen). Nach der Ermordung der Heilerin Olivia Arévalo 2018: Deklaration von Yarinacocha gegen „spirituelle Extraktion".</p>
-            <p data-en>COSHIKOX (regional council) + ASOMASHK (2018, union of Onanya healers). After healer Olivia Arévalo's 2018 murder: the Yarinacocha Declaration against "spiritual extraction."</p></div>
+            <p data-de>Der Regionalrat COSHIKOX ist als politisches Vertretungsgremium dokumentiert, ergänzt durch ASOMASHK, den 2018 gegründeten Zusammenschluss der Onanya-Heiler:innen. Nach der Ermordung der Heilerin Olivia Arévalo Lomas im selben Jahr verabschiedete COSHIKOX die Deklaration von Yarinacocha, die sich ausdrücklich gegen das wendet, was sie „spirituelle Extraktion“ nennt.</p><p data-en>The regional council COSHIKOX is documented as the community's political representative body, complemented by ASOMASHK, the union of Onanya healers founded in 2018. After healer Olivia Arévalo Lomas was murdered that same year, COSHIKOX issued the Yarinacocha Declaration, explicitly naming and rejecting what it calls „spiritual extraction“.</p></div>
           <div class="field"><h4><span data-de>Track-Record</span><span data-en>Track Record</span></h4>
-            <p data-de>2019 Ko-Unterzeichner mit Huni Kuin &amp; Yawanawá beim World Ayahuasca Forum Girona — bestehende Koalitionsfähigkeit.</p>
-            <p data-en>Co-signed a 2019 statement with Huni Kuin &amp; Yawanawá at the World Ayahuasca Forum in Girona — existing coalition track record.</p></div>
-          <div class="mini-legal"><b>§</b><span data-de>Keine Zeremonie möglich (DMT, Anlage&nbsp;I). Kulturformat erprobt: Sara Flores (Kené-Kunst), Einzelausstellungen bei White Cube London &amp; Venedig-Biennale.</span><span data-en>No ceremony possible (DMT, Schedule&nbsp;I). Cultural format proven: Sara Flores (Kené art), solo shows at White Cube London &amp; the Venice Biennale.</span></div>
+            <p data-de>2019 unterzeichneten Shipibo-Vertreter:innen gemeinsam mit Huni Kuin und Yawanawá eine indigene Erklärung beim World Ayahuasca Forum in Girona — ein direkter Beleg dafür, dass eine funktionierende Koalition mit den bereits eingeladenen Gemeinschaften bereits existiert, bevor TRYP EXPO überhaupt anfragt.</p><p data-en>In 2019, Shipibo representatives co-signed an indigenous statement together with Huni Kuin and Yawanawá at the World Ayahuasca Forum in Girona — direct evidence that a working coalition with the communities TRYP EXPO has already invited exists before any request is even made.</p></div>
+          <div class="mini-legal"><b>&sect;</b><span data-de>Eine Zeremonie mit Substanzverabreichung bleibt in Deutschland ausgeschlossen (DMT, Anlage&nbsp;I BtMG). Ein tragfähiges Alternativformat ist aber bereits erprobt: Die Künstlerin Sara Flores zeigt ihre Kené-Textilarbeiten in Einzelausstellungen bei White Cube London und der Venedig-Biennale, vollständig ohne Zeremonie-Bezug.</span><span data-en>A ceremony involving substance administration remains excluded in Germany (DMT, BtMG Schedule&nbsp;I). A viable alternative format already exists, though: artist Sara Flores shows her Kené textile work in solo exhibitions at White Cube London and the Venice Biennale, with no ceremonial framing at all.</span></div>
           <div class="field"><h4><span data-de>Kontaktweg</span><span data-en>Contact Path</span></h4>
-            <p data-de>Alianza Arkana &amp; Farmacia Viva — offizielle Chacruna-IRI-Partner.</p>
-            <p data-en>Alianza Arkana &amp; Farmacia Viva — official Chacruna IRI partners.</p></div>
+            <p data-de>Alianza Arkana und Farmacia Viva sind offizielle Partnerorganisationen von Chacruna’s Indigenous Reciprocity Initiative und damit ein direkt ansprechbarer, bereits ethisch geprüfter Einstiegspunkt.</p><p data-en>Alianza Arkana and Farmacia Viva are official partner organizations of Chacruna's Indigenous Reciprocity Initiative, making them a directly reachable entry point that has already passed an outside ethics review.</p></div>
           <div class="field"><h4><span data-de>Offene Fragen</span><span data-en>Open Questions</span></h4>
-            <ul class="oq-list" data-de><li>Aktueller COSHIKOX-Kontakt für Festivalanfragen?</li><li>Entscheidet ASOMASHK explizit über Auslandsauftritte?</li></ul>
-            <ul class="oq-list" data-en><li>Who is the current COSHIKOX contact for festival requests?</li><li>Does ASOMASHK explicitly decide on international appearances?</li></ul></div>
+            <ul class="oq-list" data-de><li>Wer ist aktuell der richtige COSHIKOX-Kontakt für eine Festivalanfrage aus Deutschland?</li><li>Entscheidet ASOMASHK eigenständig über Auslandsauftritte, oder liegt das Mandat allein bei COSHIKOX?</li><li>Welches Sicherheitsprotokoll erwartet die Gemeinschaft angesichts des Mordfalls von 2018?</li></ul><ul class="oq-list" data-en><li>Who is currently the right COSHIKOX contact for a festival request originating in Germany?</li><li>Does ASOMASHK decide independently on international appearances, or does that mandate rest with COSHIKOX alone?</li><li>Given the 2018 murder case, what safety protocol does the community expect from an inviting organization?</li></ul></div>
           <div class="src-list"><a href="https://amazonwatch.org/news/2018/0907-in-the-declaration-of-yarinacocha-shipibo-healers-organize-to-resist-spiritual-extractivism" target="_blank" rel="noopener">Amazon Watch</a><a href="https://chacruna-iri.org/organizations" target="_blank" rel="noopener">Chacruna IRI</a><a href="https://www.whitecube.com/artists/sara-flores" target="_blank" rel="noopener">White Cube</a></div>
 
           <div class="fb">
@@ -325,27 +398,29 @@ html.unlocked #lockGate{display:none}
                 <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
               </div>
             </div>
-            <div class="fb-note" contenteditable="true" data-de-ph="Notiz…" data-en-ph="Note…" data-ph="Notiz…"></div>
+            <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
           </div>
         </div>
       </details>
 
-      <details class="ccard" data-status="prioritized">
-        <summary><span class="ccard-name">Achuar</span><span class="ccard-meta">Ecuador / Peru — <span data-de>Ayahuasca</span><span data-en>Ayahuasca</span></span><span class="status-chip prioritized"><span data-de>Priorisiert</span><span data-en>Prioritized</span></span><span class="chev">▸</span></summary>
+      <details class="ccard" data-status="prioritized" id="c-achuar">
+        <summary>
+          <span class="ccard-name">Achuar</span>
+          <span class="ccard-meta">Ecuador / Peru &middot; <span data-de>Ayahuasca-Tradition</span><span data-en>Ayahuasca lineage</span></span>
+          <span class="status-chip prioritized"><span data-de>Priorisiert</span><span data-en>Prioritized</span></span>
+          <span class="chev" aria-hidden="true">&#9656;</span>
+        </summary>
         <div class="ccard-body">
+          <p class="anchor-prose"><span data-de>Kein anderer Kandidat kann einen so konkreten Beleg für echte Vertragsautonomie vorweisen wie die Achuar: Eine Tourismus-Partnerschaft, die 1996 als klassisches Joint Venture begann, endete zwölf Jahre später mit vollständiger Eigentumsübertragung an die Gemeinschaft selbst.</span><span data-en>No other candidate offers as concrete a proof of real contractual autonomy as the Achuar: a tourism partnership that began in 1996 as a conventional joint venture ended twelve years later with full ownership transferred to the community itself.</span></p>
           <div class="field"><h4><span data-de>Governance</span><span data-en>Governance</span></h4>
-            <p data-de>NAE (Ecuador, dokumentierte Vollversammlung, an CONFENIAE/CONAIE angeschlossen) + FENAP (Peru). Beide Teil der Amazon Sacred Headwaters Alliance.</p>
-            <p data-en>NAE (Ecuador, documented general assembly, affiliated with CONFENIAE/CONAIE) + FENAP (Peru). Both part of the Amazon Sacred Headwaters Alliance.</p></div>
+            <p data-de>Zwei parallele Landesverbände tragen die Vertretung: NAE (Nacionalidad Achuar del Ecuador) mit einer dokumentierten Vollversammlung, angeschlossen an CONFENIAE und CONAIE, sowie FENAP in Peru. Beide sind Teil der übergeordneten Amazon Sacred Headwaters Alliance.</p><p data-en>Two parallel national federations carry the representation: NAE (Nacionalidad Achuar del Ecuador), which has a documented general assembly and is affiliated with CONFENIAE and CONAIE, and FENAP in Peru. Both belong to the wider Amazon Sacred Headwaters Alliance.</p></div>
           <div class="field"><h4><span data-de>Track-Record</span><span data-en>Track Record</span></h4>
-            <p data-de>Stärkster Beleg aller Kandidaten: Kapawi Ecolodge, 1996 Joint Venture, 2008 vollständig an die Achuar übertragen. Mehrfache Ölkonzern-Ablehnungen per Versammlungsbeschluss.</p>
-            <p data-en>Strongest evidence among all candidates: Kapawi Ecolodge, a 1996 joint venture fully transferred to Achuar ownership by 2008. Multiple oil-company rejections by assembly vote.</p></div>
-          <div class="mini-legal"><b>§</b><span data-de>Keine Zeremonie möglich (DMT, Anlage&nbsp;I). Bisher primär umweltpolitisch sichtbar (COP26), kein Festival-Format erprobt.</span><span data-en>No ceremony possible (DMT, Schedule&nbsp;I). Visibility so far mainly environmental-political (COP26); no festival format tested yet.</span></div>
+            <p data-de>Die Kapawi Ecolodge, 1996 als Joint Venture mit einer Tourismusfirma gegründet, wurde 2008 vollständig an die Achuar übertragen und wird seither vollständig in eigener Regie geführt. Ölkonzerne wie GeoPark und Talisman/OXY wurden mehrfach per Versammlungsbeschluss abgelehnt, trotz gezielter Spaltungsversuche der Firmen.</p><p data-en>Kapawi Ecolodge, founded in 1996 as a joint venture with a tourism company, was fully transferred to Achuar ownership by 2008 and has run entirely under community control since. Oil companies such as GeoPark and Talisman/OXY were rejected repeatedly by assembly vote, despite the companies' deliberate attempts to sow internal division.</p></div>
+          <div class="mini-legal"><b>&sect;</b><span data-de>Eine Zeremonie bleibt in Deutschland rechtlich ausgeschlossen (DMT, Anlage&nbsp;I BtMG). Internationale Sichtbarkeit bestand bislang primär im umweltpolitischen Bereich, etwa bei COP26 — ein Festival-Format wäre für diese Gemeinschaft komplettes Neuland und müsste entsprechend behutsam eingeführt werden.</span><span data-en>A ceremony remains legally excluded in Germany (DMT, BtMG Schedule&nbsp;I). International visibility so far has been mainly environmental-political, for instance at COP26 — a festival format would be entirely new territory for this community and would need to be introduced carefully.</span></div>
           <div class="field"><h4><span data-de>Kontaktweg</span><span data-en>Contact Path</span></h4>
-            <p data-de>Amazon Sacred Headwaters Alliance (Präsident Domingo Peas) · Pachamama Alliance als fiskalischer Partner.</p>
-            <p data-en>Amazon Sacred Headwaters Alliance (president Domingo Peas) · Pachamama Alliance as fiscal partner.</p></div>
+            <p data-de>Der Einstieg führt über die Amazon Sacred Headwaters Alliance (Präsident Domingo Peas), mit der Pachamama Alliance als etabliertem fiskalischem Partner im Hintergrund.</p><p data-en>The entry point is the Amazon Sacred Headwaters Alliance (president Domingo Peas), with the Pachamama Alliance already established as its fiscal partner in the background.</p></div>
           <div class="field"><h4><span data-de>Offene Fragen</span><span data-en>Open Questions</span></h4>
-            <ul class="oq-list" data-de><li>Ecuador-Achuar (Visumpflicht) oder Peru-Achuar (visumfrei) — oder beide?</li><li>Explizites Mandat für Event- statt nur Umweltpartnerschaften?</li></ul>
-            <ul class="oq-list" data-en><li>Ecuador-side Achuar (visa required) or Peru-side (visa-free) — or both?</li><li>An explicit mandate for event, not only environmental, partnerships?</li></ul></div>
+            <ul class="oq-list" data-de><li>Sollte die Delegation über die Ecuador-Achuar (visumpflichtig) oder die Peru-Achuar (visumfrei) laufen, oder beide gemeinsam?</li><li>Existiert überhaupt ein explizites Mandat für Event-Partnerschaften, oder bislang ausschließlich für Umweltschutz-Bündnisse?</li></ul><ul class="oq-list" data-en><li>Should the delegation travel via the Ecuador-side Achuar (visa required) or the Peru-side Achuar (visa-free), or jointly via both?</li><li>Does an explicit mandate for event partnerships exist at all, or has the federation's mandate so far covered only environmental alliances?</li></ul></div>
           <div class="src-list"><a href="https://www.kapawi.com/our-partnership" target="_blank" rel="noopener">Kapawi</a><a href="https://amazonwatch.org/news/2019/0610-my-message-for-geopark-dont-enter-achuar-territory" target="_blank" rel="noopener">Amazon Watch</a><a href="https://sacredheadwaters.org/home-1/" target="_blank" rel="noopener">Sacred Headwaters</a></div>
 
           <div class="fb">
@@ -364,28 +439,30 @@ html.unlocked #lockGate{display:none}
                 <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
               </div>
             </div>
-            <div class="fb-note" contenteditable="true" data-de-ph="Notiz…" data-en-ph="Note…" data-ph="Notiz…"></div>
+            <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
           </div>
         </div>
       </details>
 
-      <details class="ccard" data-status="notyet">
-        <summary><span class="ccard-name">Mazatec</span><span class="ccard-meta">Mexiko · Sierra Mazateca — <span data-de>Psilocybin</span><span data-en>Psilocybin</span></span><span class="status-chip notyet"><span data-de>Noch nicht</span><span data-en>Not yet</span></span><span class="chev">▸</span></summary>
+      <details class="ccard" data-status="review" id="c-shuar">
+        <summary>
+          <span class="ccard-name">Shuar</span>
+          <span class="ccard-meta">Ecuador · Cordillera del Cóndor &middot; <span data-de>Natem-Tradition (Ayahuasca)</span><span data-en>Natem tradition (ayahuasca)</span></span>
+          <span class="status-chip review"><span data-de>In Prüfung</span><span data-en>Under Review</span></span>
+          <span class="chev" aria-hidden="true">&#9656;</span>
+        </summary>
         <div class="ccard-body">
+          <p class="anchor-prose"><span data-de>Die Shuar sind eng mit den Achuar verwandt, aber governance-mäßig ein eigener, komplizierterer Fall: Drei konkurrierende Föderationen beanspruchen Vertretung, und ein Dachkomitee hat 2023 öffentlich gegen eigenmächtige Alleingänge einzelner Funktionäre durchgegriffen — ein Warnsignal und ein Vertrauensbeweis zugleich.</span><span data-en>The Shuar are closely related to the Achuar but present a separate, more complicated governance case: three competing federations claim representation, and an umbrella committee publicly sanctioned individual officials for striking unauthorized deals in 2023 — both a warning sign and evidence that real accountability exists.</span></p>
           <div class="field"><h4><span data-de>Governance</span><span data-en>Governance</span></h4>
-            <p data-de>Kein zentrales Ratifizierungsgremium. Nur die allgemeine Gemeinde-Vollversammlung und Casa Adobe (2021, Kollektiv, kein Ratifizierungsorgan).</p>
-            <p data-en>No central ratifying body. Only the general municipal assembly and Casa Adobe (2021 collective, not a ratifying body).</p></div>
+            <p data-de>Es gibt keine einzelne Dachorganisation mit unbestrittenem Mandat. FICSH, die älteste und größte Föderation, ist territorial nicht flächendeckend legitimiert. PSHA verwaltet autonom 232.500 Hektar mit eigenem Governing Council, NASHE ist eine dritte, unabhängige Föderation. Ein Comité Interfederacional koordiniert nominell zwischen allen dreien.</p><p data-en>No single umbrella organization holds an undisputed mandate. FICSH, the oldest and largest federation, is not legitimated across the entire territory. PSHA autonomously manages 232,500 hectares with its own governing council, and NASHE is a third, independent federation. A Comité Interfederacional nominally coordinates between all three.</p></div>
           <div class="field"><h4><span data-de>Track-Record</span><span data-en>Track Record</span></h4>
-            <p data-de>María Sabinas Haus wurde nach der Wasson-Publikation mehrfach abgebrannt, sie wurde von Teilen der Gemeinde geächtet. Bis heute dokumentierter Overtourism-Konflikt in Huautla de Jiménez.</p>
-            <p data-en>María Sabina's house was burned more than once after the Wasson publication; parts of the community ostracized her. An overtourism conflict in Huautla de Jiménez is still documented today.</p></div>
-          <div class="mini-legal"><b>§</b><span data-de>Keine Zeremonie möglich (Psilocybin, Anlage&nbsp;I). 24+ Psilocybin-Patente weltweit ohne Reciprocity-Vereinbarung — Biopiraterie-Risiko real.</span><span data-en>No ceremony possible (psilocybin, Schedule&nbsp;I). 24+ global psilocybin patents exist with no reciprocity agreement — a real biopiracy risk.</span></div>
+            <p data-de>PSHA lehnte 2024 ein von einem kanadischen Bergbauunternehmen verkündetes „Kooperationsabkommen“ mit FICSH ab; die ILO stellte anschließend fest, dass die vorgeschriebene Konsultation nach ILO-Konvention&nbsp;169 nicht stattgefunden hatte. Bereits 2023 erklärte das Interfederations-Komitee ein ähnliches FICSH/NASHE-Abkommen für nichtig.</p><p data-en>In 2024, PSHA rejected a “cooperation agreement” with FICSH that a Canadian mining company had announced; the ILO subsequently found that the consultation required under ILO Convention&nbsp;169 had never taken place. As early as 2023, the interfederational committee had already declared a similar FICSH/NASHE agreement void.</p></div>
+          <div class="mini-legal"><b>&sect;</b><span data-de>Wie bei allen Ayahuasca-Traditionen bleibt eine Zeremonie in Deutschland ausgeschlossen (DMT, Anlage&nbsp;I). Zusätzlich unklar: Welches der drei Gremien überhaupt verbindlich für eine internationale Festivalpartnerschaft entscheiden dürfte — das ist keine rechtliche, sondern eine ungelöste interne Frage.</span><span data-en>As with all ayahuasca traditions, a ceremony remains excluded in Germany (DMT, Schedule&nbsp;I). An additional open question: which of the three governing bodies could actually decide bindingly on an international festival partnership — not a legal question, but an unresolved internal one.</span></div>
           <div class="field"><h4><span data-de>Kontaktweg</span><span data-en>Contact Path</span></h4>
-            <p data-de>Kein IRI-Partner. Kein empfohlener Kontakt vor Governance-Aufbau.</p>
-            <p data-en>Not an IRI partner. No recommended contact before governance capacity exists.</p></div>
+            <p data-de>Kein spezifischer Reciprocity-Fonds ist bekannt; ein erster Kontakt müsste klären, ob PSHA — mit dem klarsten dokumentierten Ratifizierungsprozess — als Ansprechpartner geeignet ist.</p><p data-en>No dedicated reciprocity fund is known; an initial contact would need to establish whether PSHA — with the clearest documented ratification process of the three — is the right point of entry.</p></div>
           <div class="field"><h4><span data-de>Offene Fragen</span><span data-en>Open Questions</span></h4>
-            <ul class="oq-list" data-de><li>Wer ist legitimiert, für die Mazatec zu sprechen?</li><li>Steht Casa Adobe einem Festival überhaupt offen gegenüber?</li></ul>
-            <ul class="oq-list" data-en><li>Who is authorized to speak for the Mazatec?</li><li>Is Casa Adobe even open to a festival, given the history?</li></ul></div>
-          <div class="src-list"><a href="https://chacruna.net/mazatec-perspectives-on-the-globalization-of-psilocybin-mushrooms/" target="_blank" rel="noopener">Chacruna</a><a href="https://www.culanth.org/fieldsights/re-territorializing-mar%C3%ADa-sabina-huautla-mushrooms-and-politics" target="_blank" rel="noopener">Cultural Anthropology</a></div>
+            <ul class="oq-list" data-de><li>Welches der drei Gremien (FICSH, PSHA, NASHE oder das Interfederations-Komitee) ratifiziert eine internationale Partnerschaft verbindlich?</li><li>Sind zeremonielle Natem-Protokolle mit denen der Achuar vergleichbar, oder braucht es eine eigenständige kulturelle Einordnung?</li></ul><ul class="oq-list" data-en><li>Which of the three bodies (FICSH, PSHA, NASHE, or the interfederational committee) can bindingly ratify an international partnership?</li><li>Are ceremonial Natem protocols comparable to those of the Achuar, or does this tradition need its own, separate framing?</li></ul></div>
+          <div class="src-list"><a href="https://www.iccaregistry.org/en/explore/Ecuador/pueblo-shuar-arutam" target="_blank" rel="noopener">PSHA / ICCA Registry</a><a href="https://miningwatch.ca/news/2024/3/4/shuar-arutam-people-speak-out-against-solaris-resources-cooperation-agreement" target="_blank" rel="noopener">MiningWatch Canada</a><a href="https://amazonwatch.org/news/2024/0318-latest-blow-for-solaris-resources-ilo-finds-shuar-arutam-people-were-not-consulted-on-warintza-and-panantza-mining-projects" target="_blank" rel="noopener">Amazon Watch (ILO finding)</a></div>
 
           <div class="fb">
             <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
@@ -403,28 +480,30 @@ html.unlocked #lockGate{display:none}
                 <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
               </div>
             </div>
-            <div class="fb-note" contenteditable="true" data-de-ph="Notiz…" data-en-ph="Note…" data-ph="Notiz…"></div>
+            <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
           </div>
         </div>
       </details>
 
-      <details class="ccard" data-status="hold">
-        <summary><span class="ccard-name">Wixárika &amp; Native American Church</span><span class="ccard-meta">Mexiko / USA — <span data-de>Peyote</span><span data-en>Peyote</span></span><span class="status-chip hold"><span data-de>Zurückhaltung</span><span data-en>Reticence</span></span><span class="chev">▸</span></summary>
+      <details class="ccard" data-status="review" id="c-matses">
+        <summary>
+          <span class="ccard-name">Matsés</span>
+          <span class="ccard-meta">Peru / Brasilien · Amazonas &middot; <span data-de>Kambô-Tradition (Frosch-Sekret)</span><span data-en>Kambô tradition (frog secretion)</span></span>
+          <span class="status-chip review"><span data-de>In Prüfung</span><span data-en>Under Review</span></span>
+          <span class="chev" aria-hidden="true">&#9656;</span>
+        </summary>
         <div class="ccard-body">
+          <p class="anchor-prose"><span data-de>Kambô ist kein klassisches Halluzinogen, sondern ein starkes Reinigungsgift, das im westlichen Wellness-Markt einen eigenen Boom erlebt — mit einer Zertifizierungsindustrie, die oft ganz ohne Bezug zu den Matsés selbst auskommt. Genau das macht eine sorgfältige, direkte Partnerschaft besonders wichtig.</span><span data-en>Kambô is not a classical hallucinogen but a potent purgative that has found its own boom in the Western wellness market — complete with a certification industry that often has no connection to the Matsés at all. That is exactly why a careful, direct partnership matters here.</span></p>
           <div class="field"><h4><span data-de>Governance</span><span data-en>Governance</span></h4>
-            <p data-de>USA-Seite stark: National Council of Native American Churches (NCNAC) + Indigenous Peyote Conservation Initiative (IPCI, indigen geführtes Board seit 2017). Wixárika-Seite dezentral, kein Zentralgremium.</p>
-            <p data-en>US side is strong: NCNAC + Indigenous Peyote Conservation Initiative (IPCI, indigenous-led board since 2017). Wixárika side is decentralized, no central body.</p></div>
+            <p data-de>Eine zentrale „Matsés-Vertretung“ existiert nicht. Reale Entscheidungen laufen über eine gewählte Junta Directiva und eine jährliche Vollversammlung aller Gemeinden. Die NGO Acaté Amazon Conservation arbeitet seit Jahren als Partnerorganisation mit dieser Struktur zusammen — ausdrücklich als Partner, nicht als Vertretung.</p><p data-en>No central “Matsés representation” exists. Real decisions run through an elected Junta Directiva and an annual general assembly of all communities. The NGO Acaté Amazon Conservation has worked alongside this structure as a partner organization for years — explicitly as a partner, not as a representative.</p></div>
           <div class="field"><h4><span data-de>Track-Record</span><span data-en>Track Record</span></h4>
-            <p data-de>NCNAC/IPCI lehnten aktiv Peyote-Dekriminalisierung ab; bei Psychedelic Science 2023 unterbrachen Aktivist:innen Rick Doblins Rede wegen Tokenismus. Die Szene wurde bereits öffentlich konfrontiert.</p>
-            <p data-en>NCNAC/IPCI actively opposed peyote decriminalization; at Psychedelic Science 2023, activists interrupted Rick Doblin's speech over tokenism. The scene has already been publicly confronted.</p></div>
-          <div class="mini-legal"><b>§</b><span data-de>Keine Zeremonie möglich (Meskalin, Anlage&nbsp;I). Peyote gilt als „vulnerable" (IUCN), 40% Rückgang in 5 Jahren in Tourismusgebieten — mit expliziter NAC-Kritik an nicht-indigenem Konsum.</span><span data-en>No ceremony possible (mescaline, Schedule&nbsp;I). Peyote is IUCN-listed "vulnerable," a 40% decline over five years in tourism areas — with explicit NAC criticism of non-indigenous use.</span></div>
+            <p data-de>2007 lehnte die Gemeinschaft PetroPeru unter angedrohter Gewalt gegen das Firmenpersonal ab; von 2012 bis 2017 hielt anhaltender Widerstand gegen ein weiteres Ölunternehmen an, bis dieses sich vollständig zurückzog. Ein spezifischer Fall einer abgelehnten Kambô-Kooperation ist bislang nicht dokumentiert.</p><p data-en>In 2007, the community rejected PetroPeru under threat of violence against company personnel; from 2012 to 2017, sustained resistance against another oil company continued until it withdrew entirely. No specific case of a rejected Kambô cooperation has been documented so far.</p></div>
+          <div class="mini-legal"><b>&sect;</b><span data-de>Kambô enthält keinen BtMG-Wirkstoff, doch der Rechtsstatus einer Anwendung am Stand — mit Brandpunkten auf der Haut und Verabreichung von Sekret — ist in Deutschland ungeklärt und würde vermutlich unter Arzneimittel- oder Heilpraktikerrecht fallen. Auch der Artenschutzstatus des Frosches Phyllomedusa bicolor ist nicht eindeutig verifiziert.</span><span data-en>Kambô contains no BtMG-scheduled substance, but the legal status of an on-site application — burn points on the skin plus administration of the secretion — is unresolved in Germany and would likely fall under pharmaceutical or alternative-practitioner law. The conservation status of the frog Phyllomedusa bicolor is also not cleanly verified.</span></div>
           <div class="field"><h4><span data-de>Kontaktweg</span><span data-en>Contact Path</span></h4>
-            <p data-de>Kein Einladungskontakt empfohlen — siehe Outreach-Stufe&nbsp;6.</p>
-            <p data-en>No invitation contact recommended — see outreach rung&nbsp;6.</p></div>
+            <p data-de>Acaté vermittelt seit Jahren den Übergang von Zwischenhändlern zu Direktkauf aus den Matsés-Gemeinden selbst und wäre der naheliegende erste Kontakt, nicht die westlich geführten „Practitioner“-Verbände.</p><p data-en>Acaté has spent years mediating the shift from middlemen to direct purchasing from the Matsés communities themselves, making it the obvious first contact — not the Western-led “practitioner” associations.</p></div>
           <div class="field"><h4><span data-de>Offene Fragen</span><span data-en>Open Questions</span></h4>
-            <ul class="oq-list" data-de><li>Gäbe es ein Format, das NCNAC/IPCI selbst vorschlagen würde (reine Konservierungsaufklärung)?</li></ul>
-            <ul class="oq-list" data-en><li>Is there any format NCNAC/IPCI would propose themselves (pure conservation education)?</li></ul></div>
-          <div class="src-list"><a href="https://chacruna.net/native-american-statement-regarding-decriminalization-of-peyote/" target="_blank" rel="noopener">Chacruna</a><a href="https://filtermag.org/indigenous-psychedelic-protest/" target="_blank" rel="noopener">Filter Mag</a></div>
+            <ul class="oq-list" data-de><li>Ist eine Anwendung am Messestand in Deutschland überhaupt rechtlich zulässig, oder bliebe nur eine rein erklärende Präsenz ohne Anwendung?</li><li>Wer stellt die verbindliche Einladung: die Junta Directiva direkt, oder Acaté als vermittelnde Organisation?</li></ul><ul class="oq-list" data-en><li>Is an on-site application at a German trade fair booth legally permissible at all, or would only a purely explanatory presence without application be possible?</li><li>Who issues the binding invitation: the Junta Directiva directly, or Acaté as the mediating organization?</li></ul></div>
+          <div class="src-list"><a href="https://acateamazon.org/acate/about-us/" target="_blank" rel="noopener">Acaté Amazon Conservation</a><a href="https://www.survivalinternational.org/peoples/matses" target="_blank" rel="noopener">Survival International</a><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9582840/" target="_blank" rel="noopener">PMC / Phyllomedusa bicolor</a></div>
 
           <div class="fb">
             <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
@@ -442,28 +521,30 @@ html.unlocked #lockGate{display:none}
                 <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
               </div>
             </div>
-            <div class="fb-note" contenteditable="true" data-de-ph="Notiz…" data-en-ph="Note…" data-ph="Notiz…"></div>
+            <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
           </div>
         </div>
       </details>
 
-      <details class="ccard" data-status="review">
-        <summary><span class="ccard-name">Bwiti (Babongo / Fang)</span><span class="ccard-meta">Gabun — <span data-de>Iboga</span><span data-en>Iboga</span></span><span class="status-chip review"><span data-de>In Prüfung</span><span data-en>Under Review</span></span><span class="chev">▸</span></summary>
+      <details class="ccard" data-status="notyet" id="c-mazatec">
+        <summary>
+          <span class="ccard-name">Mazatec</span>
+          <span class="ccard-meta">Mexiko · Sierra Mazateca &middot; <span data-de>Psilocybin-Tradition (María-Sabina-Linie)</span><span data-en>Psilocybin tradition (María Sabina lineage)</span></span>
+          <span class="status-chip notyet"><span data-de>Noch nicht</span><span data-en>Not Yet</span></span>
+          <span class="chev" aria-hidden="true">&#9656;</span>
+        </summary>
         <div class="ccard-body">
+          <p class="anchor-prose"><span data-de>Kaum eine andere Gemeinschaft in dieser Liste trägt eine so tiefe, direkt auf westliche Neugier zurückgehende Wunde: María Sabinas eigenes Haus wurde nach ihrer öffentlichen Bekanntheit mehrfach angezündet, und der Konflikt zwischen Tradition und Tourismus ist bis heute nicht befriedet.</span><span data-en>Few communities on this list carry a wound this deep, and this directly traceable to Western curiosity: María Sabina's own house was burned more than once after she became publicly known, and the conflict between tradition and tourism remains unresolved to this day.</span></p>
           <div class="field"><h4><span data-de>Governance</span><span data-en>Governance</span></h4>
-            <p data-de>Association Nationale Maghanga Ma Nzambe (ANMN, 2023, 69 Tempel/2.760 Mitglieder 2025, hielt 2025 Generalversammlung ab) — jung, aber sichtbar.</p>
-            <p data-en>Association Nationale Maghanga Ma Nzambe (ANMN, 2023, 69 temples/2,760 members by 2025, held its 2025 general assembly) — young, but visible.</p></div>
+            <p data-de>Ein zentrales, für Außenpartnerschaften zuständiges Ratifizierungsgremium existiert nicht. Es gibt nur die allgemeine Gemeinde-Vollversammlung sowie Casa Adobe, ein 2021 gegründetes Kollektiv, das kulturell sichtbar, aber kein Entscheidungsorgan ist.</p><p data-en>No central body responsible for ratifying outside partnerships exists. There is only the general municipal assembly and Casa Adobe, a collective founded in 2021 that has cultural visibility but is not a decision-making body.</p></div>
           <div class="field"><h4><span data-de>Track-Record</span><span data-en>Track Record</span></h4>
-            <p data-de>Gabun ratifizierte 2011 als erstes Land weltweit das Nagoya-Protokoll; Iboga seit 2000 nationaler Kulturschatz mit Exportverbot, direkte Reaktion auf Patentversuche (Lotsof).</p>
-            <p data-en>Gabon was the first country worldwide to ratify the Nagoya Protocol, in 2011; iboga has been a protected cultural treasure with an export ban since 2000, a direct response to earlier patent attempts (Lotsof).</p></div>
-          <div class="mini-legal"><b>§</b><span data-de>Iboga/Ibogain ist &mdash; anders als DMT/Meskalin/Psilocybin &mdash; NICHT eindeutig als BtMG-gelistet bestätigt. Vor Kontakt anwaltlich klären.</span><span data-en>Unlike DMT/mescaline/psilocybin, iboga/ibogaine is NOT clearly confirmed as BtMG-scheduled. Get legal counsel before any contact.</span></div>
+            <p data-de>1969 vertrieb das Militär „Hippie“-Besucher aus der Region; nach der Wasson-Publikation wurde María Sabinas Haus mehrfach abgebrannt und sie selbst von Teilen der Gemeinde geächtet. Der dokumentierte Overtourism-Konflikt in Huautla de Jiménez besteht bis in die Gegenwart fort.</p><p data-en>In 1969, the military expelled “hippie” visitors from the region; after the Wasson publication, María Sabina's house was burned more than once and she herself was ostracized by parts of the community. The documented overtourism conflict in Huautla de Jiménez continues into the present.</p></div>
+          <div class="mini-legal"><b>&sect;</b><span data-de>Eine Zeremonie bleibt in Deutschland ausgeschlossen (Psilocybin, Anlage&nbsp;I). Weltweit existieren über 24 Psilocybin-Patente ohne jede Reciprocity-Vereinbarung mit der Gemeinschaft — das Biopiraterie-Risiko ist hier nicht hypothetisch, sondern bereits eingetreten.</span><span data-en>A ceremony remains excluded in Germany (psilocybin, Schedule&nbsp;I). More than 24 psilocybin patents exist worldwide with no reciprocity agreement whatsoever with the community — the biopiracy risk here is not hypothetical, it has already materialized.</span></div>
           <div class="field"><h4><span data-de>Kontaktweg</span><span data-en>Contact Path</span></h4>
-            <p data-de>ANMN direkt — aber erst nach Rechtsprüfung und Visa-Machbarkeitscheck.</p>
-            <p data-en>ANMN directly — but only after legal review and a visa-feasibility check.</p></div>
+            <p data-de>Kein Chacruna-IRI-Partner ist bekannt. Ein direkter Kontakt wird bewusst nicht empfohlen, solange keine tragfähige Governance-Struktur besteht.</p><p data-en>No Chacruna IRI partner is known. A direct approach is deliberately not recommended as long as no viable governance structure exists.</p></div>
           <div class="field"><h4><span data-de>Offene Fragen</span><span data-en>Open Questions</span></h4>
-            <ul class="oq-list" data-de><li>Ratifiziert ANMN explizit Auslandspartnerschaften?</li><li>Deutsches Konsulat mit realistischer Bearbeitungszeit für Gabun?</li></ul>
-            <ul class="oq-list" data-en><li>Does ANMN explicitly ratify international partnerships?</li><li>Is there a German consulate with realistic processing time for Gabon?</li></ul></div>
-          <div class="src-list"><a href="https://gabonmediatime.com/gabon-lassociation-maghanga-ma-nzambe-en-croisade-pour-la-protection-de-liboga/" target="_blank" rel="noopener">Gabonmediatime</a><a href="https://www.nationalgeographic.com/animals/article/ibogaine-pschedelic-drug-root-fair-trade-gabon" target="_blank" rel="noopener">Nat Geo</a></div>
+            <ul class="oq-list" data-de><li>Wer ist überhaupt legitimiert, im Namen der Mazatec zu sprechen — einzelne Familienlinien oder der Gemeinderat?</li><li>Steht Casa Adobe angesichts der Overtourism-Geschichte einem kommerziellen Festival wie TRYP EXPO überhaupt offen gegenüber?</li><li>Welche konkrete Aufbauarbeit müsste zuerst finanziert werden, bevor eine Anfrage überhaupt fair wäre?</li></ul><ul class="oq-list" data-en><li>Who is actually authorized to speak on behalf of the Mazatec — individual family lines, or the community council?</li><li>Given the overtourism history, is Casa Adobe even open to a commercial festival like TRYP EXPO?</li><li>What concrete capacity-building would need to be funded first before an approach would even be fair?</li></ul></div>
+          <div class="src-list"><a href="https://chacruna.net/mazatec-perspectives-on-the-globalization-of-psilocybin-mushrooms/" target="_blank" rel="noopener">Chacruna</a><a href="https://www.culanth.org/fieldsights/re-territorializing-mar%C3%ADa-sabina-huautla-mushrooms-and-politics" target="_blank" rel="noopener">Cultural Anthropology</a><a href="https://www.law.georgetown.edu/international-law-journal/blog/the-promise-of-nagoya-indigenous-reciprocity-in-the-psychedelic-renaissance/" target="_blank" rel="noopener">Georgetown Law</a></div>
 
           <div class="fb">
             <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
@@ -481,27 +562,111 @@ html.unlocked #lockGate{display:none}
                 <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
               </div>
             </div>
-            <div class="fb-note" contenteditable="true" data-de-ph="Notiz…" data-en-ph="Note…" data-ph="Notiz…"></div>
+            <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
           </div>
         </div>
       </details>
 
-      <details class="ccard" data-status="notyet">
-        <summary><span class="ccard-name">Q&rsquo;ero</span><span class="ccard-meta">Peru · Cusco / Anden — <span data-de>San Pedro</span><span data-en>San Pedro</span></span><span class="status-chip notyet"><span data-de>Noch nicht</span><span data-en>Not yet</span></span><span class="chev">▸</span></summary>
+      <details class="ccard" data-status="hold" id="c-wixarika">
+        <summary>
+          <span class="ccard-name">Wixárika &amp; Native American Church</span>
+          <span class="ccard-meta">Mexiko / USA &middot; <span data-de>Peyote-Tradition</span><span data-en>Peyote lineage</span></span>
+          <span class="status-chip hold"><span data-de>Zurückhaltung</span><span data-en>Reticence</span></span>
+          <span class="chev" aria-hidden="true">&#9656;</span>
+        </summary>
         <div class="ccard-body">
+          <p class="anchor-prose"><span data-de>Diese Gemeinschaft hat bereits selbst gesprochen, deutlich und wiederholt: Ihre eigene Dachorganisation lehnt kommerzielle Psychedelic-Events ab. Eine Einladung auszusprechen hieße, diese ausdrückliche Position zu überhören — deshalb bleibt dieser Fall bewusst außen vor.</span><span data-en>This community has already spoken for itself, clearly and repeatedly: its own umbrella organization opposes commercial psychedelic events. Extending an invitation would mean overriding that explicit position — which is exactly why this case is deliberately left out.</span></p>
           <div class="field"><h4><span data-de>Governance</span><span data-en>Governance</span></h4>
-            <p data-de>„Hatún Q'ero"-Nation, 5 Gemeinden, Präsident Rolando Sonqo Apaza — aber kein Gremium, das Auslandspartnerschaften ratifiziert. Kein Chacruna-IRI-Partner.</p>
-            <p data-en>The "Hatún Q'ero" nation, five communities, president Rolando Sonqo Apaza — but no body ratifying international partnerships. Not a Chacruna IRI partner.</p></div>
+            <p data-de>Die US-amerikanische Seite verfügt über eine starke Struktur: den National Council of Native American Churches (NCNAC) und die Indigenous Peyote Conservation Initiative (IPCI), deren Board seit 2017 indigen geführt wird. Die Wixárika-Seite in Mexiko ist dagegen dezentral organisiert, ohne Zentralgremium.</p><p data-en>The US side has a strong structure: the National Council of Native American Churches (NCNAC) and the Indigenous Peyote Conservation Initiative (IPCI), whose board has been indigenous-led since 2017. The Wixárika side in Mexico, by contrast, is organized in a decentralized way, with no central body.</p></div>
           <div class="field"><h4><span data-de>Track-Record</span><span data-en>Track Record</span></h4>
-            <p data-de>Einzelne Paqos haben Reiseveranstalter komplett entlassen — reale, aber individuelle statt gremiale Vetokraft. Ein Veranstalter brachte bis zu 200 Tourist:innen gleichzeitig; Sprachbarriere wurde zum Betrug an Heiler:innen genutzt.</p>
-            <p data-en>Individual Paqos have fired tour operators outright — real veto power, but individual rather than institutional. One operator brought up to 200 tourists at once; the language barrier has been exploited to shortchange healers.</p></div>
-          <div class="mini-legal"><b>§</b><span data-de>Meskalin-Status bei San Pedro rechtlich nicht sauber verifiziert — als offene Frage behandeln, nicht als Fakt.</span><span data-en>Mescaline's legal status for San Pedro is not cleanly verified — treat as an open question, not settled fact.</span></div>
+            <p data-de>NCNAC und IPCI haben sich aktiv gegen Peyote-Dekriminalisierungsinitiativen ausgesprochen. Bei der Konferenz Psychedelic Science 2023 unterbrachen indigene Aktivist:innen die Rede von MAPS-Gründer Rick Doblin wegen des Vorwurfs von Tokenismus — die Szene selbst wurde damit bereits öffentlich konfrontiert.</p><p data-en>NCNAC and IPCI have actively spoken out against peyote decriminalization initiatives. At the Psychedelic Science 2023 conference, indigenous activists interrupted a speech by MAPS founder Rick Doblin over accusations of tokenism — the scene itself has already been publicly confronted with this criticism.</p></div>
+          <div class="mini-legal"><b>&sect;</b><span data-de>Eine Zeremonie bleibt in Deutschland ausgeschlossen (Meskalin, Anlage&nbsp;I). Zusätzlich besteht eine aktive Konservierungskrise: Peyote gilt bei der IUCN als „vulnerable“, mit einem dokumentierten Rückgang von 40&nbsp;% in fünf Jahren in stark touristisch frequentierten Gebieten — begleitet von expliziter NAC-Kritik an nicht-indigenem Konsum.</span><span data-en>A ceremony remains excluded in Germany (mescaline, Schedule&nbsp;I). There is also an active conservation crisis: peyote is IUCN-listed as “vulnerable”, with a documented 40&nbsp;% decline over five years in heavily touristed areas — accompanied by explicit NAC criticism of non-indigenous consumption.</span></div>
           <div class="field"><h4><span data-de>Kontaktweg</span><span data-en>Contact Path</span></h4>
-            <p data-de>Kein empfohlener Kontaktweg — Doppelübersetzung (Quechua–Spanisch–Deutsch) erhöht das dokumentierte Missbrauchsrisiko.</p>
-            <p data-en>No recommended contact path — the double translation chain (Quechua–Spanish–German) compounds an already-documented exploitation risk.</p></div>
+            <p data-de>Ein Einladungskontakt wird nicht empfohlen; die begründete Alternative steht unter Stufe&nbsp;6 der Kontaktleiter weiter unten.</p><p data-en>An invitation contact is not recommended; the reasoned alternative appears under rung&nbsp;6 of the outreach ladder further below.</p></div>
           <div class="field"><h4><span data-de>Offene Fragen</span><span data-en>Open Questions</span></h4>
-            <ul class="oq-list" data-de><li>Existiert überhaupt ein ansprechbares Gremium, oder nur Einzelpersonen?</li><li>Wer sind aktuell nicht-ausgebeutete Delegierte?</li></ul>
-            <ul class="oq-list" data-en><li>Is there any body to approach, or only individuals?</li><li>Who are currently non-exploited delegates?</li></ul></div>
+            <ul class="oq-list" data-de><li>Gäbe es überhaupt ein Format, das NCNAC/IPCI von sich aus vorschlagen würden, etwa reine Konservierungsaufklärung ohne Festival-Rahmen?</li></ul><ul class="oq-list" data-en><li>Is there any format NCNAC/IPCI would propose on their own initiative, such as pure conservation education outside a festival setting?</li></ul></div>
+          <div class="src-list"><a href="https://chacruna.net/native-american-statement-regarding-decriminalization-of-peyote/" target="_blank" rel="noopener">Chacruna</a><a href="https://filtermag.org/indigenous-psychedelic-protest/" target="_blank" rel="noopener">Filter Mag</a><a href="https://www.opendemocracy.net/en/oureconomy/peyote-mescaline-psychedelic-mexico-agroindustry-wirikuta/" target="_blank" rel="noopener">openDemocracy</a></div>
+
+          <div class="fb">
+            <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
+              <div class="fb-group">
+                <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
+                <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
+                <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
+              </div>
+            </div>
+            <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
+              <div class="fb-group">
+                <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
+                <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
+                <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
+                <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
+              </div>
+            </div>
+            <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="ccard" data-status="review" id="c-bwiti">
+        <summary>
+          <span class="ccard-name">Bwiti (Babongo / Fang)</span>
+          <span class="ccard-meta">Gabun &middot; <span data-de>Iboga-Tradition</span><span data-en>Iboga lineage</span></span>
+          <span class="status-chip review"><span data-de>In Prüfung</span><span data-en>Under Review</span></span>
+          <span class="chev" aria-hidden="true">&#9656;</span>
+        </summary>
+        <div class="ccard-body">
+          <p class="anchor-prose"><span data-de>Gabun war 2011 das erste Land der Welt, das das Nagoya-Protokoll ratifizierte — direkte Konsequenz früherer Patentversuche auf Iboga. Diese Gemeinschaft hat also bereits auf Staatsebene gelernt, sich rechtlich zu wehren; die offene Frage ist, ob dieselbe Ernsthaftigkeit auch für ein Berliner Festival gilt.</span><span data-en>Gabon was the first country in the world to ratify the Nagoya Protocol, in 2011 — a direct consequence of earlier attempts to patent iboga. This community has therefore already learned to defend itself legally at the state level; the open question is whether that same seriousness extends to a Berlin festival.</span></p>
+          <div class="field"><h4><span data-de>Governance</span><span data-en>Governance</span></h4>
+            <p data-de>Die Association Nationale Maghanga Ma Nzambe (ANMN), gegründet 2023, föderiert inzwischen 69 Tempel mit 2.760 Mitgliedern (Stand 2025) und hielt in diesem Jahr ihre erste Generalversammlung ab — jung, aber bereits sichtbar organisiert.</p><p data-en>The Association Nationale Maghanga Ma Nzambe (ANMN), founded in 2023, now federates 69 temples with 2,760 members (as of 2025) and held its first general assembly that same year — a young structure, but already visibly organized.</p></div>
+          <div class="field"><h4><span data-de>Track-Record</span><span data-en>Track Record</span></h4>
+            <p data-de>Iboga gilt seit dem Jahr 2000 als nationaler Kulturschatz mit Exportverbot, eine direkte Reaktion auf frühere Patentversuche des Amerikaners Howard Lotsof. Ein spezifischer Fall einer abgelehnten Auslandspartnerschaft ist bislang nicht dokumentiert.</p><p data-en>Iboga has been designated a protected national cultural treasure with an export ban since 2000, a direct response to earlier patent attempts by American Howard Lotsof. No specific case of a rejected international partnership has been documented so far.</p></div>
+          <div class="mini-legal"><b>&sect;</b><span data-de>Anders als bei DMT, Meskalin und Psilocybin ist der BtMG-Status von Iboga/Ibogain nicht eindeutig bestätigt — das muss vor jedem Kontakt anwaltlich geprüft werden, statt stillschweigend als unproblematisch vorausgesetzt zu werden.</span><span data-en>Unlike DMT, mescaline, and psilocybin, iboga/ibogaine's status under German drug law is not clearly confirmed — this needs legal review before any contact, rather than being silently assumed to be unproblematic.</span></div>
+          <div class="field"><h4><span data-de>Kontaktweg</span><span data-en>Contact Path</span></h4>
+            <p data-de>ANMN wäre der direkte Ansprechpartner, aber erst nachdem sowohl die Rechtsfrage als auch die Visa-Machbarkeit für gabunische Delegierte geklärt sind.</p><p data-en>ANMN would be the direct point of contact, but only after both the legal question and visa feasibility for Gabonese delegates have been clarified.</p></div>
+          <div class="field"><h4><span data-de>Offene Fragen</span><span data-en>Open Questions</span></h4>
+            <ul class="oq-list" data-de><li>Ratifiziert ANMN als Organisation explizit auch Auslandspartnerschaften, oder bislang nur nationale Tempel-Angelegenheiten?</li><li>Gibt es ein deutsches Konsulat mit realistischer Bearbeitungszeit für Antragsteller:innen aus Gabun?</li></ul><ul class="oq-list" data-en><li>Does ANMN as an organization explicitly ratify international partnerships too, or has its mandate so far covered only national temple affairs?</li><li>Is there a German consulate with a realistic processing time for applicants from Gabon?</li></ul></div>
+          <div class="src-list"><a href="https://gabonmediatime.com/gabon-lassociation-maghanga-ma-nzambe-en-croisade-pour-la-protection-de-liboga/" target="_blank" rel="noopener">Gabonmediatime</a><a href="https://www.nationalgeographic.com/animals/article/ibogaine-pschedelic-drug-root-fair-trade-gabon" target="_blank" rel="noopener">National Geographic</a><a href="https://www.law.georgetown.edu/international-law-journal/blog/the-promise-of-nagoya-indigenous-reciprocity-in-the-psychedelic-renaissance/" target="_blank" rel="noopener">Georgetown Law</a></div>
+
+          <div class="fb">
+            <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
+              <div class="fb-group">
+                <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
+                <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
+                <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
+              </div>
+            </div>
+            <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
+              <div class="fb-group">
+                <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
+                <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
+                <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
+                <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
+              </div>
+            </div>
+            <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="ccard" data-status="notyet" id="c-qero">
+        <summary>
+          <span class="ccard-name">Q&rsquo;ero</span>
+          <span class="ccard-meta">Peru · Cusco / Anden &middot; <span data-de>San-Pedro-Tradition (Wachuma)</span><span data-en>San Pedro tradition (Wachuma)</span></span>
+          <span class="status-chip notyet"><span data-de>Noch nicht</span><span data-en>Not Yet</span></span>
+          <span class="chev" aria-hidden="true">&#9656;</span>
+        </summary>
+        <div class="ccard-body">
+          <p class="anchor-prose"><span data-de>Ein einzelner Anbieter brachte einst zweihundert Tourist:innen auf einmal zu Q'ero-Workshops — ein Ausmaß an Kommerzialisierung, das in dieser Liste seinesgleichen sucht, und ein deutlicher Grund, warum eine Einladung ohne vorherigen Schutzmechanismus verantwortungslos wäre.</span><span data-en>A single operator once brought two hundred tourists at a time to Q'ero workshops — a scale of commercialization unmatched anywhere else on this list, and a clear reason why an invitation without a protective mechanism in place first would be irresponsible.</span></p>
+          <div class="field"><h4><span data-de>Governance</span><span data-en>Governance</span></h4>
+            <p data-de>Die „Hatún Q'ero“-Nation umfasst fünf Gemeinden unter dem amtierenden Präsidenten Rolando Sonqo Apaza, doch ein Gremium, das speziell Auslandspartnerschaften ratifiziert, ist nicht dokumentiert. Die Gemeinschaft ist kein Partner von Chacruna’s Indigenous Reciprocity Initiative.</p><p data-en>The “Hatún Q'ero” nation comprises five communities under current president Rolando Sonqo Apaza, but no body specifically ratifying international partnerships is documented. The community is not a partner of Chacruna's Indigenous Reciprocity Initiative.</p></div>
+          <div class="field"><h4><span data-de>Track-Record</span><span data-en>Track Record</span></h4>
+            <p data-de>Einzelne Paqos (Heiler:innen) haben Reiseveranstalter bereits komplett entlassen — ein realer, aber individueller statt gremialer Beleg für Vetokraft. Reiseveranstalter haben zugleich fehlende Spanischkenntnisse mancher Heiler:innen gezielt ausgenutzt, um sie um ihren Anteil zu betrügen.</p><p data-en>Individual Paqos (healers) have already fired tour operators outright — real evidence of veto power, though exercised individually rather than institutionally. At the same time, tour operators have deliberately exploited some healers' limited Spanish to shortchange them on their share.</p></div>
+          <div class="mini-legal"><b>&sect;</b><span data-de>Der rechtliche Status von Meskalin bei San-Pedro-Zubereitungen ist in Deutschland nicht sauber verifiziert und wird hier bewusst als offene Frage behandelt, nicht als gesicherter Fakt dargestellt.</span><span data-en>Mescaline's legal status for San Pedro preparations is not cleanly verified in Germany and is deliberately treated here as an open question, not presented as settled fact.</span></div>
+          <div class="field"><h4><span data-de>Kontaktweg</span><span data-en>Contact Path</span></h4>
+            <p data-de>Ein Kontaktweg wird derzeit nicht empfohlen: Die notwendige doppelte Übersetzungskette Quechua–Spanisch–Deutsch erhöht genau das dokumentierte Missbrauchsrisiko zusätzlich, das diese Gemeinschaft bereits erlebt hat.</p><p data-en>A contact path is not currently recommended: the necessary double translation chain from Quechua to Spanish to German compounds exactly the documented exploitation risk this community has already experienced.</p></div>
+          <div class="field"><h4><span data-de>Offene Fragen</span><span data-en>Open Questions</span></h4>
+            <ul class="oq-list" data-de><li>Existiert überhaupt ein ansprechbares Gremium, oder ausschließlich Einzelpersonen ohne kollektives Mandat?</li><li>Wer sind aktuell nicht-ausgebeutete, vertrauenswürdige Delegierte, die die Gemeinschaft selbst benennen würde?</li></ul><ul class="oq-list" data-en><li>Does any approachable body exist at all, or only individuals without a collective mandate?</li><li>Who are currently non-exploited, trustworthy delegates the community itself would name?</li></ul></div>
           <div class="src-list"><a href="https://stories.kahtoola.com/the-qeros-nation-the-last-of-the-incas/" target="_blank" rel="noopener">Kahtoola</a><a href="https://ictnews.org/archive/qero-preserve-tradition-at-the-western-roof-of-the-world/" target="_blank" rel="noopener">ICT News</a></div>
 
           <div class="fb">
@@ -520,90 +685,249 @@ html.unlocked #lockGate{display:none}
                 <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
               </div>
             </div>
-            <div class="fb-note" contenteditable="true" data-de-ph="Notiz…" data-en-ph="Note…" data-ph="Notiz…"></div>
+            <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
           </div>
         </div>
       </details>
 
+      <details class="ccard" data-status="notyet" id="c-yopo">
+        <summary>
+          <span class="ccard-name">Yanomami &amp; Piaroa</span>
+          <span class="ccard-meta">Venezuela / Brasilien · Orinoco &middot; <span data-de>Yopo-Tradition (Anadenanthera-Schnupftabak)</span><span data-en>Yopo tradition (Anadenanthera snuff)</span></span>
+          <span class="status-chip notyet"><span data-de>Noch nicht</span><span data-en>Not Yet</span></span>
+          <span class="chev" aria-hidden="true">&#9656;</span>
+        </summary>
+        <div class="ccard-body">
+          <p class="anchor-prose"><span data-de>Beide Gemeinschaften haben starke, internationale anerkannte Führungsfiguren — und beide stecken zugleich in einer akuten Existenzkrise. Diese Karte endet deshalb nicht mit einer Kontakt-Empfehlung, sondern mit der Frage, ob eine Festivaleinladung angesichts von Goldschmuggel und Gewalt überhaupt die richtige Priorität wäre.</span><span data-en>Both communities have strong, internationally recognized leaders — and both are, at the same time, in the middle of an acute survival crisis. This card therefore does not end with a contact recommendation, but with the question of whether a festival invitation is even the right priority given illegal mining and violence on the ground.</span></p>
+          <div class="field"><h4><span data-de>Governance</span><span data-en>Governance</span></h4>
+            <p data-de>Die Yanomami in Brasilien werden durch Hutukara Associação Yanomami vertreten (gegründet 2004, seit Oktober 2025 unter Präsident Dário Kopenawa). Die Piaroa/Uwottüja in Venezuela sind im Dachverband ORPIA organisiert, lokal ergänzt durch OIPUS in der Sipapo-Region.</p><p data-en>The Yanomami in Brazil are represented by Hutukara Associação Yanomami (founded 2004, led since October 2025 by president Dário Kopenawa). The Piaroa/Uwottüja in Venezuela are organized under the umbrella federation ORPIA, complemented locally by OIPUS in the Sipapo region.</p></div>
+          <div class="field"><h4><span data-de>Track-Record</span><span data-en>Track Record</span></h4>
+            <p data-de>Davi Kopenawa, Vater des heutigen Hutukara-Präsidenten, erhielt bereits 1989 den Right Livelihood Award und sprach seither an Universitäten wie Harvard, Oxford und Princeton — internationale Bühnenerfahrung ist bei dieser Gemeinschaft also längst vorhanden.</p><p data-en>Davi Kopenawa, father of the current Hutukara president, received the Right Livelihood Award as early as 1989 and has since spoken at universities including Harvard, Oxford, and Princeton — international stage experience already exists for this community.</p></div>
+          <div class="mini-legal"><b>&sect;</b><span data-de>Der zentrale Punkt ist hier kein rechtlicher, sondern ein humanitärer: Das Yanomami-Gebiet steht seit 2023 unter dem Druck von mehr als 20.000 illegalen Goldgräbern, mit dokumentierter Gewalt und Unterernährung; im Piaroa-Gebiet kontrollieren bewaffnete Gruppen Teile des Bergbaus. Eine Einladung sollte diese Überlebenskrise nicht überlagern.</span><span data-en>The central issue here is not legal but humanitarian: the Yanomami territory has been under pressure from more than 20,000 illegal gold miners since 2023, with documented violence and malnutrition; in Piaroa territory, armed groups control parts of the mining activity. An invitation should not take priority over this survival crisis.</span></div>
+          <div class="field"><h4><span data-de>Kontaktweg</span><span data-en>Contact Path</span></h4>
+            <p data-de>Sollte die Lage sich stabilisieren, führt ein Kontakt sinnvoll über den deutschen Verein Yanomami-Hilfe e.V. oder die venezolanische Organisation Wataniba — nicht direkt.</p><p data-en>Should the situation stabilize, a sensible contact path runs through the German association Yanomami-Hilfe e.V. or the Venezuelan organization Wataniba — not directly.</p></div>
+          <div class="field"><h4><span data-de>Offene Fragen</span><span data-en>Open Questions</span></h4>
+            <ul class="oq-list" data-de><li>Ist eine Einladung angesichts der akuten humanitären Lage aktuell überhaupt ethisch vertretbar? Direkt bei Hutukara/ORPIA erfragen, nicht selbst entscheiden.</li><li>Existiert ein von ORPIA oder OIPUS mandatierter Yopo-Wissensträger für internationale Vertretung?</li></ul><ul class="oq-list" data-en><li>Given the acute humanitarian situation, is an invitation ethically defensible at all right now? Ask Hutukara/ORPIA directly rather than deciding this from the outside.</li><li>Does a Yopo knowledge-holder mandated by ORPIA or OIPUS exist for international representation?</li></ul></div>
+          <div class="src-list"><a href="https://www.aljazeera.com/news/2023/1/24/calls-for-action-as-brazil-yanomami-indigenous-people-face-crisis" target="_blank" rel="noopener">Al Jazeera</a><a href="https://sumauma.com/en/o-ouro-que-mata-sob-assedio-de-garimpeiros-yanomami-cobram-plano-para-2027/" target="_blank" rel="noopener">SUMAÚMA</a><a href="https://www.yanomami-hilfe.de/en/campaigns-and-projects/hutukara/" target="_blank" rel="noopener">Yanomami-Hilfe e.V.</a></div>
+
+          <div class="fb">
+            <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
+              <div class="fb-group">
+                <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
+                <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
+                <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
+              </div>
+            </div>
+            <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
+              <div class="fb-group">
+                <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
+                <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
+                <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
+                <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
+              </div>
+            </div>
+            <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="ccard" data-status="notyet" id="c-siberia">
+        <summary>
+          <span class="ccard-name">Korjaken, Tschuktschen &amp; Ewenen</span>
+          <span class="ccard-meta">Russland · Kamtschatka &middot; <span data-de>Fliegenpilz-Tradition (Amanita muscaria)</span><span data-en>Fly agaric tradition (Amanita muscaria)</span></span>
+          <span class="status-chip notyet"><span data-de>Noch nicht</span><span data-en>Not Yet</span></span>
+          <span class="chev" aria-hidden="true">&#9656;</span>
+        </summary>
+        <div class="ccard-body">
+          <p class="anchor-prose"><span data-de>Diese Karte steht bewusst auch dann in der Liste, wenn die ehrliche Antwort am Ende „nein“ heißt: Nordasien fehlte in der ursprünglichen Kandidatenliste komplett, und die Recherche zeigt genau, warum eine Einladung hier aktuell nicht funktionieren würde — nicht aus Desinteresse, sondern aus zwei unabhängigen, harten Gründen.</span><span data-en>This card stays in the list even though the honest answer turns out to be “no”: North Asia was missing entirely from the original candidate list, and the research shows exactly why an invitation would not work right now — not from lack of interest, but for two independent, hard reasons.</span></p>
+          <div class="field"><h4><span data-de>Governance</span><span data-en>Governance</span></h4>
+            <p data-de>Eine fliegenpilz-spezifische Vertretung existiert nicht. Einzige übergreifende Struktur ist RAIPON, die russische Dachorganisation indigener Völker des Nordens — aber als allgemeine Rechte-Organisation, nicht als Hüterin einer bestimmten Zeremonie. Eine Fachpublikation stellt zudem fest, dass zeitgenössischer Konsum kaum noch als organisiertes rituelles Verhalten gelten kann.</p><p data-en>No fly-agaric-specific representation exists. The only overarching structure is RAIPON, Russia's umbrella organization for indigenous peoples of the North — but as a general rights organization, not as the custodian of a specific ceremony. A scholarly publication also notes that contemporary use can barely still be considered organized ritual behavior.</p></div>
+          <div class="field"><h4><span data-de>Track-Record</span><span data-en>Track Record</span></h4>
+            <p data-de>RAIPON wurde 2012 von russischen Behörden zur zeitweisen Schließung gezwungen — ein Beleg für stark eingeschränkte politische Selbstbestimmung innerhalb Russlands, nicht für internationale Verhandlungsfähigkeit gegenüber einem Festival im Ausland.</p><p data-en>RAIPON was forced into temporary closure by Russian authorities in 2012 — evidence of severely restricted political self-determination within Russia, not of any capacity to negotiate internationally with a festival abroad.</p></div>
+          <div class="mini-legal"><b>&sect;</b><span data-de>Der wahrscheinlichste Ausschlussgrund ist nicht kulturell, sondern geopolitisch: Seit September 2022 hat die EU das Visa-Erleichterungsabkommen mit Russland ausgesetzt, seit November 2025 zusätzlich Mehrfach-Schengen-Visa für die meisten russischen Staatsbürger abgeschafft, und Deutschland hat sein humanitäres Fast-Track-Programm 2025 eingestellt.</span><span data-en>The most likely exclusion factor is not cultural but geopolitical: since September 2022 the EU has suspended the visa facilitation agreement with Russia, since November 2025 it has additionally abolished multi-entry Schengen visas for most Russian citizens, and Germany discontinued its humanitarian fast-track program in 2025.</span></div>
+          <div class="field"><h4><span data-de>Kontaktweg</span><span data-en>Contact Path</span></h4>
+            <p data-de>Ein Kontakt wäre derzeit nicht praktikabel. Sollte sich die Lage ändern, käme RAIPON oder eine Kamtschatka-Kulturbehörde als erster Ansprechpartner infrage — aber ohne Substanzbezug, ausschließlich als kulturhistorische Präsenz.</p><p data-en>A contact would not be practicable at present. Should the situation change, RAIPON or a Kamchatka cultural authority would be the first point of contact — but without any substance reference, purely as a cultural-historical presence.</p></div>
+          <div class="field"><h4><span data-de>Offene Fragen</span><span data-en>Open Questions</span></h4>
+            <ul class="oq-list" data-de><li>Gibt es überhaupt noch lebende Praktizierende, die öffentlich und mit eigenem Mandat repräsentieren wollen und dürfen?</li><li>Wäre eine Vertretung durch Folklore- oder Museumsakteure statt aktiver spiritueller Praxis die realistischere, aber ethisch fragwürdigere Option?</li></ul><ul class="oq-list" data-en><li>Are there any living practitioners left who want to and are permitted to represent this tradition publicly, with their own mandate?</li><li>Would representation through folklore or museum actors, rather than active spiritual practice, be the more realistic but ethically more questionable option?</li></ul></div>
+          <div class="src-list"><a href="https://www.survivalinternational.org/news/8845" target="_blank" rel="noopener">Survival International (RAIPON)</a><a href="https://www.themoscowtimes.com/2025/11/07/eu-bans-russians-from-multi-entry-schengen-visas-a91078" target="_blank" rel="noopener">The Moscow Times</a><a href="https://www.forbes.com/sites/freylindsay/2025/08/18/germany-suspends-humanitarian-visas-for-russian-dissidents/" target="_blank" rel="noopener">Forbes</a></div>
+
+          <div class="fb">
+            <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
+              <div class="fb-group">
+                <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
+                <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
+                <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
+              </div>
+            </div>
+            <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
+              <div class="fb-group">
+                <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
+                <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
+                <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
+                <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
+              </div>
+            </div>
+            <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <h3 style="margin:36px 0 6px"><span data-de>Kontextkandidaten</span><span data-en>Context Candidates</span></h3>
+    <p style="color:var(--ink-soft); font-size:.94rem; max-width:70ch">
+      <span data-de>Kürzer recherchiert, absichtlich: Diese vier Traditionen sind lebendig und real, aber ohne die gleiche Governance-Dokumentation wie oben &mdash; hier geht es um sichtbare Repräsentation, nicht um eine Einladungsempfehlung.</span>
+      <span data-en>Deliberately researched in less depth: these four traditions are alive and real, but without the same governance documentation as above &mdash; the goal here is visible representation, not an invitation recommendation.</span>
+    </p>
+    <div class="kontext-grid">
+
+      <div class="kcard">
+        <div class="kcard-head">
+          <span class="kcard-name">Rarámuri (Tarahumara)</span>
+          <span class="kcard-meta">Mexiko · Chihuahua &middot; <span data-de>Jícuri-Tradition (eigenständige Peyote-Linie)</span><span data-en>Jícuri tradition (a distinct peyote lineage)</span></span>
+        </div>
+        <p data-de>Nutzen eine eigene, von den Wixárika sprachlich und rituell unterschiedene Peyote-Tradition (Jícuri statt Hikuri). Keine dedizierte internationale Vertretungsstruktur gefunden — als eigenständige Linie hier bewusst sichtbar gemacht, nicht mit den Wixárika vermischt.</p><p data-en>Practice their own peyote tradition, linguistically and ritually distinct from the Wixárika (jícuri rather than hikuri). No dedicated international representative body was found — named here deliberately as its own lineage, not folded into the Wixárika entry.</p>
+        <div class="src-list"><a href="http://www.revistas.unam.mx/index.php/antropologia/article/view/9970" target="_blank" rel="noopener">Anales de Antropología (UNAM)</a></div>
+      </div>
+
+      <div class="kcard">
+        <div class="kcard-head">
+          <span class="kcard-name">Katukina</span>
+          <span class="kcard-meta">Brasilien · Amazonas/Acre &middot; <span data-de>Rapé- und Kambô-Ursprungslinie</span><span data-en>Origin lineage of rapé and Kambô</span></span>
+        </div>
+        <p data-de>Gelten als eine der Ursprungsgemeinschaften von Rapé (Schnupftabak) und Kambô. Ihr Name wird zugleich als Handelsmarke für kommerzielle Rapé/Kambô-Shops verwendet — ein Beispiel genau des Namens-ohne-Herkunftsnachweis-Problems, vor dem dieses Dossier warnt, und ein Grund für besondere Sorgfalt bei jeder Kontaktaufnahme.</p><p data-en>Regarded as one of the origin communities of rapé (snuff) and Kambô. Their name is also used as a retail brand by commercial rapé/Kambô shops — a live example of exactly the name-without-provenance problem this dossier warns about, and a reason for extra care in any outreach.</p>
+        <div class="src-list"><a href="https://katukina.com/about" target="_blank" rel="noopener">Katukina (community-run retail site)</a></div>
+      </div>
+
+      <div class="kcard">
+        <div class="kcard-head">
+          <span class="kcard-name">Santo Daime &amp; União do Vegetal</span>
+          <span class="kcard-meta">Brasilien (weltweite Diaspora) &middot; <span data-de>Synkretistische Ayahuasca-Kirchen</span><span data-en>Syncretic ayahuasca churches</span></span>
+        </div>
+        <p data-de>Kein indigenes Volk, sondern zwei organisierte Religionsgemeinschaften — seit 1986 in Brasilien legal, seit 2006 per US-Supreme-Court-Urteil für ihre Mitglieder in den USA ausnahmsweise erlaubt. In Deutschland dagegen wurde ein Santo-Daime-Lager in Thüringen von rund 100 Polizeikräften durchsucht — der konkrete Beweis dafür, dass die Rechtslage in diesem Dossier keine Theorie ist.</p><p data-en>Not an indigenous people but two organized religious communities — legal in Brazil since 1986, and exceptionally permitted for their members in the US since a 2006 Supreme Court ruling. In Germany, by contrast, a Santo Daime camp in Thuringia was raided by roughly 100 police officers — concrete proof that the legal situation described throughout this dossier is not theoretical.</p>
+        <div class="src-list"><a href="https://www.iceers.org/en/legal-info/germany/" target="_blank" rel="noopener">ICEERS · Germany</a><a href="https://link.springer.com/article/10.1007/s10943-014-9826-2" target="_blank" rel="noopener">Journal of Religion and Health</a></div>
+      </div>
+
+      <div class="kcard">
+        <div class="kcard-head">
+          <span class="kcard-name">San / Ju&rsquo;hoansi</span>
+          <span class="kcard-meta">Kalahari, Südliches Afrika &middot; <span data-de>Trance-Tanz (kein Pflanzenmedizin-Bezug)</span><span data-en>Trance dance (no plant-medicine link)</span></span>
+        </div>
+        <p data-de>Eine der ältesten durchgehend praktizierten spirituellen Traditionen der Welt — aber ohne Pflanzenmedizin-Bezug: Der Trance-Zustand entsteht durch Tanz, Musik und emotionale Intensität, nicht durch eine eingenommene Substanz. Fällt damit klar außerhalb des selbst gesetzten Scopes dieses Dossiers, wird hier aber benannt, um die Abgrenzung sichtbar statt stillschweigend zu machen.</p><p data-en>One of the oldest continuously practiced spiritual traditions in the world — but with no plant-medicine link: the trance state arises from dance, music, and emotional intensity, not from an ingested substance. It falls clearly outside this dossier's self-defined scope, and is named here precisely to make that boundary visible rather than silent.</p>
+        <div class="src-list"><a href="https://www.tandfonline.com/doi/abs/10.1080/14635240.2016.1142063" target="_blank" rel="noopener">International Journal of Health Promotion and Education</a></div>
+      </div>
+    </div>
+
+    <h3 style="margin:36px 0 6px"><span data-de>Archiv-Ebene &mdash; wo die Recherche endet</span><span data-en>Archive Tier &mdash; where the research ends</span></h3>
+    <p style="color:var(--ink-soft); font-size:.94rem; max-width:70ch">
+      <span data-de>Drei Weltregionen, für die keine lebendige, mit den obigen Traditionen vergleichbare Pflanzenmedizin-Gemeinschaft gefunden wurde &mdash; benannt, damit die Lücke sichtbar bleibt statt stillschweigend zu verschwinden.</span>
+      <span data-en>Three world regions for which no living plant-medicine community comparable to the traditions above was found &mdash; named so the gap stays visible instead of quietly disappearing.</span>
+    </p>
+    <div class="abs-box">
+<div class="abs-row"><b><span data-de>Europa</span><span data-en>Europe</span></b><p data-de>Historisch belegt (Eleusinische Mysterien, mutmaßlich ergotinhaltig; die „Hexensalben“ der frühen Neuzeit), aber ohne durchgehend lebendige, organisierte Trägergemeinschaft bis heute.</p><p data-en>Historically documented (the Eleusinian Mysteries, thought to have involved ergot; the “witches' ointments” of the early modern period), but with no continuously living, organized carrier community surviving to the present.</p></div>
+<div class="abs-row"><b><span data-de>Ostasien</span><span data-en>East Asia</span></b><p data-de>Keine breit dokumentierte, mit den obigen Traditionen vergleichbare lebendige Pflanzenmedizin-Zeremonialpraxis gefunden — dies ist ein Rechercheergebnis, kein Urteil über das Fehlen spiritueller Traditionen insgesamt.</p><p data-en>No broadly documented living plant-medicine ceremonial practice comparable to the traditions above was found — this is a research finding, not a judgment about the absence of spiritual traditions in general.</p></div>
+<div class="abs-row"><b><span data-de>Australien</span><span data-en>Australia</span></b><p data-de>Pituri (Nicotiana-Arten) wird traditionell konsumiert, wirkt aber stimulierend/leicht psychoaktiv wie Tabak, nicht klassisch halluzinogen — daher kein direktes Gegenstück zu den übrigen Kandidaten.</p><p data-en>Pituri (Nicotiana species) is traditionally used but acts as a stimulant / mild psychoactive similar to tobacco, not as a classical hallucinogen — so it is not a direct counterpart to the other candidates.</p></div>
     </div>
   </div>
 </section>
+<svg class="wave-divider" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,15 C250,40 450,0 650,20 C850,40 1050,0 1200,20 L1200,40 L0,40 Z"/></svg>
 
 <section id="outreach">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow"><span data-de>Kontaktaufnahme</span><span data-en>Outreach</span></div>
-      <h2><span data-de>Intermediär zuerst</span><span data-en>Intermediaries first</span></h2>
+      <h2><span data-de>Intermediär zuerst, in dieser Reihenfolge</span><span data-en>Intermediaries first, in this order</span></h2>
+      <p data-de>Jede Stufe dieser Leiter greift auf eine bereits bestehende, geprüfte Struktur zurück, statt eine Gemeinschaft ohne Vorwarnung direkt anzuschreiben &mdash; und wo die Recherche zeigt, dass eine Einladung gerade unangemessen wäre, sagt diese Leiter das ausdrücklich statt es zu verschweigen.</p>
+      <p data-en>Every rung of this ladder builds on a structure that already exists and has already been vetted, rather than approaching a community cold &mdash; and where the research shows an invitation would currently be inappropriate, this ladder says so explicitly instead of staying quiet about it.</p>
     </div>
     <div class="ladder">
       <div class="rung"><div class="num">1</div><div>
         <h3><span data-de>Bestehende Beziehung nutzen</span><span data-en>Use the existing relationship</span></h3>
-        <p data-de>Ainbu Dayá (Huni Kuin) und ASCY (Yawanawá) sind bereits TRYP-Partner — um eine Peer-Empfehlung bitten, bevor irgendjemand sonst kontaktiert wird.</p>
-        <p data-en>Ainbu Dayá (Huni Kuin) and ASCY (Yawanawá) are already TRYP partners — ask them for a peer referral before anyone else is contacted.</p>
+        <p data-de>Ainbu Dayá (Huni Kuin) und ASCY (Yawanawá) sind bereits TRYP-Partner. Sie sollten um eine Peer-Empfehlung gebeten werden, bevor überhaupt jemand anders kontaktiert wird &mdash; das ist die höflichste und legitimste erste Bewegung, die möglich ist.</p>
+        <p data-en>Ainbu Dayá (Huni Kuin) and ASCY (Yawanawá) are already TRYP partners. They should be asked for a peer referral before anyone else is contacted at all &mdash; that is the most respectful and legitimate first move available.</p>
         <div class="tag-row"><span class="tag">Ainbu Dayá</span><span class="tag">ASCY</span></div></div></div>
       <div class="rung"><div class="num">2</div><div>
         <h3><span data-de>Verifizierte IRI-Partner anschreiben</span><span data-en>Approach verified IRI partners</span></h3>
-        <p data-de>Für Shipibo-Konibo: Alianza Arkana &amp; Farmacia Viva, offiziell bei Chacruna IRI gelistet.</p>
-        <p data-en>For Shipibo-Konibo: Alianza Arkana &amp; Farmacia Viva, officially listed under Chacruna IRI.</p>
+        <p data-de>Für die Shipibo-Konibo sind Alianza Arkana und Farmacia Viva offiziell bei Chacruna’s Indigenous Reciprocity Initiative gelistet, mit einem bereits laufenden Reciprocity-Rahmen im Hintergrund.</p>
+        <p data-en>For the Shipibo-Konibo, Alianza Arkana and Farmacia Viva are officially listed under Chacruna's Indigenous Reciprocity Initiative, with an existing reciprocity framework already running in the background.</p>
         <div class="tag-row"><span class="tag">chacruna-iri.org</span></div></div></div>
       <div class="rung"><div class="num">3</div><div>
         <h3><span data-de>Dachallianz statt Einzelverband</span><span data-en>Umbrella alliance, not one federation</span></h3>
-        <p data-de>Für Achuar über die Amazon Sacred Headwaters Alliance einsteigen — kennt die Visa-Asymmetrie Ecuador/Peru bereits.</p>
-        <p data-en>For Achuar, enter via the Amazon Sacred Headwaters Alliance — already aware of the Ecuador/Peru visa asymmetry.</p></div></div>
+        <p data-de>Für die Achuar führt der Einstieg über die Amazon Sacred Headwaters Alliance, die bereits weiß, wie unterschiedlich die Visa-Situation zwischen der ecuadorianischen und der peruanischen Seite der Gemeinschaft ausfällt.</p>
+        <p data-en>For the Achuar, the entry point runs through the Amazon Sacred Headwaters Alliance, which is already aware of how differently the visa situation plays out between the Ecuadorian and Peruvian sides of the community.</p></div></div>
       <div class="rung"><div class="num">4</div><div>
-        <h3><span data-de>Governance-Aufbau finanzieren, statt einzuladen</span><span data-en>Fund governance-building, not an invitation</span></h3>
-        <p data-de>Mazatec &amp; Q'ero: Beitrag zu lokaler Aufbauarbeit (Casa Adobe, Willka Yachay) anbieten. Eine Einladung ohne diese Struktur wäre selbst die Vereinnahmung, vor der die Kriterien schützen sollen.</p>
-        <p data-en>Mazatec &amp; Q'ero: offer support for local capacity-building (Casa Adobe, Willka Yachay). An invitation without that structure would itself be the appropriation the criteria exist to prevent.</p></div></div>
+        <h3><span data-de>Bei Governance-Streit das klarste Gremium wählen</span><span data-en>Where governance is contested, pick the clearest body</span></h3>
+        <p data-de>Bei den Shuar konkurrieren drei Föderationen um Vertretung. PSHA hat den am besten dokumentierten Ratifizierungsprozess und sollte deshalb der erste Ansprechpartner sein, nicht die älteste oder größte der drei Organisationen.</p>
+        <p data-en>Among the Shuar, three federations compete for representation. PSHA has the best-documented ratification process and should therefore be the first point of contact, not whichever of the three organizations happens to be oldest or largest.</p>
+        <div class="tag-row"><span class="tag">PSHA</span></div></div></div>
       <div class="rung"><div class="num">5</div><div>
-        <h3><span data-de>Rechtsprüfung vor Kontakt (Bwiti)</span><span data-en>Legal review before contact (Bwiti)</span></h3>
-        <p data-de>ANMN erst nach anwaltlicher Klärung des Iboga-BtMG-Status und Visa-Machbarkeit kontaktieren.</p>
-        <p data-en>Contact ANMN only after legal counsel confirms iboga's BtMG status and visa feasibility.</p></div></div>
+        <h3><span data-de>Über die Partnerorganisation, nicht über Practitioner-Verbände</span><span data-en>Through the partner organization, not practitioner associations</span></h3>
+        <p data-de>Bei den Matsés führt der seriöse Weg über Acaté Amazon Conservation, die seit Jahren den Übergang von Zwischenhändlern zu Direktkauf begleitet &mdash; nicht über westlich geführte Kambô-Zertifizierungsverbände ohne verifizierte Anbindung.</p>
+        <p data-en>For the Matsés, the credible path runs through Acaté Amazon Conservation, which has spent years mediating the shift from middlemen to direct purchasing &mdash; not through Western-led Kambô certification associations with no verified connection.</p>
+        <div class="tag-row"><span class="tag">Acaté</span></div></div></div>
       <div class="rung"><div class="num">6</div><div>
-        <h3><span data-de>Zurückhaltung respektieren</span><span data-en>Respect the declared reticence</span></h3>
-        <p data-de>NCNAC hat sich öffentlich gegen kommerzielle Psychedelic-Events positioniert. Keine Einladung — höchstens ein Beitrag zur Peyote-Konservierung, ohne Gegenleistung.</p>
-        <p data-en>NCNAC has publicly opposed commercial psychedelic events. No invitation — at most, support for peyote conservation, with no expectation of anything in return.</p></div></div>
+        <h3><span data-de>Governance-Aufbau finanzieren, statt einzuladen</span><span data-en>Fund governance-building, not an invitation</span></h3>
+        <p data-de>Für Mazatec und Q&rsquo;ero wird ein Beitrag zu lokaler Aufbauarbeit vorgeschlagen, etwa über Casa Adobe oder Willka Yachay. Eine Einladung ohne diese Struktur wäre selbst schon die Vereinnahmung, vor der die Kriterien eigentlich schützen sollen.</p>
+        <p data-en>For Mazatec and Q'ero, offering support for local capacity-building is proposed instead, for example through Casa Adobe or Willka Yachay. An invitation without that structure in place would itself already be the appropriation the criteria exist to prevent.</p>
+        <div class="tag-row"><span class="tag">Casa Adobe</span><span class="tag">Willka Yachay</span></div></div></div>
       <div class="rung"><div class="num">7</div><div>
+        <h3><span data-de>Rechtsprüfung vor Kontakt</span><span data-en>Legal review before contact</span></h3>
+        <p data-de>ANMN sollte für die Bwiti-Tradition erst kontaktiert werden, nachdem anwaltlich geklärt ist, ob Iboga oder Ibogain überhaupt einer BtMG-Kategorie unterliegen, und nachdem die Visa-Situation für gabunische Delegierte vorab geprüft wurde.</p>
+        <p data-en>For the Bwiti tradition, ANMN should only be contacted after legal counsel has clarified whether iboga or ibogaine fall under any category of German drug law, and after the visa situation for Gabonese delegates has been checked in advance.</p>
+        <div class="tag-row"><span class="tag">ANMN</span></div></div></div>
+      <div class="rung"><div class="num">8</div><div>
+        <h3><span data-de>Zurückhaltung respektieren</span><span data-en>Respect the declared reticence</span></h3>
+        <p data-de>Der National Council of Native American Churches hat sich wiederholt öffentlich gegen kommerzielle Psychedelic-Events positioniert. Keine Einladung auszusprechen ist hier die richtige Antwort &mdash; höchstens ein Beitrag zur Peyote-Konservierung, ohne jede Erwartung einer Gegenleistung.</p>
+        <p data-en>The National Council of Native American Churches has repeatedly and publicly opposed commercial psychedelic events. Not extending an invitation is the right response here &mdash; at most, support for peyote conservation, with no expectation of anything in return.</p></div></div>
+      <div class="rung"><div class="num">9</div><div>
+        <h3><span data-de>Menschliche Sicherheit vor Programm-Diversität</span><span data-en>Human safety before program diversity</span></h3>
+        <p data-de>Bei den Yanomami und Piaroa steht eine akute humanitäre Krise im Vordergrund, bei den sibirischen Fliegenpilz-Traditionen eine geopolitisch blockierte Reisemöglichkeit. In beiden Fällen wird bewusst keine Kontaktaufnahme empfohlen, solange sich die jeweilige Lage nicht grundlegend ändert.</p>
+        <p data-en>For the Yanomami and Piaroa, an acute humanitarian crisis takes precedence; for the Siberian fly-agaric traditions, travel is geopolitically blocked. In both cases, no outreach is deliberately recommended unless the respective situation changes fundamentally.</p></div></div>
+      <div class="rung"><div class="num">10</div><div>
         <h3><span data-de>TRYP-intern: eigene Spur beantragen</span><span data-en>Inside TRYP: request a dedicated track</span></h3>
-        <p data-de>Der Standard-Exhibitor-Weg (fairoo, bezahlte Buchung) zeigt keine kulturelle Kategorie. Über den „Strategic Fit Call" eine reciprocity-finanzierte Delegationsspur anfragen, mit Verweis auf Huni Kuin/Yawanawá.</p>
-        <p data-en>The standard exhibitor path (fairoo, paid booking) shows no cultural category. Use the "strategic fit call" to request a reciprocity-funded delegation track, citing Huni Kuin/Yawanawá as precedent.</p></div></div>
+        <p data-de>Der Standard-Exhibitor-Weg über das fairoo-Portal zeigt keine kulturelle oder nicht-kommerzielle Kategorie. Über den &bdquo;Strategic Fit Call&ldquo; sollte gezielt eine reciprocity-finanzierte Delegationsspur angefragt werden, mit ausdrücklichem Verweis auf das bereits bestehende Huni-Kuin/Yawanawá-Format.</p>
+        <p data-en>The standard exhibitor path through the fairoo portal shows no cultural or non-commercial category. The &ldquo;strategic fit call&rdquo; should be used to specifically request a reciprocity-funded delegation track, explicitly citing the existing Huni Kuin/Yawanawá format as precedent.</p>
+        <div class="tag-row"><span class="tag">my.fairoo.de/tryp-expo</span><span class="tag">Strategic Fit Call</span></div></div></div>
     </div>
   </div>
 </section>
+<svg class="wave-divider" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,25 C200,0 400,40 600,18 C800,-4 1000,38 1200,15 L1200,40 L0,40 Z"/></svg>
 
 <section id="sponsors">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow"><span data-de>Finanzierung</span><span data-en>Funding</span></div>
       <h2><span data-de>Wer bereits in diesen Raum gibt</span><span data-en>Who already gives into this space</span></h2>
+      <p data-de>Keine der drei folgenden Spalten bedeutet einen kalten Erstkontakt: Alle genannten Organisationen haben bereits dokumentierte Berührungspunkte mit Reciprocity-Finanzierung im Psychedelic-Feld, was jede Anfrage von vornherein glaubwürdiger macht.</p>
+      <p data-en>None of the three columns below means a cold first contact: every organization named already has documented touchpoints with reciprocity funding in the psychedelic space, which makes any approach more credible from the outset.</p>
     </div>
     <div class="sponsor-cols">
       <div class="sponsor-col"><h3><span data-de>Reciprocity-Ebene</span><span data-en>Reciprocity Layer</span></h3>
         <ul>
-          <li><b>Chacruna IRI</b> — <span data-de>20 Partnerorgs, 92,5% Direktausschüttung</span><span data-en>20 partner orgs, 92.5% pass-through</span></li>
+          <li><b>Chacruna IRI</b> &mdash; <span data-de>20 Partnerorgs, 92,5&nbsp;% Direktausschüttung</span><span data-en>20 partner orgs, 92.5&nbsp;% pass-through</span></li>
           <li><b>ICEERS</b>, <b>Beckley Foundation</b>, <b>OPEN Foundation</b></li>
         </ul></div>
       <div class="sponsor-col"><h3><span data-de>Industrie-CSR</span><span data-en>Industry CSR</span></h3>
         <ul>
-          <li><b>Dr. Bronner's Family Foundation</b> — <span data-de>bereits IRI-Geber</span><span data-en>existing IRI donor</span></li>
-          <li><b>AtaiBeckley Inc.</b> — <span data-de>Spenden an MAPS dokumentiert</span><span data-en>documented MAPS donations</span></li>
-          <li><b>Synthesis</b> — <span data-de>IRI-Spender</span><span data-en>IRI donor</span></li>
+          <li><b>Dr. Bronner&rsquo;s Family Foundation</b> &mdash; <span data-de>bereits IRI-Geber</span><span data-en>existing IRI donor</span></li>
+          <li><b>AtaiBeckley Inc.</b> &mdash; <span data-de>Spenden an MAPS dokumentiert</span><span data-en>documented MAPS donations</span></li>
+          <li><b>Synthesis</b> &mdash; <span data-de>IRI-Spender</span><span data-en>IRI donor</span></li>
         </ul></div>
       <div class="sponsor-col"><h3><span data-de>Kulturdiplomatie (zu prüfen)</span><span data-en>Cultural Diplomacy (unverified)</span></h3>
         <ul>
           <li><span data-de>Goethe-Institut Brasilien/Peru/Mexiko</span><span data-en>Goethe-Institut Brazil/Peru/Mexico</span></li>
           <li><span data-de>Botschaften der Herkunftsländer</span><span data-en>Origin-country embassies</span></li>
-          <li><span data-de>Humboldt-Stiftung — noch nicht kontaktiert</span><span data-en>Humboldt Foundation — not yet contacted</span></li>
+          <li><span data-de>Humboldt-Stiftung &mdash; noch nicht kontaktiert</span><span data-en>Humboldt Foundation &mdash; not yet contacted</span></li>
         </ul></div>
     </div>
   </div>
 </section>
 
-<footer>
+<footer id="footer-methodik">
   <div class="wrap">
     <div class="eyebrow"><span data-de>Methodik &amp; Kosten</span><span data-en>Methodology &amp; Cost</span></div>
-    <p data-de>Erstellt mit SuperBrain-Engines (Dialektik, NovaSphere-Vollengine mit fallspezifischem Casting + Gegenpol, FalsifiabilityCheck) plus paralleler Web-Recherche. Kein Rechtsrat, keine fertige Zusage — jede „offene Frage" ist wörtlich offen. Feedback-Buttons/Notizen dienen als Gespraechs-Gedaechtnisstuetze vor Ort — diese gehostete Version speichert sie NICHT dauerhaft (kein Server, kein Sync); wichtige Notizen bitte separat sichern.</p>
-    <p data-en>Built with SuperBrain engines (Dialektik, full NovaSphere engine with case-specific casting + dissent, FalsifiabilityCheck) plus parallel web research. Not legal advice, not a finished commitment — every "open question" means exactly that. Feedback buttons/notes are an in-the-room memory aid — this hosted version does NOT persist them (no server, no sync); save anything important elsewhere.</p>
-    <div class="cost-strip"><span><b>Dialektik</b> $0.002</span><span><b>NovaSphere ×2</b> $0.36</span><span><b>FalsifiabilityCheck</b> $0.003</span><span><b>Σ</b> ≈ $0.37</span></div>
+    <p data-de>Erstellt mit SuperBrain-Engines (Dialektik, zwei vollständigen NovaSphere-Panelrunden mit fallspezifischem Casting und Gegenpol, FalsifiabilityCheck) plus zehn parallelen Web-Recherchen. Kein Rechtsrat und keine fertige Zusage &mdash; jede Zeile mit &bdquo;offene Frage&ldquo; ist wörtlich offen. Feedback-Buttons/Notizen dienen als Gespraechs-Gedaechtnisstuetze vor Ort — diese gehostete Version speichert sie NICHT dauerhaft (kein Server, kein Sync); wichtige Notizen bitte separat sichern.</p>
+    <p data-en>Built with SuperBrain engines (Dialektik, two full NovaSphere panel rounds with case-specific casting and dissent, FalsifiabilityCheck) plus ten parallel web research passes. Not legal advice and not a finished commitment &mdash; every line marked &ldquo;open question&rdquo; means exactly that. Feedback buttons/notes are an in-the-room memory aid — this hosted version does NOT persist them (no server, no sync); save anything important elsewhere.</p>
+    <div class="cost-strip"><span><b>Dialektik &times;2</b> $0.004</span><span><b>NovaSphere &times;3</b> $0.50</span><span><b>FalsifiabilityCheck</b> $0.003</span><span><b>&Sigma;</b> &approx; $0.51</span></div>
   </div>
 </footer>
 </div>
@@ -627,7 +951,7 @@ html.unlocked #lockGate{display:none}
       return Array.prototype.map.call(new Uint8Array(buf), function(b){ return b.toString(16).padStart(2,"0"); }).join("");
     });
   }
-  function unlock(){ document.documentElement.classList.add("unlocked"); }
+  function unlock(){ document.documentElement.classList.add("unlocked"); initAfterUnlock(); }
   function tryUnlock(pw){
     var input = document.getElementById("lockInput");
     var err = document.getElementById("lockErr");
@@ -646,8 +970,9 @@ html.unlocked #lockGate{display:none}
       }
     });
   }
+  var alreadyUnlocked = false;
   try{
-    if(sessionStorage.getItem(SESSION_KEY) === "1"){ unlock(); }
+    if(sessionStorage.getItem(SESSION_KEY) === "1"){ alreadyUnlocked = true; }
   }catch(e){}
   document.getElementById("lockSubmit").addEventListener("click", function(){
     tryUnlock(document.getElementById("lockInput").value);
@@ -656,7 +981,7 @@ html.unlocked #lockGate{display:none}
     if(e.key === "Enter"){ tryUnlock(e.target.value); }
   });
 
-  // language + theme are set on <html>, outside the artifact-sync body region — per-view, never shared
+  // ---- language + theme: set on <html>, outside the artifact-sync body region — per-view, never shared ----
   var langBtn = document.getElementById("langToggle");
   var lockLangBtn = document.getElementById("lockLangToggle");
   function setLang(lang){
@@ -691,8 +1016,6 @@ html.unlocked #lockGate{display:none}
   // On artifacts with the `artifact` capability granted, the runtime auto-saves
   // attribute/text changes made by a real click/input inside <body> — no API
   // calls needed here. Works as ordinary (non-persistent) UI when ungranted.
-
-  // sentiment chips: single-select per group
   Array.prototype.forEach.call(document.querySelectorAll(".fb-group"), function(group){
     var isStatusGroup = group.querySelector(".status-pill") !== null;
     var btnClass = isStatusGroup ? ".status-pill" : ".chip";
@@ -704,16 +1027,81 @@ html.unlocked #lockGate{display:none}
       });
     });
   });
-
-  // notes: keep as a single flat text node (required for sync; also fixes stray <br>/<div> from contenteditable)
   Array.prototype.forEach.call(document.querySelectorAll(".fb-note"), function(note){
     note.addEventListener("keydown", function(e){ if(e.key === "Enter"){ e.preventDefault(); note.blur(); } });
     note.addEventListener("input", function(){
       if(note.querySelector("*")){ note.textContent = note.textContent; }
     });
   });
+
+  // ---- sub-nav scroll-spy (per-viewer UI only, nothing persisted) ----
+  function initScrollSpy(){
+    var links = Array.prototype.slice.call(document.querySelectorAll("#subnavInner a"));
+    var targets = links.map(function(a){ return document.querySelector(a.getAttribute("href")); }).filter(Boolean);
+    if(!("IntersectionObserver" in window) || !targets.length) return;
+    var byId = {};
+    links.forEach(function(a){ byId[a.getAttribute("href").slice(1)] = a; });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          links.forEach(function(a){ a.removeAttribute("aria-current"); });
+          var link = byId[entry.target.id];
+          if(link) link.setAttribute("aria-current","true");
+        }
+      });
+    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+    targets.forEach(function(t){ io.observe(t); });
+  }
+
+  // ---- ambient plasma canvas: purely decorative, no state, respects reduced-motion ----
+  function initPlasma(){
+    var canvas = document.getElementById("plasmaCanvas");
+    if(!canvas) return;
+    var ctx = canvas.getContext("2d");
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var blobs = [
+      { x:.25, y:.35, r:.55, c:["--grad-a"], vx:.00011, vy:.00008, p:0 },
+      { x:.7,  y:.25, r:.5,  c:["--grad-b"], vx:-.00009, vy:.00013, p:2 },
+      { x:.55, y:.7,  r:.6,  c:["--grad-c"], vx:.00007, vy:-.00010, p:4 },
+      { x:.85, y:.65, r:.4,  c:["--grad-d"], vx:-.00012, vy:-.00006, p:1 }
+    ];
+    function size(){
+      var rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = Math.max(1, rect.width);
+      canvas.height = Math.max(1, rect.height);
+    }
+    function colorOf(varName){
+      return getComputedStyle(document.documentElement).getPropertyValue(varName).trim() || "#888";
+    }
+    function draw(t){
+      var w = canvas.width, h = canvas.height;
+      ctx.clearRect(0,0,w,h);
+      blobs.forEach(function(b){
+        var cx = (b.x + Math.sin(t*b.vx + b.p)*.12) * w;
+        var cy = (b.y + Math.cos(t*b.vy + b.p)*.12) * h;
+        var r = b.r * Math.max(w,h) * .5;
+        var grad = ctx.createRadialGradient(cx,cy,0,cx,cy,r);
+        grad.addColorStop(0, colorOf(b.c[0]));
+        grad.addColorStop(1, "transparent");
+        ctx.globalCompositeOperation = "lighter";
+        ctx.fillStyle = grad;
+        ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.fill();
+      });
+    }
+    size();
+    window.addEventListener("resize", size);
+    if(reduced){ draw(0); return; }
+    var raf;
+    function loop(ts){ draw(ts||0); raf = requestAnimationFrame(loop); }
+    raf = requestAnimationFrame(loop);
+  }
+
+  function initAfterUnlock(){
+    initScrollSpy();
+    initPlasma();
+  }
+  if(alreadyUnlocked){ unlock(); }
 })();
 </script>
-
 </body>
 </html>
