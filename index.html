@@ -137,6 +137,8 @@ section{padding:clamp(40px,6vw,64px) 0; position:relative}
 
 /* ---- candidate cards ---- */
 .candidate-list{display:flex; flex-direction:column; gap:10px}
+.ccard-wrap .ccard{border-radius:4px 4px 0 0; box-shadow:none; border-bottom:none}
+.ccard-wrap .fb-visible{border-radius:0 0 4px 4px}
 .ccard{background:var(--bg-raised); border:1px solid var(--line); border-radius:4px; overflow:hidden; box-shadow:var(--shadow)}
 .ccard[open]{border-color:var(--line-strong)}
 .ccard > summary{list-style:none; cursor:pointer; padding:16px 19px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; border-left:5px solid var(--line-strong)}
@@ -184,6 +186,7 @@ section{padding:clamp(40px,6vw,64px) 0; position:relative}
 
 /* ---- feedback controls ---- */
 .fb{margin-top:18px; padding-top:15px; border-top:1px dashed var(--line-strong)}
+.fb-visible{background:var(--bg-raised); border:1px solid var(--line); border-top:none; padding:15px 19px 19px; margin-top:0}
 .fb-row{display:flex; align-items:center; gap:14px; flex-wrap:wrap}
 .fb-group{display:flex; gap:6px; flex-wrap:wrap}
 .fb-label{font-family:var(--font-mono); font-size:.66rem; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); margin-right:2px}
@@ -373,12 +376,13 @@ html.unlocked #lockGate{display:none}
 
     <h3 style="margin-bottom:6px"><span data-de>Kernkandidaten &mdash; zum Öffnen klicken</span><span data-en>Core candidates &mdash; click to open</span></h3>
     <p style="color:var(--ink-soft); font-size:.85rem; margin:0 0 14px">
-      <span data-de>&#128172; Jede Karte hat unten ein Notizfeld &mdash; die Recherche wird noch iteriert, dein Feedback bleibt hilfreich. Gesammelt gespeichert, heruntergeladen oder geteilt wird alles ganz am <a href="#feedback">Ende des Dokuments</a>.</span>
-      <span data-en>&#128172; Every card has a note field at the bottom &mdash; this research keeps being iterated on, so your feedback stays useful. Everything is saved, downloaded, or shared together at the <a href="#feedback">end of the document</a>.</span>
+      <span data-de>&#128172; Direkt unter jeder Karte &mdash; auch ohne sie zu öffnen &mdash; steht ein Sentiment-/Status-/Notizfeld: die Recherche wird noch iteriert, dein Feedback bleibt hilfreich. Gesammelt gespeichert, heruntergeladen oder geteilt wird alles ganz am <a href="#feedback">Ende des Dokuments</a>.</span>
+      <span data-en>&#128172; Directly below every card &mdash; even without opening it &mdash; sits a sentiment/status/note field: this research keeps being iterated on, so your feedback stays useful. Everything is saved, downloaded, or shared together at the <a href="#feedback">end of the document</a>.</span>
     </p>
     <div class="candidate-list">
 
-      <details class="ccard" data-status="prioritized" id="c-shipibo">
+      <div class="ccard-wrap" id="c-shipibo">
+      <details class="ccard" data-status="prioritized">
         <summary>
           <span class="ccard-name">Shipibo-Konibo</span>
           <span class="ccard-meta">Peru · Ucayali &middot; <span data-de>Ayahuasca-Tradition</span><span data-en>Ayahuasca lineage</span></span>
@@ -398,28 +402,30 @@ html.unlocked #lockGate{display:none}
             <ul class="oq-list" data-de><li>Wer ist aktuell der richtige COSHIKOX-Kontakt für eine Festivalanfrage aus Deutschland?</li><li>Entscheidet ASOMASHK eigenständig über Auslandsauftritte, oder liegt das Mandat allein bei COSHIKOX?</li><li>Welches Sicherheitsprotokoll erwartet die Gemeinschaft angesichts des Mordfalls von 2018?</li></ul><ul class="oq-list" data-en><li>Who is currently the right COSHIKOX contact for a festival request originating in Germany?</li><li>Does ASOMASHK decide independently on international appearances, or does that mandate rest with COSHIKOX alone?</li><li>Given the 2018 murder case, what safety protocol does the community expect from an inviting organization?</li></ul></div>
           <div class="src-list"><a href="https://amazonwatch.org/news/2018/0907-in-the-declaration-of-yarinacocha-shipibo-healers-organize-to-resist-spiritual-extractivism" target="_blank" rel="noopener">Amazon Watch</a><a href="https://chacruna-iri.org/organizations" target="_blank" rel="noopener">Chacruna IRI</a><a href="https://www.whitecube.com/artists/sara-flores" target="_blank" rel="noopener">White Cube</a></div>
 
-          <div class="fb">
-            <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
-              <div class="fb-group">
-                <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
-                <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
-                <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
-              </div>
-            </div>
-            <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
-              <div class="fb-group">
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
-              </div>
-            </div>
-            <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
-          </div>
         </div>
       </details>
+      <div class="fb fb-visible">
+        <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
+          <div class="fb-group">
+            <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
+            <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
+            <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
+          </div>
+        </div>
+        <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
+          <div class="fb-group">
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
+          </div>
+        </div>
+        <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+      </div>
+      </div>
 
-      <details class="ccard" data-status="prioritized" id="c-achuar">
+      <div class="ccard-wrap" id="c-achuar">
+      <details class="ccard" data-status="prioritized">
         <summary>
           <span class="ccard-name">Achuar</span>
           <span class="ccard-meta">Ecuador / Peru &middot; <span data-de>Ayahuasca-Tradition</span><span data-en>Ayahuasca lineage</span></span>
@@ -439,28 +445,30 @@ html.unlocked #lockGate{display:none}
             <ul class="oq-list" data-de><li>Sollte die Delegation über die Ecuador-Achuar (visumpflichtig) oder die Peru-Achuar (visumfrei) laufen, oder beide gemeinsam?</li><li>Existiert überhaupt ein explizites Mandat für Event-Partnerschaften, oder bislang ausschließlich für Umweltschutz-Bündnisse?</li></ul><ul class="oq-list" data-en><li>Should the delegation travel via the Ecuador-side Achuar (visa required) or the Peru-side Achuar (visa-free), or jointly via both?</li><li>Does an explicit mandate for event partnerships exist at all, or has the federation's mandate so far covered only environmental alliances?</li></ul></div>
           <div class="src-list"><a href="https://www.kapawi.com/our-partnership" target="_blank" rel="noopener">Kapawi</a><a href="https://amazonwatch.org/news/2019/0610-my-message-for-geopark-dont-enter-achuar-territory" target="_blank" rel="noopener">Amazon Watch</a><a href="https://sacredheadwaters.org/home-1/" target="_blank" rel="noopener">Sacred Headwaters</a></div>
 
-          <div class="fb">
-            <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
-              <div class="fb-group">
-                <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
-                <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
-                <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
-              </div>
-            </div>
-            <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
-              <div class="fb-group">
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
-              </div>
-            </div>
-            <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
-          </div>
         </div>
       </details>
+      <div class="fb fb-visible">
+        <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
+          <div class="fb-group">
+            <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
+            <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
+            <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
+          </div>
+        </div>
+        <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
+          <div class="fb-group">
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
+          </div>
+        </div>
+        <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+      </div>
+      </div>
 
-      <details class="ccard" data-status="review" id="c-shuar">
+      <div class="ccard-wrap" id="c-shuar">
+      <details class="ccard" data-status="review">
         <summary>
           <span class="ccard-name">Shuar</span>
           <span class="ccard-meta">Ecuador · Cordillera del Cóndor &middot; <span data-de>Natem-Tradition (Ayahuasca)</span><span data-en>Natem tradition (ayahuasca)</span></span>
@@ -480,28 +488,30 @@ html.unlocked #lockGate{display:none}
             <ul class="oq-list" data-de><li>Welches der drei Gremien (FICSH, PSHA, NASHE oder das Interfederations-Komitee) ratifiziert eine internationale Partnerschaft verbindlich?</li><li>Sind zeremonielle Natem-Protokolle mit denen der Achuar vergleichbar, oder braucht es eine eigenständige kulturelle Einordnung?</li></ul><ul class="oq-list" data-en><li>Which of the three bodies (FICSH, PSHA, NASHE, or the interfederational committee) can bindingly ratify an international partnership?</li><li>Are ceremonial Natem protocols comparable to those of the Achuar, or does this tradition need its own, separate framing?</li></ul></div>
           <div class="src-list"><a href="https://www.iccaregistry.org/en/explore/Ecuador/pueblo-shuar-arutam" target="_blank" rel="noopener">PSHA / ICCA Registry</a><a href="https://miningwatch.ca/news/2024/3/4/shuar-arutam-people-speak-out-against-solaris-resources-cooperation-agreement" target="_blank" rel="noopener">MiningWatch Canada</a><a href="https://amazonwatch.org/news/2024/0318-latest-blow-for-solaris-resources-ilo-finds-shuar-arutam-people-were-not-consulted-on-warintza-and-panantza-mining-projects" target="_blank" rel="noopener">Amazon Watch (ILO finding)</a></div>
 
-          <div class="fb">
-            <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
-              <div class="fb-group">
-                <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
-                <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
-                <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
-              </div>
-            </div>
-            <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
-              <div class="fb-group">
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
-              </div>
-            </div>
-            <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
-          </div>
         </div>
       </details>
+      <div class="fb fb-visible">
+        <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
+          <div class="fb-group">
+            <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
+            <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
+            <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
+          </div>
+        </div>
+        <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
+          <div class="fb-group">
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
+          </div>
+        </div>
+        <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+      </div>
+      </div>
 
-      <details class="ccard" data-status="review" id="c-matses">
+      <div class="ccard-wrap" id="c-matses">
+      <details class="ccard" data-status="review">
         <summary>
           <span class="ccard-name">Matsés</span>
           <span class="ccard-meta">Peru / Brasilien · Amazonas &middot; <span data-de>Kambô-Tradition (Frosch-Sekret)</span><span data-en>Kambô tradition (frog secretion)</span></span>
@@ -521,28 +531,30 @@ html.unlocked #lockGate{display:none}
             <ul class="oq-list" data-de><li>Ist eine Anwendung am Messestand in Deutschland überhaupt rechtlich zulässig, oder bliebe nur eine rein erklärende Präsenz ohne Anwendung?</li><li>Wer stellt die verbindliche Einladung: die Junta Directiva direkt, oder Acaté als vermittelnde Organisation?</li></ul><ul class="oq-list" data-en><li>Is an on-site application at a German trade fair booth legally permissible at all, or would only a purely explanatory presence without application be possible?</li><li>Who issues the binding invitation: the Junta Directiva directly, or Acaté as the mediating organization?</li></ul></div>
           <div class="src-list"><a href="https://acateamazon.org/acate/about-us/" target="_blank" rel="noopener">Acaté Amazon Conservation</a><a href="https://www.survivalinternational.org/peoples/matses" target="_blank" rel="noopener">Survival International</a><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9582840/" target="_blank" rel="noopener">PMC / Phyllomedusa bicolor</a></div>
 
-          <div class="fb">
-            <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
-              <div class="fb-group">
-                <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
-                <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
-                <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
-              </div>
-            </div>
-            <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
-              <div class="fb-group">
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
-              </div>
-            </div>
-            <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
-          </div>
         </div>
       </details>
+      <div class="fb fb-visible">
+        <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
+          <div class="fb-group">
+            <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
+            <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
+            <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
+          </div>
+        </div>
+        <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
+          <div class="fb-group">
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
+          </div>
+        </div>
+        <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+      </div>
+      </div>
 
-      <details class="ccard" data-status="notyet" id="c-mazatec">
+      <div class="ccard-wrap" id="c-mazatec">
+      <details class="ccard" data-status="notyet">
         <summary>
           <span class="ccard-name">Mazatec</span>
           <span class="ccard-meta">Mexiko · Sierra Mazateca &middot; <span data-de>Psilocybin-Tradition (María-Sabina-Linie)</span><span data-en>Psilocybin tradition (María Sabina lineage)</span></span>
@@ -562,28 +574,30 @@ html.unlocked #lockGate{display:none}
             <ul class="oq-list" data-de><li>Wer ist überhaupt legitimiert, im Namen der Mazatec zu sprechen — einzelne Familienlinien oder der Gemeinderat?</li><li>Steht Casa Adobe angesichts der Overtourism-Geschichte einem kommerziellen Festival wie TRYP EXPO überhaupt offen gegenüber?</li><li>Welche konkrete Aufbauarbeit müsste zuerst finanziert werden, bevor eine Anfrage überhaupt fair wäre?</li></ul><ul class="oq-list" data-en><li>Who is actually authorized to speak on behalf of the Mazatec — individual family lines, or the community council?</li><li>Given the overtourism history, is Casa Adobe even open to a commercial festival like TRYP EXPO?</li><li>What concrete capacity-building would need to be funded first before an approach would even be fair?</li></ul></div>
           <div class="src-list"><a href="https://chacruna.net/mazatec-perspectives-on-the-globalization-of-psilocybin-mushrooms/" target="_blank" rel="noopener">Chacruna</a><a href="https://www.culanth.org/fieldsights/re-territorializing-mar%C3%ADa-sabina-huautla-mushrooms-and-politics" target="_blank" rel="noopener">Cultural Anthropology</a><a href="https://www.law.georgetown.edu/international-law-journal/blog/the-promise-of-nagoya-indigenous-reciprocity-in-the-psychedelic-renaissance/" target="_blank" rel="noopener">Georgetown Law</a></div>
 
-          <div class="fb">
-            <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
-              <div class="fb-group">
-                <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
-                <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
-                <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
-              </div>
-            </div>
-            <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
-              <div class="fb-group">
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
-              </div>
-            </div>
-            <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
-          </div>
         </div>
       </details>
+      <div class="fb fb-visible">
+        <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
+          <div class="fb-group">
+            <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
+            <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
+            <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
+          </div>
+        </div>
+        <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
+          <div class="fb-group">
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
+          </div>
+        </div>
+        <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+      </div>
+      </div>
 
-      <details class="ccard" data-status="hold" id="c-wixarika">
+      <div class="ccard-wrap" id="c-wixarika">
+      <details class="ccard" data-status="hold">
         <summary>
           <span class="ccard-name">Wixárika &amp; Native American Church</span>
           <span class="ccard-meta">Mexiko / USA &middot; <span data-de>Peyote-Tradition</span><span data-en>Peyote lineage</span></span>
@@ -603,28 +617,30 @@ html.unlocked #lockGate{display:none}
             <ul class="oq-list" data-de><li>Gäbe es überhaupt ein Format, das NCNAC/IPCI von sich aus vorschlagen würden, etwa reine Konservierungsaufklärung ohne Festival-Rahmen?</li></ul><ul class="oq-list" data-en><li>Is there any format NCNAC/IPCI would propose on their own initiative, such as pure conservation education outside a festival setting?</li></ul></div>
           <div class="src-list"><a href="https://chacruna.net/native-american-statement-regarding-decriminalization-of-peyote/" target="_blank" rel="noopener">Chacruna</a><a href="https://filtermag.org/indigenous-psychedelic-protest/" target="_blank" rel="noopener">Filter Mag</a><a href="https://www.opendemocracy.net/en/oureconomy/peyote-mescaline-psychedelic-mexico-agroindustry-wirikuta/" target="_blank" rel="noopener">openDemocracy</a></div>
 
-          <div class="fb">
-            <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
-              <div class="fb-group">
-                <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
-                <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
-                <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
-              </div>
-            </div>
-            <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
-              <div class="fb-group">
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
-              </div>
-            </div>
-            <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
-          </div>
         </div>
       </details>
+      <div class="fb fb-visible">
+        <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
+          <div class="fb-group">
+            <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
+            <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
+            <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
+          </div>
+        </div>
+        <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
+          <div class="fb-group">
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
+          </div>
+        </div>
+        <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+      </div>
+      </div>
 
-      <details class="ccard" data-status="review" id="c-bwiti">
+      <div class="ccard-wrap" id="c-bwiti">
+      <details class="ccard" data-status="review">
         <summary>
           <span class="ccard-name">Bwiti (Babongo / Fang)</span>
           <span class="ccard-meta">Gabun &middot; <span data-de>Iboga-Tradition</span><span data-en>Iboga lineage</span></span>
@@ -644,28 +660,30 @@ html.unlocked #lockGate{display:none}
             <ul class="oq-list" data-de><li>Ratifiziert ANMN als Organisation explizit auch Auslandspartnerschaften, oder bislang nur nationale Tempel-Angelegenheiten?</li><li>Gibt es ein deutsches Konsulat mit realistischer Bearbeitungszeit für Antragsteller:innen aus Gabun?</li></ul><ul class="oq-list" data-en><li>Does ANMN as an organization explicitly ratify international partnerships too, or has its mandate so far covered only national temple affairs?</li><li>Is there a German consulate with a realistic processing time for applicants from Gabon?</li></ul></div>
           <div class="src-list"><a href="https://gabonmediatime.com/gabon-lassociation-maghanga-ma-nzambe-en-croisade-pour-la-protection-de-liboga/" target="_blank" rel="noopener">Gabonmediatime</a><a href="https://www.nationalgeographic.com/animals/article/ibogaine-pschedelic-drug-root-fair-trade-gabon" target="_blank" rel="noopener">National Geographic</a><a href="https://www.law.georgetown.edu/international-law-journal/blog/the-promise-of-nagoya-indigenous-reciprocity-in-the-psychedelic-renaissance/" target="_blank" rel="noopener">Georgetown Law</a></div>
 
-          <div class="fb">
-            <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
-              <div class="fb-group">
-                <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
-                <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
-                <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
-              </div>
-            </div>
-            <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
-              <div class="fb-group">
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
-              </div>
-            </div>
-            <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
-          </div>
         </div>
       </details>
+      <div class="fb fb-visible">
+        <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
+          <div class="fb-group">
+            <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
+            <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
+            <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
+          </div>
+        </div>
+        <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
+          <div class="fb-group">
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
+          </div>
+        </div>
+        <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+      </div>
+      </div>
 
-      <details class="ccard" data-status="notyet" id="c-qero">
+      <div class="ccard-wrap" id="c-qero">
+      <details class="ccard" data-status="notyet">
         <summary>
           <span class="ccard-name">Q&rsquo;ero</span>
           <span class="ccard-meta">Peru · Cusco / Anden &middot; <span data-de>San-Pedro-Tradition (Wachuma)</span><span data-en>San Pedro tradition (Wachuma)</span></span>
@@ -685,28 +703,30 @@ html.unlocked #lockGate{display:none}
             <ul class="oq-list" data-de><li>Existiert überhaupt ein ansprechbares Gremium, oder ausschließlich Einzelpersonen ohne kollektives Mandat?</li><li>Wer sind aktuell nicht-ausgebeutete, vertrauenswürdige Delegierte, die die Gemeinschaft selbst benennen würde?</li></ul><ul class="oq-list" data-en><li>Does any approachable body exist at all, or only individuals without a collective mandate?</li><li>Who are currently non-exploited, trustworthy delegates the community itself would name?</li></ul></div>
           <div class="src-list"><a href="https://stories.kahtoola.com/the-qeros-nation-the-last-of-the-incas/" target="_blank" rel="noopener">Kahtoola</a><a href="https://ictnews.org/archive/qero-preserve-tradition-at-the-western-roof-of-the-world/" target="_blank" rel="noopener">ICT News</a></div>
 
-          <div class="fb">
-            <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
-              <div class="fb-group">
-                <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
-                <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
-                <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
-              </div>
-            </div>
-            <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
-              <div class="fb-group">
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
-              </div>
-            </div>
-            <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
-          </div>
         </div>
       </details>
+      <div class="fb fb-visible">
+        <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
+          <div class="fb-group">
+            <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
+            <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
+            <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
+          </div>
+        </div>
+        <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
+          <div class="fb-group">
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
+          </div>
+        </div>
+        <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+      </div>
+      </div>
 
-      <details class="ccard" data-status="notyet" id="c-yopo">
+      <div class="ccard-wrap" id="c-yopo">
+      <details class="ccard" data-status="notyet">
         <summary>
           <span class="ccard-name">Yanomami &amp; Piaroa</span>
           <span class="ccard-meta">Venezuela / Brasilien · Orinoco &middot; <span data-de>Yopo-Tradition (Anadenanthera-Schnupftabak)</span><span data-en>Yopo tradition (Anadenanthera snuff)</span></span>
@@ -726,28 +746,30 @@ html.unlocked #lockGate{display:none}
             <ul class="oq-list" data-de><li>Ist eine Einladung angesichts der akuten humanitären Lage aktuell überhaupt ethisch vertretbar? Direkt bei Hutukara/ORPIA erfragen, nicht selbst entscheiden.</li><li>Existiert ein von ORPIA oder OIPUS mandatierter Yopo-Wissensträger für internationale Vertretung?</li></ul><ul class="oq-list" data-en><li>Given the acute humanitarian situation, is an invitation ethically defensible at all right now? Ask Hutukara/ORPIA directly rather than deciding this from the outside.</li><li>Does a Yopo knowledge-holder mandated by ORPIA or OIPUS exist for international representation?</li></ul></div>
           <div class="src-list"><a href="https://www.aljazeera.com/news/2023/1/24/calls-for-action-as-brazil-yanomami-indigenous-people-face-crisis" target="_blank" rel="noopener">Al Jazeera</a><a href="https://sumauma.com/en/o-ouro-que-mata-sob-assedio-de-garimpeiros-yanomami-cobram-plano-para-2027/" target="_blank" rel="noopener">SUMAÚMA</a><a href="https://www.yanomami-hilfe.de/en/campaigns-and-projects/hutukara/" target="_blank" rel="noopener">Yanomami-Hilfe e.V.</a></div>
 
-          <div class="fb">
-            <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
-              <div class="fb-group">
-                <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
-                <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
-                <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
-              </div>
-            </div>
-            <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
-              <div class="fb-group">
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
-              </div>
-            </div>
-            <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
-          </div>
         </div>
       </details>
+      <div class="fb fb-visible">
+        <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
+          <div class="fb-group">
+            <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
+            <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
+            <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
+          </div>
+        </div>
+        <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
+          <div class="fb-group">
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
+          </div>
+        </div>
+        <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+      </div>
+      </div>
 
-      <details class="ccard" data-status="notyet" id="c-siberia">
+      <div class="ccard-wrap" id="c-siberia">
+      <details class="ccard" data-status="notyet">
         <summary>
           <span class="ccard-name">Korjaken, Tschuktschen &amp; Ewenen</span>
           <span class="ccard-meta">Russland · Kamtschatka &middot; <span data-de>Fliegenpilz-Tradition (Amanita muscaria)</span><span data-en>Fly agaric tradition (Amanita muscaria)</span></span>
@@ -767,26 +789,27 @@ html.unlocked #lockGate{display:none}
             <ul class="oq-list" data-de><li>Gibt es überhaupt noch lebende Praktizierende, die öffentlich und mit eigenem Mandat repräsentieren wollen und dürfen?</li><li>Wäre eine Vertretung durch Folklore- oder Museumsakteure statt aktiver spiritueller Praxis die realistischere, aber ethisch fragwürdigere Option?</li></ul><ul class="oq-list" data-en><li>Are there any living practitioners left who want to and are permitted to represent this tradition publicly, with their own mandate?</li><li>Would representation through folklore or museum actors, rather than active spiritual practice, be the more realistic but ethically more questionable option?</li></ul></div>
           <div class="src-list"><a href="https://www.survivalinternational.org/news/8845" target="_blank" rel="noopener">Survival International (RAIPON)</a><a href="https://www.themoscowtimes.com/2025/11/07/eu-bans-russians-from-multi-entry-schengen-visas-a91078" target="_blank" rel="noopener">The Moscow Times</a><a href="https://www.forbes.com/sites/freylindsay/2025/08/18/germany-suspends-humanitarian-visas-for-russian-dissidents/" target="_blank" rel="noopener">Forbes</a></div>
 
-          <div class="fb">
-            <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
-              <div class="fb-group">
-                <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
-                <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
-                <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
-              </div>
-            </div>
-            <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
-              <div class="fb-group">
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
-                <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
-              </div>
-            </div>
-            <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
-          </div>
         </div>
       </details>
+      <div class="fb fb-visible">
+        <div class="fb-row"><span class="fb-label" data-de>Sentiment</span><span class="fb-label" data-en>Sentiment</span>
+          <div class="fb-group">
+            <button class="chip" type="button" aria-pressed="false"><span data-de>vielversprechend</span><span data-en>promising</span></button>
+            <button class="chip" type="button" aria-pressed="false"><span data-de>Vorsicht</span><span data-en>caution</span></button>
+            <button class="chip" type="button" aria-pressed="false"><span data-de>blockiert</span><span data-en>blocked</span></button>
+          </div>
+        </div>
+        <div class="fb-row" style="margin-top:8px"><span class="fb-label" data-de>Kontakt-Status</span><span class="fb-label" data-en>Contact Status</span>
+          <div class="fb-group">
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>kontaktiert</span><span data-en>contacted</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>wartet</span><span data-en>awaiting</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>bestätigt</span><span data-en>confirmed</span></button>
+            <button class="status-pill" type="button" aria-pressed="false"><span data-de>abgelehnt</span><span data-en>declined</span></button>
+          </div>
+        </div>
+        <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+      </div>
+      </div>
     </div>
 
     <h3 style="margin:36px 0 6px"><span data-de>Kontextkandidaten</span><span data-en>Context Candidates</span></h3>
@@ -1150,7 +1173,7 @@ html.unlocked #lockGate{display:none}
   // plain GitHub Pages mirror (no window.claude at all).
   var FB_KEY = "tryp2027_fb_v1";
   function allFbFields(){
-    return Array.prototype.slice.call(document.querySelectorAll(".ccard, .kcard, .abs-row"));
+    return Array.prototype.slice.call(document.querySelectorAll(".ccard-wrap, .kcard, .abs-row"));
   }
   function loadFbStore(){
     try{ return JSON.parse(localStorage.getItem(FB_KEY) || "{}"); }catch(e){ return {}; }
