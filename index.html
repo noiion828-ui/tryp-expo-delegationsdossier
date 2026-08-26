@@ -1,11 +1,9 @@
 <!doctype html>
-<html lang="de">
+<html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Delegationsdossier 2027</title>
-<meta name="robots" content="noindex, nofollow, noarchive">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;900&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -232,10 +230,18 @@ html.unlocked #lockGate{display:none}
 .lock-card input[type="password"]:focus{outline:2px solid var(--grad-b); outline-offset:1px}
 .lock-card button{width:100%; font-family:var(--font-display); font-weight:600; font-size:.9rem; padding:10px 12px; border-radius:4px; border:none; background:linear-gradient(100deg,var(--grad-a),var(--grad-b)); color:#0D0C10; cursor:pointer}
 .lock-card .err{font-size:.8rem; color:var(--rose); margin-top:10px; min-height:1.2em}
+
+/* ---- feedback actions: save / download / share (per candidate card) ---- */
+.fb-actions{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:12px}
+.fb-btn{font-family:var(--font-mono); font-size:.7rem; letter-spacing:.03em; padding:6px 12px; border-radius:999px; border:1px solid var(--line-strong); background:var(--bg-raised); color:var(--ink-soft); cursor:pointer; display:inline-flex; align-items:center; gap:5px}
+.fb-btn:hover{border-color:var(--grad-b); color:var(--ink)}
+.fb-btn:active{transform:translateY(1px)}
+.fb-status{font-family:var(--font-mono); font-size:.68rem; color:var(--lime); opacity:0; transition:opacity .25s; min-height:1em}
+.fb-status.show{opacity:1}
+.fb-status.err{color:var(--rose)}
 </style>
 </head>
 <body>
-
 <div id="lockGate">
   <div class="lock-card">
     <div class="brand"><span class="grad-text">TRYP</span> / 2027</div>
@@ -399,6 +405,12 @@ html.unlocked #lockGate{display:none}
               </div>
             </div>
             <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+            <div class="fb-actions">
+              <button class="fb-btn fb-save" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
+              <button class="fb-btn fb-download" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
+              <button class="fb-btn fb-share" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
+              <span class="fb-status" aria-live="polite"></span>
+            </div>
           </div>
         </div>
       </details>
@@ -440,6 +452,12 @@ html.unlocked #lockGate{display:none}
               </div>
             </div>
             <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+            <div class="fb-actions">
+              <button class="fb-btn fb-save" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
+              <button class="fb-btn fb-download" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
+              <button class="fb-btn fb-share" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
+              <span class="fb-status" aria-live="polite"></span>
+            </div>
           </div>
         </div>
       </details>
@@ -481,6 +499,12 @@ html.unlocked #lockGate{display:none}
               </div>
             </div>
             <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+            <div class="fb-actions">
+              <button class="fb-btn fb-save" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
+              <button class="fb-btn fb-download" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
+              <button class="fb-btn fb-share" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
+              <span class="fb-status" aria-live="polite"></span>
+            </div>
           </div>
         </div>
       </details>
@@ -522,6 +546,12 @@ html.unlocked #lockGate{display:none}
               </div>
             </div>
             <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+            <div class="fb-actions">
+              <button class="fb-btn fb-save" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
+              <button class="fb-btn fb-download" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
+              <button class="fb-btn fb-share" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
+              <span class="fb-status" aria-live="polite"></span>
+            </div>
           </div>
         </div>
       </details>
@@ -563,6 +593,12 @@ html.unlocked #lockGate{display:none}
               </div>
             </div>
             <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+            <div class="fb-actions">
+              <button class="fb-btn fb-save" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
+              <button class="fb-btn fb-download" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
+              <button class="fb-btn fb-share" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
+              <span class="fb-status" aria-live="polite"></span>
+            </div>
           </div>
         </div>
       </details>
@@ -604,6 +640,12 @@ html.unlocked #lockGate{display:none}
               </div>
             </div>
             <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+            <div class="fb-actions">
+              <button class="fb-btn fb-save" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
+              <button class="fb-btn fb-download" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
+              <button class="fb-btn fb-share" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
+              <span class="fb-status" aria-live="polite"></span>
+            </div>
           </div>
         </div>
       </details>
@@ -645,6 +687,12 @@ html.unlocked #lockGate{display:none}
               </div>
             </div>
             <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+            <div class="fb-actions">
+              <button class="fb-btn fb-save" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
+              <button class="fb-btn fb-download" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
+              <button class="fb-btn fb-share" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
+              <span class="fb-status" aria-live="polite"></span>
+            </div>
           </div>
         </div>
       </details>
@@ -686,6 +734,12 @@ html.unlocked #lockGate{display:none}
               </div>
             </div>
             <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+            <div class="fb-actions">
+              <button class="fb-btn fb-save" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
+              <button class="fb-btn fb-download" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
+              <button class="fb-btn fb-share" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
+              <span class="fb-status" aria-live="polite"></span>
+            </div>
           </div>
         </div>
       </details>
@@ -727,6 +781,12 @@ html.unlocked #lockGate{display:none}
               </div>
             </div>
             <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+            <div class="fb-actions">
+              <button class="fb-btn fb-save" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
+              <button class="fb-btn fb-download" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
+              <button class="fb-btn fb-share" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
+              <span class="fb-status" aria-live="polite"></span>
+            </div>
           </div>
         </div>
       </details>
@@ -768,6 +828,12 @@ html.unlocked #lockGate{display:none}
               </div>
             </div>
             <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
+            <div class="fb-actions">
+              <button class="fb-btn fb-save" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
+              <button class="fb-btn fb-download" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
+              <button class="fb-btn fb-share" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
+              <span class="fb-status" aria-live="polite"></span>
+            </div>
           </div>
         </div>
       </details>
@@ -925,8 +991,8 @@ html.unlocked #lockGate{display:none}
 <footer id="footer-methodik">
   <div class="wrap">
     <div class="eyebrow"><span data-de>Methodik &amp; Kosten</span><span data-en>Methodology &amp; Cost</span></div>
-    <p data-de>Erstellt mit SuperBrain-Engines (Dialektik, zwei vollständigen NovaSphere-Panelrunden mit fallspezifischem Casting und Gegenpol, FalsifiabilityCheck) plus zehn parallelen Web-Recherchen. Kein Rechtsrat und keine fertige Zusage &mdash; jede Zeile mit &bdquo;offene Frage&ldquo; ist wörtlich offen. Feedback-Buttons/Notizen dienen als Gespraechs-Gedaechtnisstuetze vor Ort — diese gehostete Version speichert sie NICHT dauerhaft (kein Server, kein Sync); wichtige Notizen bitte separat sichern.</p>
-    <p data-en>Built with SuperBrain engines (Dialektik, two full NovaSphere panel rounds with case-specific casting and dissent, FalsifiabilityCheck) plus ten parallel web research passes. Not legal advice and not a finished commitment &mdash; every line marked &ldquo;open question&rdquo; means exactly that. Feedback buttons/notes are an in-the-room memory aid — this hosted version does NOT persist them (no server, no sync); save anything important elsewhere.</p>
+    <p data-de>Erstellt mit SuperBrain-Engines (Dialektik, zwei vollständigen NovaSphere-Panelrunden mit fallspezifischem Casting und Gegenpol, FalsifiabilityCheck) plus zehn parallelen Web-Recherchen. Kein Rechtsrat und keine fertige Zusage &mdash; jede Zeile mit &bdquo;offene Frage&ldquo; ist wörtlich offen. Feedback oben ist geteilter Projektstand (Artifact-Sync), kein privates Gedächtnis.</p>
+    <p data-en>Built with SuperBrain engines (Dialektik, two full NovaSphere panel rounds with case-specific casting and dissent, FalsifiabilityCheck) plus ten parallel web research passes. Not legal advice and not a finished commitment &mdash; every line marked &ldquo;open question&rdquo; means exactly that. Feedback above is shared project state (artifact sync), not private memory.</p>
     <div class="cost-strip"><span><b>Dialektik &times;2</b> $0.004</span><span><b>NovaSphere &times;3</b> $0.50</span><span><b>FalsifiabilityCheck</b> $0.003</span><span><b>&Sigma;</b> &approx; $0.51</span></div>
   </div>
 </footer>
@@ -940,8 +1006,9 @@ html.unlocked #lockGate{display:none}
   // Soft access gate, not real encryption: the page's HTML is still present in
   // View Source regardless of the password. This only blocks casual opening of
   // a shared link (incl. on mobile — plain SHA-256 via Web Crypto, no native app
-  // needed). Standalone GitHub Pages build: no artifact-sync runtime here, so
-  // feedback buttons/notes below are plain non-persistent UI (by design).
+  // needed). The gated content (#pageContent) is never removed or re-rendered —
+  // it stays real, server-served markup the whole time, so the feedback
+  // buttons/notes inside it keep working with the artifact-sync capability.
   var PW_HASH_HEX = "5dab29cf594dd75eaaa7262d4fdc0865474e334a144218e7aaadd9c0d99a69e8";
   var SESSION_KEY = "tryp2027_unlocked";
 
@@ -1100,6 +1167,195 @@ html.unlocked #lockGate{display:none}
     initScrollSpy();
     initPlasma();
   }
+
+
+  // ---- feedback save / download / share: pure browser tech, works identically on
+  // claude.ai (Artifact viewer, capabilities sandboxed) and on the plain GitHub Pages
+  // mirror (no window.claude at all). Persists per-viewer in localStorage; explicit
+  // Save button just makes that persistence visible and gives an affirmative click.
+  var FB_KEY = "tryp2027_fb_v1";
+  function loadFbStore(){
+    try{ return JSON.parse(localStorage.getItem(FB_KEY) || "{}"); }catch(e){ return {}; }
+  }
+  function saveFbStoreRaw(store){
+    try{ localStorage.setItem(FB_KEY, JSON.stringify(store)); }catch(e){}
+  }
+  function candidateName(ccard){
+    var el = ccard.querySelector(".ccard-name");
+    return el ? el.textContent.trim() : ccard.id;
+  }
+  function fbGroups(ccard){
+    var groups = ccard.querySelectorAll(".fb-group");
+    return { sentiment: groups[0], status: groups[1] };
+  }
+  function pressedIdx(group, cls){
+    if(!group) return -1;
+    var btns = Array.prototype.slice.call(group.querySelectorAll(cls));
+    for(var i=0;i<btns.length;i++){ if(btns[i].getAttribute("aria-pressed")==="true") return i; }
+    return -1;
+  }
+  function setPressedIdx(group, cls, idx){
+    if(!group) return;
+    Array.prototype.forEach.call(group.querySelectorAll(cls), function(b,i){
+      b.setAttribute("aria-pressed", i===idx ? "true":"false");
+    });
+  }
+  function readFbState(ccard){
+    var g = fbGroups(ccard);
+    var note = ccard.querySelector(".fb-note");
+    return {
+      candidate: candidateName(ccard),
+      sentimentIdx: pressedIdx(g.sentiment, ".chip"),
+      statusIdx: pressedIdx(g.status, ".status-pill"),
+      note: note ? note.textContent.trim() : "",
+      updatedAt: new Date().toISOString()
+    };
+  }
+  function applyFbState(ccard, state){
+    if(!state) return;
+    var g = fbGroups(ccard);
+    if(typeof state.sentimentIdx === "number") setPressedIdx(g.sentiment, ".chip", state.sentimentIdx);
+    if(typeof state.statusIdx === "number") setPressedIdx(g.status, ".status-pill", state.statusIdx);
+    var note = ccard.querySelector(".fb-note");
+    if(note && state.note){ note.textContent = state.note; }
+  }
+  function restoreAllFb(){
+    var store = loadFbStore();
+    Array.prototype.forEach.call(document.querySelectorAll(".ccard"), function(ccard){
+      applyFbState(ccard, store[ccard.id]);
+    });
+  }
+  function fbSave(ccard){
+    var store = loadFbStore();
+    store[ccard.id] = readFbState(ccard);
+    saveFbStoreRaw(store);
+  }
+  function fbLabel(btn){
+    if(!btn) return "";
+    var lang = document.documentElement.getAttribute("data-lang") === "en" ? "en" : "de";
+    var span = btn.querySelector("[data-" + lang + "]");
+    return span ? span.textContent.trim() : btn.textContent.trim();
+  }
+  function fbSummaryText(ccard){
+    var g = fbGroups(ccard);
+    var sentimentBtn = g.sentiment ? g.sentiment.querySelector('.chip[aria-pressed="true"]') : null;
+    var statusBtn = g.status ? g.status.querySelector('.status-pill[aria-pressed="true"]') : null;
+    var note = ccard.querySelector(".fb-note");
+    var lang = document.documentElement.getAttribute("data-lang") === "en" ? "en" : "de";
+    var noneLabel = lang === "en" ? "(none)" : "(keins)";
+    var lines = [];
+    lines.push((lang==="en"?"Candidate: ":"Kandidat: ") + candidateName(ccard));
+    lines.push((lang==="en"?"Sentiment: ":"Sentiment: ") + (fbLabel(sentimentBtn) || noneLabel));
+    lines.push((lang==="en"?"Contact status: ":"Kontakt-Status: ") + (fbLabel(statusBtn) || noneLabel));
+    var noteText = note ? note.textContent.trim() : "";
+    if(noteText) lines.push((lang==="en"?"Note: ":"Notiz: ") + noteText);
+    lines.push("");
+    lines.push(lang==="en" ? "From: TRYP EXPO Delegation Dossier 2027" : "Aus: TRYP EXPO Delegationsdossier 2027");
+    lines.push(location.href.split("#")[0] + "#" + ccard.id);
+    return lines.join("\n");
+  }
+  function flashStatus(el, kind, isErr){
+    if(!el) return;
+    var lang = document.documentElement.getAttribute("data-lang") === "en" ? "en" : "de";
+    var msgs = {
+      saved:      { de:"Gespeichert ✓", en:"Saved ✓" },
+      downloaded: { de:"Heruntergeladen ✓", en:"Downloaded ✓" },
+      shared:     { de:"Geteilt ✓", en:"Shared ✓" },
+      copied:     { de:"In Zwischenablage kopiert ✓", en:"Copied to clipboard ✓" },
+      declined:   { de:"Abgebrochen", en:"Cancelled" },
+      error:      { de:"Fehler — bitte erneut versuchen", en:"Error — please try again" }
+    };
+    el.textContent = msgs[kind] ? msgs[kind][lang] : "";
+    el.classList.toggle("err", !!isErr);
+    el.classList.add("show");
+    clearTimeout(el._fbT);
+    el._fbT = setTimeout(function(){ el.classList.remove("show"); }, 2600);
+  }
+  function fbDownloadFile(filename, text){
+    return new Promise(function(resolve, reject){
+      if(window.claude && typeof window.claude.use === "function"){
+        window.claude.use("downloads").then(function(downloads){
+          if(!downloads){ fallback(); return; }
+          downloads.save({ filename: filename, data: text }).then(function(){ resolve("downloaded"); }, function(err){
+            if(err && err.code === "declined"){ resolve("declined"); return; }
+            fallback();
+          });
+        }, fallback);
+      } else {
+        fallback();
+      }
+      function fallback(){
+        try{
+          var blob = new Blob([text], {type:"text/plain;charset=utf-8"});
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement("a");
+          a.href = url; a.download = filename;
+          document.body.appendChild(a); a.click(); document.body.removeChild(a);
+          setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+          resolve("downloaded");
+        }catch(e){ reject(e); }
+      }
+    });
+  }
+  function fbShareText(title, text){
+    if(navigator.share){
+      return navigator.share({ title: title, text: text }).then(function(){ return "shared"; }, function(err){
+        if(err && err.name === "AbortError") return "declined";
+        return fbCopyOrMailto(text);
+      });
+    }
+    return fbCopyOrMailto(text);
+  }
+  function fbCopyOrMailto(text){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      return navigator.clipboard.writeText(text).then(function(){ return "copied"; }, function(){ return fbMailto(text); });
+    }
+    return fbMailto(text);
+  }
+  function fbMailto(text){
+    try{
+      window.location.href = "mailto:?subject=" + encodeURIComponent("TRYP EXPO Feedback") + "&body=" + encodeURIComponent(text);
+      return Promise.resolve("shared");
+    }catch(e){ return Promise.reject(e); }
+  }
+  Array.prototype.forEach.call(document.querySelectorAll(".fb-actions"), function(actions){
+    var ccard = actions.closest(".ccard");
+    var statusEl = actions.querySelector(".fb-status");
+    actions.querySelector(".fb-save").addEventListener("click", function(){
+      fbSave(ccard);
+      flashStatus(statusEl, "saved");
+    });
+    actions.querySelector(".fb-download").addEventListener("click", function(){
+      var name = "tryp2027-feedback-" + ccard.id.replace(/^c-/,"") + ".txt";
+      fbDownloadFile(name, fbSummaryText(ccard)).then(function(kind){
+        flashStatus(statusEl, kind === "declined" ? "declined" : "downloaded", kind === "error");
+      }, function(){ flashStatus(statusEl, "error", true); });
+    });
+    actions.querySelector(".fb-share").addEventListener("click", function(){
+      var title = "TRYP EXPO Feedback — " + candidateName(ccard);
+      fbShareText(title, fbSummaryText(ccard)).then(function(kind){
+        flashStatus(statusEl, kind === "declined" ? "declined" : kind, false);
+      }, function(){ flashStatus(statusEl, "error", true); });
+    });
+  });
+  // auto-persist on every sentiment/status click and on note edits, in addition to the
+  // explicit Save button above (which mainly gives a visible confirmation)
+  Array.prototype.forEach.call(document.querySelectorAll(".ccard"), function(ccard){
+    Array.prototype.forEach.call(ccard.querySelectorAll(".fb-group .chip, .fb-group .status-pill"), function(btn){
+      btn.addEventListener("click", function(){ fbSave(ccard); });
+    });
+    var note = ccard.querySelector(".fb-note");
+    if(note){
+      var t;
+      note.addEventListener("input", function(){
+        clearTimeout(t);
+        t = setTimeout(function(){ fbSave(ccard); }, 600);
+      });
+      note.addEventListener("blur", function(){ fbSave(ccard); });
+    }
+  });
+  restoreAllFb();
+
   if(alreadyUnlocked){ unlock(); }
 })();
 </script>
