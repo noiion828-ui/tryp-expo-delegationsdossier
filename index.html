@@ -232,13 +232,18 @@ html.unlocked #lockGate{display:none}
 .lock-card .err{font-size:.8rem; color:var(--rose); margin-top:10px; min-height:1.2em}
 
 /* ---- feedback actions: save / download / share (per candidate card) ---- */
-.fb-actions{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:12px}
+.fb-mini{margin-top:12px; padding-top:10px; border-top:1px dashed var(--line-strong)}
 .fb-btn{font-family:var(--font-mono); font-size:.7rem; letter-spacing:.03em; padding:6px 12px; border-radius:999px; border:1px solid var(--line-strong); background:var(--bg-raised); color:var(--ink-soft); cursor:pointer; display:inline-flex; align-items:center; gap:5px}
 .fb-btn:hover{border-color:var(--grad-b); color:var(--ink)}
 .fb-btn:active{transform:translateY(1px)}
 .fb-status{font-family:var(--font-mono); font-size:.68rem; color:var(--lime); opacity:0; transition:opacity .25s; min-height:1em}
 .fb-status.show{opacity:1}
 .fb-status.err{color:var(--rose)}
+
+/* ---- global feedback summary (bottom of document) ---- */
+.fb-summary-actions{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-top:20px}
+.fb-summary-actions .fb-btn{font-size:.78rem; padding:9px 18px}
+.fb-summary-count{font-family:var(--font-mono); font-size:.78rem; color:var(--ink-faint); margin-top:14px}
 </style>
 </head>
 <body>
@@ -270,6 +275,7 @@ html.unlocked #lockGate{display:none}
     <a href="#candidates"><span data-de>Kandidaten</span><span data-en>Candidates</span></a>
     <a href="#outreach"><span data-de>Kontakt</span><span data-en>Outreach</span></a>
     <a href="#sponsors"><span data-de>Sponsoren</span><span data-en>Sponsors</span></a>
+    <a href="#feedback"><span data-de>Feedback</span><span data-en>Feedback</span></a>
     <a href="#footer-methodik"><span data-de>Methodik</span><span data-en>Methodology</span></a>
   </div>
 </nav>
@@ -367,8 +373,8 @@ html.unlocked #lockGate{display:none}
 
     <h3 style="margin-bottom:6px"><span data-de>Kernkandidaten &mdash; zum Öffnen klicken</span><span data-en>Core candidates &mdash; click to open</span></h3>
     <p style="color:var(--ink-soft); font-size:.85rem; margin:0 0 14px">
-      <span data-de>&#128190; Jede geöffnete Karte endet mit einem Feedback-Feld &mdash; Sentiment, Kontakt-Status, Notiz, dazu Speichern-, Download- und Teilen-Button.</span>
-      <span data-en>&#128190; Every opened card ends with a feedback field &mdash; sentiment, contact status, note, plus Save, Download, and Share buttons.</span>
+      <span data-de>&#128172; Jede Karte hat unten ein Notizfeld &mdash; die Recherche wird noch iteriert, dein Feedback bleibt hilfreich. Gesammelt gespeichert, heruntergeladen oder geteilt wird alles ganz am <a href="#feedback">Ende des Dokuments</a>.</span>
+      <span data-en>&#128172; Every card has a note field at the bottom &mdash; this research keeps being iterated on, so your feedback stays useful. Everything is saved, downloaded, or shared together at the <a href="#feedback">end of the document</a>.</span>
     </p>
     <div class="candidate-list">
 
@@ -409,12 +415,6 @@ html.unlocked #lockGate{display:none}
               </div>
             </div>
             <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
-            <div class="fb-actions">
-              <button class="fb-btn fb-save" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
-              <button class="fb-btn fb-download" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
-              <button class="fb-btn fb-share" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
-              <span class="fb-status" aria-live="polite"></span>
-            </div>
           </div>
         </div>
       </details>
@@ -456,12 +456,6 @@ html.unlocked #lockGate{display:none}
               </div>
             </div>
             <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
-            <div class="fb-actions">
-              <button class="fb-btn fb-save" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
-              <button class="fb-btn fb-download" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
-              <button class="fb-btn fb-share" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
-              <span class="fb-status" aria-live="polite"></span>
-            </div>
           </div>
         </div>
       </details>
@@ -503,12 +497,6 @@ html.unlocked #lockGate{display:none}
               </div>
             </div>
             <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
-            <div class="fb-actions">
-              <button class="fb-btn fb-save" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
-              <button class="fb-btn fb-download" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
-              <button class="fb-btn fb-share" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
-              <span class="fb-status" aria-live="polite"></span>
-            </div>
           </div>
         </div>
       </details>
@@ -550,12 +538,6 @@ html.unlocked #lockGate{display:none}
               </div>
             </div>
             <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
-            <div class="fb-actions">
-              <button class="fb-btn fb-save" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
-              <button class="fb-btn fb-download" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
-              <button class="fb-btn fb-share" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
-              <span class="fb-status" aria-live="polite"></span>
-            </div>
           </div>
         </div>
       </details>
@@ -597,12 +579,6 @@ html.unlocked #lockGate{display:none}
               </div>
             </div>
             <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
-            <div class="fb-actions">
-              <button class="fb-btn fb-save" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
-              <button class="fb-btn fb-download" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
-              <button class="fb-btn fb-share" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
-              <span class="fb-status" aria-live="polite"></span>
-            </div>
           </div>
         </div>
       </details>
@@ -644,12 +620,6 @@ html.unlocked #lockGate{display:none}
               </div>
             </div>
             <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
-            <div class="fb-actions">
-              <button class="fb-btn fb-save" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
-              <button class="fb-btn fb-download" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
-              <button class="fb-btn fb-share" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
-              <span class="fb-status" aria-live="polite"></span>
-            </div>
           </div>
         </div>
       </details>
@@ -691,12 +661,6 @@ html.unlocked #lockGate{display:none}
               </div>
             </div>
             <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
-            <div class="fb-actions">
-              <button class="fb-btn fb-save" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
-              <button class="fb-btn fb-download" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
-              <button class="fb-btn fb-share" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
-              <span class="fb-status" aria-live="polite"></span>
-            </div>
           </div>
         </div>
       </details>
@@ -738,12 +702,6 @@ html.unlocked #lockGate{display:none}
               </div>
             </div>
             <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
-            <div class="fb-actions">
-              <button class="fb-btn fb-save" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
-              <button class="fb-btn fb-download" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
-              <button class="fb-btn fb-share" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
-              <span class="fb-status" aria-live="polite"></span>
-            </div>
           </div>
         </div>
       </details>
@@ -785,12 +743,6 @@ html.unlocked #lockGate{display:none}
               </div>
             </div>
             <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
-            <div class="fb-actions">
-              <button class="fb-btn fb-save" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
-              <button class="fb-btn fb-download" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
-              <button class="fb-btn fb-share" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
-              <span class="fb-status" aria-live="polite"></span>
-            </div>
           </div>
         </div>
       </details>
@@ -832,12 +784,6 @@ html.unlocked #lockGate{display:none}
               </div>
             </div>
             <div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div>
-            <div class="fb-actions">
-              <button class="fb-btn fb-save" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
-              <button class="fb-btn fb-download" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
-              <button class="fb-btn fb-share" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
-              <span class="fb-status" aria-live="polite"></span>
-            </div>
           </div>
         </div>
       </details>
@@ -850,40 +796,44 @@ html.unlocked #lockGate{display:none}
     </p>
     <div class="kontext-grid">
 
-      <div class="kcard">
+      <div class="kcard" id="k-raramuri">
         <div class="kcard-head">
           <span class="kcard-name">Rarámuri (Tarahumara)</span>
           <span class="kcard-meta">Mexiko · Chihuahua &middot; <span data-de>Jícuri-Tradition (eigenständige Peyote-Linie)</span><span data-en>Jícuri tradition (a distinct peyote lineage)</span></span>
         </div>
         <p data-de>Nutzen eine eigene, von den Wixárika sprachlich und rituell unterschiedene Peyote-Tradition (Jícuri statt Hikuri). Keine dedizierte internationale Vertretungsstruktur gefunden — als eigenständige Linie hier bewusst sichtbar gemacht, nicht mit den Wixárika vermischt.</p><p data-en>Practice their own peyote tradition, linguistically and ritually distinct from the Wixárika (jícuri rather than hikuri). No dedicated international representative body was found — named here deliberately as its own lineage, not folded into the Wixárika entry.</p>
         <div class="src-list"><a href="http://www.revistas.unam.mx/index.php/antropologia/article/view/9970" target="_blank" rel="noopener">Anales de Antropología (UNAM)</a></div>
+        <div class="fb-mini"><span class="fb-label" data-de>Notiz</span><span class="fb-label" data-en>Note</span><div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div></div>
       </div>
 
-      <div class="kcard">
+      <div class="kcard" id="k-katukina">
         <div class="kcard-head">
           <span class="kcard-name">Katukina</span>
           <span class="kcard-meta">Brasilien · Amazonas/Acre &middot; <span data-de>Rapé- und Kambô-Ursprungslinie</span><span data-en>Origin lineage of rapé and Kambô</span></span>
         </div>
         <p data-de>Gelten als eine der Ursprungsgemeinschaften von Rapé (Schnupftabak) und Kambô. Ihr Name wird zugleich als Handelsmarke für kommerzielle Rapé/Kambô-Shops verwendet — ein Beispiel genau des Namens-ohne-Herkunftsnachweis-Problems, vor dem dieses Dossier warnt, und ein Grund für besondere Sorgfalt bei jeder Kontaktaufnahme.</p><p data-en>Regarded as one of the origin communities of rapé (snuff) and Kambô. Their name is also used as a retail brand by commercial rapé/Kambô shops — a live example of exactly the name-without-provenance problem this dossier warns about, and a reason for extra care in any outreach.</p>
         <div class="src-list"><a href="https://katukina.com/about" target="_blank" rel="noopener">Katukina (community-run retail site)</a></div>
+        <div class="fb-mini"><span class="fb-label" data-de>Notiz</span><span class="fb-label" data-en>Note</span><div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div></div>
       </div>
 
-      <div class="kcard">
+      <div class="kcard" id="k-daime">
         <div class="kcard-head">
           <span class="kcard-name">Santo Daime &amp; União do Vegetal</span>
           <span class="kcard-meta">Brasilien (weltweite Diaspora) &middot; <span data-de>Synkretistische Ayahuasca-Kirchen</span><span data-en>Syncretic ayahuasca churches</span></span>
         </div>
         <p data-de>Kein indigenes Volk, sondern zwei organisierte Religionsgemeinschaften — seit 1986 in Brasilien legal, seit 2006 per US-Supreme-Court-Urteil für ihre Mitglieder in den USA ausnahmsweise erlaubt. In Deutschland dagegen wurde ein Santo-Daime-Lager in Thüringen von rund 100 Polizeikräften durchsucht — der konkrete Beweis dafür, dass die Rechtslage in diesem Dossier keine Theorie ist.</p><p data-en>Not an indigenous people but two organized religious communities — legal in Brazil since 1986, and exceptionally permitted for their members in the US since a 2006 Supreme Court ruling. In Germany, by contrast, a Santo Daime camp in Thuringia was raided by roughly 100 police officers — concrete proof that the legal situation described throughout this dossier is not theoretical.</p>
         <div class="src-list"><a href="https://www.iceers.org/en/legal-info/germany/" target="_blank" rel="noopener">ICEERS · Germany</a><a href="https://link.springer.com/article/10.1007/s10943-014-9826-2" target="_blank" rel="noopener">Journal of Religion and Health</a></div>
+        <div class="fb-mini"><span class="fb-label" data-de>Notiz</span><span class="fb-label" data-en>Note</span><div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div></div>
       </div>
 
-      <div class="kcard">
+      <div class="kcard" id="k-san">
         <div class="kcard-head">
           <span class="kcard-name">San / Ju&rsquo;hoansi</span>
           <span class="kcard-meta">Kalahari, Südliches Afrika &middot; <span data-de>Trance-Tanz (kein Pflanzenmedizin-Bezug)</span><span data-en>Trance dance (no plant-medicine link)</span></span>
         </div>
         <p data-de>Eine der ältesten durchgehend praktizierten spirituellen Traditionen der Welt — aber ohne Pflanzenmedizin-Bezug: Der Trance-Zustand entsteht durch Tanz, Musik und emotionale Intensität, nicht durch eine eingenommene Substanz. Fällt damit klar außerhalb des selbst gesetzten Scopes dieses Dossiers, wird hier aber benannt, um die Abgrenzung sichtbar statt stillschweigend zu machen.</p><p data-en>One of the oldest continuously practiced spiritual traditions in the world — but with no plant-medicine link: the trance state arises from dance, music, and emotional intensity, not from an ingested substance. It falls clearly outside this dossier's self-defined scope, and is named here precisely to make that boundary visible rather than silent.</p>
         <div class="src-list"><a href="https://www.tandfonline.com/doi/abs/10.1080/14635240.2016.1142063" target="_blank" rel="noopener">International Journal of Health Promotion and Education</a></div>
+        <div class="fb-mini"><span class="fb-label" data-de>Notiz</span><span class="fb-label" data-en>Note</span><div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div></div>
       </div>
     </div>
 
@@ -893,9 +843,9 @@ html.unlocked #lockGate{display:none}
       <span data-en>Three world regions for which no living plant-medicine community comparable to the traditions above was found &mdash; named so the gap stays visible instead of quietly disappearing.</span>
     </p>
     <div class="abs-box">
-<div class="abs-row"><b><span data-de>Europa</span><span data-en>Europe</span></b><p data-de>Historisch belegt (Eleusinische Mysterien, mutmaßlich ergotinhaltig; die „Hexensalben“ der frühen Neuzeit), aber ohne durchgehend lebendige, organisierte Trägergemeinschaft bis heute.</p><p data-en>Historically documented (the Eleusinian Mysteries, thought to have involved ergot; the “witches' ointments” of the early modern period), but with no continuously living, organized carrier community surviving to the present.</p></div>
-<div class="abs-row"><b><span data-de>Ostasien</span><span data-en>East Asia</span></b><p data-de>Keine breit dokumentierte, mit den obigen Traditionen vergleichbare lebendige Pflanzenmedizin-Zeremonialpraxis gefunden — dies ist ein Rechercheergebnis, kein Urteil über das Fehlen spiritueller Traditionen insgesamt.</p><p data-en>No broadly documented living plant-medicine ceremonial practice comparable to the traditions above was found — this is a research finding, not a judgment about the absence of spiritual traditions in general.</p></div>
-<div class="abs-row"><b><span data-de>Australien</span><span data-en>Australia</span></b><p data-de>Pituri (Nicotiana-Arten) wird traditionell konsumiert, wirkt aber stimulierend/leicht psychoaktiv wie Tabak, nicht klassisch halluzinogen — daher kein direktes Gegenstück zu den übrigen Kandidaten.</p><p data-en>Pituri (Nicotiana species) is traditionally used but acts as a stimulant / mild psychoactive similar to tobacco, not as a classical hallucinogen — so it is not a direct counterpart to the other candidates.</p></div>
+<div class="abs-row" id="a-europe"><b><span data-de>Europa</span><span data-en>Europe</span></b><p data-de>Historisch belegt (Eleusinische Mysterien, mutmaßlich ergotinhaltig; die „Hexensalben“ der frühen Neuzeit), aber ohne durchgehend lebendige, organisierte Trägergemeinschaft bis heute.</p><p data-en>Historically documented (the Eleusinian Mysteries, thought to have involved ergot; the “witches' ointments” of the early modern period), but with no continuously living, organized carrier community surviving to the present.</p><div class="fb-mini"><span class="fb-label" data-de>Notiz</span><span class="fb-label" data-en>Note</span><div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div></div></div>
+<div class="abs-row" id="a-eastasia"><b><span data-de>Ostasien</span><span data-en>East Asia</span></b><p data-de>Keine breit dokumentierte, mit den obigen Traditionen vergleichbare lebendige Pflanzenmedizin-Zeremonialpraxis gefunden — dies ist ein Rechercheergebnis, kein Urteil über das Fehlen spiritueller Traditionen insgesamt.</p><p data-en>No broadly documented living plant-medicine ceremonial practice comparable to the traditions above was found — this is a research finding, not a judgment about the absence of spiritual traditions in general.</p><div class="fb-mini"><span class="fb-label" data-de>Notiz</span><span class="fb-label" data-en>Note</span><div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div></div></div>
+<div class="abs-row" id="a-australia"><b><span data-de>Australien</span><span data-en>Australia</span></b><p data-de>Pituri (Nicotiana-Arten) wird traditionell konsumiert, wirkt aber stimulierend/leicht psychoaktiv wie Tabak, nicht klassisch halluzinogen — daher kein direktes Gegenstück zu den übrigen Kandidaten.</p><p data-en>Pituri (Nicotiana species) is traditionally used but acts as a stimulant / mild psychoactive similar to tobacco, not as a classical hallucinogen — so it is not a direct counterpart to the other candidates.</p><div class="fb-mini"><span class="fb-label" data-de>Notiz</span><span class="fb-label" data-en>Note</span><div class="fb-note" contenteditable="true" data-de-ph="Notiz&hellip;" data-en-ph="Note&hellip;" data-ph="Notiz&hellip;"></div></div></div>
     </div>
   </div>
 </section>
@@ -991,12 +941,31 @@ html.unlocked #lockGate{display:none}
     </div>
   </div>
 </section>
+<svg class="wave-divider" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 C200,40 400,0 600,20 C800,40 1000,0 1200,20 L1200,40 L0,40 Z"/></svg>
+
+<section id="feedback">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow"><span data-de>Dein Feedback</span><span data-en>Your Feedback</span></div>
+      <h2><span data-de>Alle Notizen an einem Ort</span><span data-en>All notes in one place</span></h2>
+      <p data-de>Jedes Kandidaten-, Kontext- und Archiv-Feld oben hat ein eigenes Notizfeld &mdash; diese Recherche wird noch iteriert, dein Feedback bleibt also hilfreich, auch für Felder, die sich nicht aufklappen lassen. Statt an jeder einzelnen Karte: hier, einmalig für das ganze Dokument, lokal speichern, als Datei herunterladen oder direkt teilen.</p>
+      <p data-en>Every candidate, context, and archive field above has its own note field &mdash; this research keeps being iterated on, so your feedback stays useful, including on fields that cannot be expanded. Instead of on every single card: here, once for the whole document, save locally, download as a file, or share directly.</p>
+    </div>
+    <div class="fb-summary-actions">
+      <button class="fb-btn fb-save-all" type="button"><span data-de>&#128190; Speichern</span><span data-en>&#128190; Save</span></button>
+      <button class="fb-btn fb-download-all" type="button"><span data-de>&#8681; Download</span><span data-en>&#8681; Download</span></button>
+      <button class="fb-btn fb-share-all" type="button"><span data-de>&#8599; Teilen</span><span data-en>&#8599; Share</span></button>
+      <span class="fb-status" id="fbGlobalStatus" aria-live="polite"></span>
+    </div>
+    <div class="fb-summary-count" id="fbSummaryCount"></div>
+  </div>
+</section>
 
 <footer id="footer-methodik">
   <div class="wrap">
     <div class="eyebrow"><span data-de>Methodik &amp; Kosten</span><span data-en>Methodology &amp; Cost</span></div>
-    <p data-de>Erstellt mit SuperBrain-Engines (Dialektik, zwei vollständigen NovaSphere-Panelrunden mit fallspezifischem Casting und Gegenpol, FalsifiabilityCheck) plus zehn parallelen Web-Recherchen. Kein Rechtsrat und keine fertige Zusage &mdash; jede Zeile mit &bdquo;offene Frage&ldquo; ist wörtlich offen. Feedback oben ist geteilter Projektstand (Artifact-Sync), kein privates Gedächtnis.</p>
-    <p data-en>Built with SuperBrain engines (Dialektik, two full NovaSphere panel rounds with case-specific casting and dissent, FalsifiabilityCheck) plus ten parallel web research passes. Not legal advice and not a finished commitment &mdash; every line marked &ldquo;open question&rdquo; means exactly that. Feedback above is shared project state (artifact sync), not private memory.</p>
+    <p data-de>Erstellt mit SuperBrain-Engines (Dialektik, zwei vollständigen NovaSphere-Panelrunden mit fallspezifischem Casting und Gegenpol, FalsifiabilityCheck) plus zehn parallelen Web-Recherchen. Kein Rechtsrat und keine fertige Zusage &mdash; jede Zeile mit &bdquo;offene Frage&ldquo; ist wörtlich offen. Dein <a href="#feedback">Feedback</a> bleibt lokal in deinem Browser (nicht geteilt) &mdash; zum Weitergeben bewusst herunterladen oder teilen.</p>
+    <p data-en>Built with SuperBrain engines (Dialektik, two full NovaSphere panel rounds with case-specific casting and dissent, FalsifiabilityCheck) plus ten parallel web research passes. Not legal advice and not a finished commitment &mdash; every line marked &ldquo;open question&rdquo; means exactly that. Your <a href="#feedback">feedback</a> stays local to your browser (not shared) &mdash; download or share it deliberately to pass it on.</p>
     <div class="cost-strip"><span><b>Dialektik &times;2</b> $0.004</span><span><b>NovaSphere &times;3</b> $0.50</span><span><b>FalsifiabilityCheck</b> $0.003</span><span><b>&Sigma;</b> &approx; $0.51</span></div>
   </div>
 </footer>
@@ -1173,23 +1142,28 @@ html.unlocked #lockGate{display:none}
   }
 
 
-  // ---- feedback save / download / share: pure browser tech, works identically on
-  // claude.ai (Artifact viewer, capabilities sandboxed) and on the plain GitHub Pages
-  // mirror (no window.claude at all). Persists per-viewer in localStorage; explicit
-  // Save button just makes that persistence visible and gives an affirmative click.
+  // ---- feedback: a note field on every info field (candidate cards, context cards,
+  // archive rows — including the ones that can't be expanded), persisted locally in
+  // this browser. Save / Download / Share are ONE set of controls at the bottom of
+  // the document (#feedback), acting on ALL fields at once — not repeated per field.
+  // Pure browser tech, works identically on claude.ai (Artifact viewer) and on the
+  // plain GitHub Pages mirror (no window.claude at all).
   var FB_KEY = "tryp2027_fb_v1";
+  function allFbFields(){
+    return Array.prototype.slice.call(document.querySelectorAll(".ccard, .kcard, .abs-row"));
+  }
   function loadFbStore(){
     try{ return JSON.parse(localStorage.getItem(FB_KEY) || "{}"); }catch(e){ return {}; }
   }
   function saveFbStoreRaw(store){
     try{ localStorage.setItem(FB_KEY, JSON.stringify(store)); }catch(e){}
   }
-  function candidateName(ccard){
-    var el = ccard.querySelector(".ccard-name");
-    return el ? el.textContent.trim() : ccard.id;
+  function fieldName(el){
+    var n = el.querySelector(".ccard-name, .kcard-name, .abs-row b, b");
+    return n ? n.textContent.trim() : el.id;
   }
-  function fbGroups(ccard){
-    var groups = ccard.querySelectorAll(".fb-group");
+  function fbGroups(el){
+    var groups = el.querySelectorAll(".fb-group");
     return { sentiment: groups[0], status: groups[1] };
   }
   function pressedIdx(group, cls){
@@ -1204,34 +1178,32 @@ html.unlocked #lockGate{display:none}
       b.setAttribute("aria-pressed", i===idx ? "true":"false");
     });
   }
-  function readFbState(ccard){
-    var g = fbGroups(ccard);
-    var note = ccard.querySelector(".fb-note");
+  function readFbState(el){
+    var g = fbGroups(el);
+    var note = el.querySelector(".fb-note");
     return {
-      candidate: candidateName(ccard),
+      name: fieldName(el),
       sentimentIdx: pressedIdx(g.sentiment, ".chip"),
       statusIdx: pressedIdx(g.status, ".status-pill"),
       note: note ? note.textContent.trim() : "",
       updatedAt: new Date().toISOString()
     };
   }
-  function applyFbState(ccard, state){
+  function applyFbState(el, state){
     if(!state) return;
-    var g = fbGroups(ccard);
+    var g = fbGroups(el);
     if(typeof state.sentimentIdx === "number") setPressedIdx(g.sentiment, ".chip", state.sentimentIdx);
     if(typeof state.statusIdx === "number") setPressedIdx(g.status, ".status-pill", state.statusIdx);
-    var note = ccard.querySelector(".fb-note");
+    var note = el.querySelector(".fb-note");
     if(note && state.note){ note.textContent = state.note; }
   }
   function restoreAllFb(){
     var store = loadFbStore();
-    Array.prototype.forEach.call(document.querySelectorAll(".ccard"), function(ccard){
-      applyFbState(ccard, store[ccard.id]);
-    });
+    allFbFields().forEach(function(el){ applyFbState(el, store[el.id]); });
   }
-  function fbSave(ccard){
+  function fbSaveField(el){
     var store = loadFbStore();
-    store[ccard.id] = readFbState(ccard);
+    store[el.id] = readFbState(el);
     saveFbStoreRaw(store);
   }
   function fbLabel(btn){
@@ -1240,23 +1212,51 @@ html.unlocked #lockGate{display:none}
     var span = btn.querySelector("[data-" + lang + "]");
     return span ? span.textContent.trim() : btn.textContent.trim();
   }
-  function fbSummaryText(ccard){
-    var g = fbGroups(ccard);
+  function fieldHasFeedback(el){
+    var g = fbGroups(el);
+    var note = el.querySelector(".fb-note");
+    return pressedIdx(g.sentiment, ".chip") >= 0 || pressedIdx(g.status, ".status-pill") >= 0 ||
+      (note && note.textContent.trim().length > 0);
+  }
+  function fieldSummaryLines(el, lang){
+    var g = fbGroups(el);
     var sentimentBtn = g.sentiment ? g.sentiment.querySelector('.chip[aria-pressed="true"]') : null;
     var statusBtn = g.status ? g.status.querySelector('.status-pill[aria-pressed="true"]') : null;
-    var note = ccard.querySelector(".fb-note");
-    var lang = document.documentElement.getAttribute("data-lang") === "en" ? "en" : "de";
-    var noneLabel = lang === "en" ? "(none)" : "(keins)";
+    var note = el.querySelector(".fb-note");
     var lines = [];
-    lines.push((lang==="en"?"Candidate: ":"Kandidat: ") + candidateName(ccard));
-    lines.push((lang==="en"?"Sentiment: ":"Sentiment: ") + (fbLabel(sentimentBtn) || noneLabel));
-    lines.push((lang==="en"?"Contact status: ":"Kontakt-Status: ") + (fbLabel(statusBtn) || noneLabel));
+    lines.push("— " + fieldName(el) + " —");
+    if(sentimentBtn) lines.push((lang==="en"?"Sentiment: ":"Sentiment: ") + fbLabel(sentimentBtn));
+    if(statusBtn) lines.push((lang==="en"?"Contact status: ":"Kontakt-Status: ") + fbLabel(statusBtn));
     var noteText = note ? note.textContent.trim() : "";
     if(noteText) lines.push((lang==="en"?"Note: ":"Notiz: ") + noteText);
+    return lines;
+  }
+  function fbFullSummaryText(){
+    var lang = document.documentElement.getAttribute("data-lang") === "en" ? "en" : "de";
+    var fields = allFbFields().filter(fieldHasFeedback);
+    var lines = [];
+    lines.push(lang==="en" ? "TRYP EXPO Delegation Dossier 2027 — Reader Feedback" : "TRYP EXPO Delegationsdossier 2027 — Leser-Feedback");
+    lines.push(new Date().toLocaleString(lang==="en" ? "en-GB" : "de-DE"));
     lines.push("");
-    lines.push(lang==="en" ? "From: TRYP EXPO Delegation Dossier 2027" : "Aus: TRYP EXPO Delegationsdossier 2027");
-    lines.push(location.href.split("#")[0] + "#" + ccard.id);
+    if(!fields.length){
+      lines.push(lang==="en" ? "(no notes entered yet)" : "(noch keine Notizen eingetragen)");
+    } else {
+      fields.forEach(function(el){
+        lines = lines.concat(fieldSummaryLines(el, lang), [""]);
+      });
+    }
+    lines.push(location.href.split("#")[0]);
     return lines.join("\n");
+  }
+  function updateGlobalCount(){
+    var el = document.getElementById("fbSummaryCount");
+    if(!el) return;
+    var total = allFbFields().length;
+    var withFeedback = allFbFields().filter(fieldHasFeedback).length;
+    var lang = document.documentElement.getAttribute("data-lang") === "en" ? "en" : "de";
+    el.textContent = lang==="en"
+      ? withFeedback + " of " + total + " fields have a note"
+      : withFeedback + " von " + total + " Feldern mit Notiz";
   }
   function flashStatus(el, kind, isErr){
     if(!el) return;
@@ -1322,43 +1322,47 @@ html.unlocked #lockGate{display:none}
       return Promise.resolve("shared");
     }catch(e){ return Promise.reject(e); }
   }
-  Array.prototype.forEach.call(document.querySelectorAll(".fb-actions"), function(actions){
-    var ccard = actions.closest(".ccard");
-    var statusEl = actions.querySelector(".fb-status");
-    actions.querySelector(".fb-save").addEventListener("click", function(){
-      fbSave(ccard);
-      flashStatus(statusEl, "saved");
+  // auto-persist every field on every sentiment/status click and note edit — quiet,
+  // continuous, so nothing is lost even if the reader never opens #feedback at all
+  allFbFields().forEach(function(el){
+    Array.prototype.forEach.call(el.querySelectorAll(".fb-group .chip, .fb-group .status-pill"), function(btn){
+      btn.addEventListener("click", function(){ fbSaveField(el); updateGlobalCount(); });
     });
-    actions.querySelector(".fb-download").addEventListener("click", function(){
-      var name = "tryp2027-feedback-" + ccard.id.replace(/^c-/,"") + ".txt";
-      fbDownloadFile(name, fbSummaryText(ccard)).then(function(kind){
-        flashStatus(statusEl, kind === "declined" ? "declined" : "downloaded", kind === "error");
-      }, function(){ flashStatus(statusEl, "error", true); });
-    });
-    actions.querySelector(".fb-share").addEventListener("click", function(){
-      var title = "TRYP EXPO Feedback — " + candidateName(ccard);
-      fbShareText(title, fbSummaryText(ccard)).then(function(kind){
-        flashStatus(statusEl, kind === "declined" ? "declined" : kind, false);
-      }, function(){ flashStatus(statusEl, "error", true); });
-    });
-  });
-  // auto-persist on every sentiment/status click and on note edits, in addition to the
-  // explicit Save button above (which mainly gives a visible confirmation)
-  Array.prototype.forEach.call(document.querySelectorAll(".ccard"), function(ccard){
-    Array.prototype.forEach.call(ccard.querySelectorAll(".fb-group .chip, .fb-group .status-pill"), function(btn){
-      btn.addEventListener("click", function(){ fbSave(ccard); });
-    });
-    var note = ccard.querySelector(".fb-note");
+    var note = el.querySelector(".fb-note");
     if(note){
       var t;
       note.addEventListener("input", function(){
         clearTimeout(t);
-        t = setTimeout(function(){ fbSave(ccard); }, 600);
+        t = setTimeout(function(){ fbSaveField(el); updateGlobalCount(); }, 600);
       });
-      note.addEventListener("blur", function(){ fbSave(ccard); });
+      note.addEventListener("blur", function(){ fbSaveField(el); updateGlobalCount(); });
     }
   });
   restoreAllFb();
+  updateGlobalCount();
+
+  // ---- global feedback toolbar (#feedback): the ONE save / download / share, for everything ----
+  var fbGlobalStatus = document.getElementById("fbGlobalStatus");
+  var fbSaveAllBtn = document.querySelector(".fb-save-all");
+  if(fbSaveAllBtn) fbSaveAllBtn.addEventListener("click", function(){
+    allFbFields().forEach(fbSaveField);
+    updateGlobalCount();
+    flashStatus(fbGlobalStatus, "saved");
+  });
+  var fbDownloadAllBtn = document.querySelector(".fb-download-all");
+  if(fbDownloadAllBtn) fbDownloadAllBtn.addEventListener("click", function(){
+    allFbFields().forEach(fbSaveField);
+    fbDownloadFile("tryp2027-feedback.txt", fbFullSummaryText()).then(function(kind){
+      flashStatus(fbGlobalStatus, kind === "declined" ? "declined" : "downloaded", kind === "error");
+    }, function(){ flashStatus(fbGlobalStatus, "error", true); });
+  });
+  var fbShareAllBtn = document.querySelector(".fb-share-all");
+  if(fbShareAllBtn) fbShareAllBtn.addEventListener("click", function(){
+    allFbFields().forEach(fbSaveField);
+    fbShareText("TRYP EXPO Feedback", fbFullSummaryText()).then(function(kind){
+      flashStatus(fbGlobalStatus, kind === "declined" ? "declined" : kind, false);
+    }, function(){ flashStatus(fbGlobalStatus, "error", true); });
+  });
 
   if(alreadyUnlocked){ unlock(); }
 })();
